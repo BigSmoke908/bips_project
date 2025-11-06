@@ -1,0 +1,89 @@
+{
+  "components": [
+    {
+      "text": "# Anmeldung Projekt- und Seminararbeiten\n\n\n",
+      "type": "text",
+      "layout": {
+        "row": "Row_1rdumwv",
+        "columns": null
+      },
+      "id": "Field_032gmj2",
+      "properties": {}
+    },
+    {
+      "label": "Typ der Arbeit",
+      "values": [
+        {
+          "label": "Projektarbeit",
+          "value": "1"
+        },
+        {
+          "label": "Seminararbeit",
+          "value": "2"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_1cqhtrw",
+        "columns": null
+      },
+      "id": "Field_0ajfn46",
+      "key": "radio_6e6iyb"
+    },
+    {
+      "label": "Name des Studierenden",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_01srf2x",
+        "columns": null
+      },
+      "id": "Field_01zqp0l",
+      "key": "textfield_jz2mkj",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "E-mail Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ysi2kz",
+        "columns": null
+      },
+      "id": "Field_13xetih",
+      "key": "textfield_j4ham"
+    },
+    {
+      "label": "Studiengang",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0d0e1oy",
+        "columns": null
+      },
+      "id": "Field_0y09nlq",
+      "key": "textfield_97ezqn",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Betreuer (Optional)",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1bs8llz",
+        "columns": null
+      },
+      "id": "Field_1bqzjq4",
+      "key": "textfield_opiimk"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1k2rqwm",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

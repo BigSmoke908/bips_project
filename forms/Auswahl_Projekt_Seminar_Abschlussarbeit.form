@@ -1,0 +1,46 @@
+{
+  "components": [
+    {
+      "text": "# Art der Arbeit",
+      "type": "text",
+      "layout": {
+        "row": "Row_1d98a9d",
+        "columns": null
+      },
+      "id": "Field_0w6dfk2"
+    },
+    {
+      "label": "Projekt-/Seminararbeit oder Abschlussarbeit?",
+      "values": [
+        {
+          "label": "Seminararbeit",
+          "value": "1"
+        },
+        {
+          "label": "Projektarbeit",
+          "value": "2"
+        },
+        {
+          "label": "Abschlussarbeit",
+          "value": "3"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0yufcyf",
+        "columns": null
+      },
+      "id": "Field_0m1xigk",
+      "key": "radio_vvumvq"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0ahi9vc",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

@@ -1,0 +1,102 @@
+{
+  "components": [
+    {
+      "text": "# Anmeldung Abschlussarbeit",
+      "type": "text",
+      "layout": {
+        "row": "Row_1kjuoly",
+        "columns": null
+      },
+      "id": "Field_18ax127"
+    },
+    {
+      "label": "Name Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0xn0wos",
+        "columns": null
+      },
+      "id": "Field_097txm3",
+      "key": "textfield_7wtjk"
+    },
+    {
+      "label": "E-mail Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0p28ec3",
+        "columns": null
+      },
+      "id": "Field_11bgu3n",
+      "key": "textfield_v38r7g"
+    },
+    {
+      "label": "Thema der Arbeit",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0wca3yd",
+        "columns": null
+      },
+      "id": "Field_07mnz6g",
+      "key": "textfield_h5mlv"
+    },
+    {
+      "label": "Studiengang",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1u5hmrt",
+        "columns": null
+      },
+      "id": "Field_0xphxn0",
+      "key": "textfield_4gp488"
+    },
+    {
+      "label": "Name Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0e4ffbu",
+        "columns": null
+      },
+      "id": "Field_0lpj1gp",
+      "key": "textfield_6no5oh"
+    },
+    {
+      "label": "Email Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0cfybu0",
+        "columns": null
+      },
+      "id": "Field_1ftjq3k",
+      "key": "textfield_o9ynnf"
+    },
+    {
+      "label": "Name Zweitbetreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_19lsz3q",
+        "columns": null
+      },
+      "id": "Field_0exp0m2",
+      "key": "textfield_dud0z"
+    },
+    {
+      "label": "Email Zweiter Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1d89tp9",
+        "columns": null
+      },
+      "id": "Field_13xz3if",
+      "key": "textfield_o7fsd"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0rira0y",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

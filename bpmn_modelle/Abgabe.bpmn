@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0f235ww" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.40.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <bpmn:collaboration id="Collaboration_0pnklhn">
+    <bpmn:participant id="Participant_1awlld9" name="Abgabe studentischer Arbeiten" processRef="Process_0ux812i" />
+    <bpmn:textAnnotation id="TextAnnotation_1butv1d">
+      <bpmn:text>Projekt/Seminar oder Abschlussarbeit</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0ubi9jd" associationDirection="None" sourceRef="Gateway_09368iv" targetRef="TextAnnotation_1butv1d" />
+    <bpmn:textAnnotation id="TextAnnotation_16epclq">
+      <bpmn:text>projekt/seminar</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_033en0q" associationDirection="None" sourceRef="Flow_09srl7l" targetRef="TextAnnotation_16epclq" />
+    <bpmn:textAnnotation id="TextAnnotation_1yp4xnn">
+      <bpmn:text>Abschlussarbeit</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_09pkbge" associationDirection="None" sourceRef="Flow_1sdqoxg" targetRef="TextAnnotation_1yp4xnn" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_0ux812i" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_183scpj">
+      <bpmn:lane id="Lane_1pxh8aj" name="Student">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_111x25k</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_09368iv</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1tfegku</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1h937f2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1ckkm2r" name="Betreuer" />
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1qjgd9h</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1qjgd9h" sourceRef="StartEvent_1" targetRef="Activity_111x25k" />
+    <bpmn:userTask id="Activity_111x25k" name="Auswahl Projekt- und Seminararbeit / Abschlussarbeit">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1qjgd9h</bpmn:incoming>
+      <bpmn:outgoing>Flow_05aljx5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_09368iv">
+      <bpmn:incoming>Flow_05aljx5</bpmn:incoming>
+      <bpmn:outgoing>Flow_09srl7l</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1sdqoxg</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_05aljx5" sourceRef="Activity_111x25k" targetRef="Gateway_09368iv" />
+    <bpmn:sequenceFlow id="Flow_09srl7l" sourceRef="Gateway_09368iv" targetRef="Activity_1tfegku" />
+    <bpmn:userTask id="Activity_1tfegku" name="Bestätigung Eigenständigkeit und Einreichung der Arbeit">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_09srl7l</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1sdqoxg" sourceRef="Gateway_09368iv" targetRef="Activity_1h937f2" />
+    <bpmn:userTask id="Activity_1h937f2" name="Abschlussarbeit im Rechenzentrum hochladen (Bestätigung)">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1sdqoxg</bpmn:incoming>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0pnklhn">
+      <bpmndi:BPMNShape id="Participant_1awlld9_di" bpmnElement="Participant_1awlld9" isHorizontal="true">
+        <dc:Bounds x="132" y="100" width="1328" height="740" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1pxh8aj_di" bpmnElement="Lane_1pxh8aj" isHorizontal="true">
+        <dc:Bounds x="162" y="100" width="1298" height="420" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1ckkm2r_di" bpmnElement="Lane_1ckkm2r" isHorizontal="true">
+        <dc:Bounds x="162" y="520" width="1298" height="320" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="212" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pzraq7_di" bpmnElement="Activity_111x25k">
+        <dc:Bounds x="330" y="200" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_09368iv_di" bpmnElement="Gateway_09368iv" isMarkerVisible="true">
+        <dc:Bounds x="525" y="215" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09l7xak_di" bpmnElement="Activity_1tfegku">
+        <dc:Bounds x="830" y="200" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0a3odxl_di" bpmnElement="Activity_1h937f2">
+        <dc:Bounds x="370" y="410" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1qjgd9h_di" bpmnElement="Flow_1qjgd9h">
+        <di:waypoint x="248" y="240" />
+        <di:waypoint x="330" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05aljx5_di" bpmnElement="Flow_05aljx5">
+        <di:waypoint x="430" y="240" />
+        <di:waypoint x="525" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09srl7l_di" bpmnElement="Flow_09srl7l">
+        <di:waypoint x="575" y="240" />
+        <di:waypoint x="830" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sdqoxg_di" bpmnElement="Flow_1sdqoxg">
+        <di:waypoint x="550" y="265" />
+        <di:waypoint x="550" y="420" />
+        <di:waypoint x="470" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0ubi9jd_di" bpmnElement="Association_0ubi9jd">
+        <di:waypoint x="561" y="226" />
+        <di:waypoint x="596" y="185" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_033en0q_di" bpmnElement="Association_033en0q">
+        <di:waypoint x="703" y="240" />
+        <di:waypoint x="721" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_09pkbge_di" bpmnElement="Association_09pkbge">
+        <di:waypoint x="510" y="420" />
+        <di:waypoint x="510" y="318" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1butv1d_di" bpmnElement="TextAnnotation_1butv1d">
+        <dc:Bounds x="580" y="130" width="100" height="55" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_16epclq_di" bpmnElement="TextAnnotation_16epclq">
+        <dc:Bounds x="700" y="170" width="100" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1yp4xnn_di" bpmnElement="TextAnnotation_1yp4xnn">
+        <dc:Bounds x="410" y="303" width="100" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
