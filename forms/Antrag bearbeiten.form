@@ -1,0 +1,121 @@
+{
+  "components": [
+    {
+      "text": "Antrag auf Betreueung ",
+      "type": "text",
+      "layout": {
+        "row": "Row_0ti1w0x",
+        "columns": null
+      },
+      "id": "Field_0ce8ern",
+      "properties": {}
+    },
+    {
+      "label": "Name der Studierenden",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0ti1w0x",
+        "columns": null
+      },
+      "id": "Field_18y92b6",
+      "key": "textarea_5xjjc"
+    },
+    {
+      "label": "Thema der Arbeit",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0ti1w0x",
+        "columns": null
+      },
+      "id": "Field_1j4r5qf",
+      "key": "textarea_ukioro"
+    },
+    {
+      "label": "Name der Betreuerin/des Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0ti1w0x",
+        "columns": null
+      },
+      "id": "Field_1vs9hff",
+      "key": "betreuerName",
+      "properties": {},
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "E-Mail der Betreuerin/des Betreuer",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0sj9emk",
+        "columns": null
+      },
+      "id": "Field_1n1k3c8",
+      "key": "textarea_tausbb",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Bestätigung ",
+      "values": [
+        {
+          "label": "Ja ,ich übernehme die Betreuung",
+          "value": "value"
+        },
+        {
+          "label": "Nein",
+          "value": "ja ich übernehme die Betreuung"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0sj9emk",
+        "columns": null
+      },
+      "id": "Field_1x0ea18",
+      "key": "date_",
+      "validate": {
+        "required": true
+      },
+      "disabled": true
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Datum der Bestätigung",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_0c1yzuf",
+        "columns": null
+      },
+      "id": "Field_0109ljn",
+      "key": "datetime_4yg9v",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Kommentar/Anmerkung ",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1jhypc3",
+        "columns": null
+      },
+      "id": "Field_1jblvvx",
+      "key": "kommentar",
+      "validate": {
+        "required": false
+      }
+    }
+  ],
+  "type": "default",
+  "id": "form_1.form",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

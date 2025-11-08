@@ -1,0 +1,102 @@
+{
+  "components": [
+    {
+      "text": "# Abgabe ",
+      "type": "text",
+      "layout": {
+        "row": "Row_07qmcxd",
+        "columns": null
+      },
+      "id": "Field_1tomwq0"
+    },
+    {
+      "label": "Name,Vorname ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0po0pb8",
+        "columns": null
+      },
+      "id": "Field_0a7jk57",
+      "key": "textfield_6fc1xf"
+    },
+    {
+      "label": "Matr.-Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_18jtd0u",
+        "columns": null
+      },
+      "id": "Field_069k4fh",
+      "key": "textfield_agz6ks"
+    },
+    {
+      "label": "Arbeit hochladen(PDF)",
+      "type": "filepicker",
+      "layout": {
+        "row": "Row_0mprjdq",
+        "columns": null
+      },
+      "id": "Field_1qid55l",
+      "key": "filepicker_b40bszo",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Ich bestätige ,dass die Arbeit eigenständig erstellt habe ",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_0mprjdq",
+        "columns": null
+      },
+      "id": "Field_1ml5xfc",
+      "key": "checkbox_t8yf8",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Abgabedatum",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_0mprjdq",
+        "columns": null
+      },
+      "id": "Field_1k3wqb9",
+      "key": "datetime_gzelkd",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Unterschrift",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1kobr59",
+        "columns": null
+      },
+      "id": "Field_0vleue4",
+      "key": "textarea_t0etkd"
+    },
+    {
+      "label": "Abgabe bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_1vbrqqw",
+        "columns": null
+      },
+      "id": "Field_1vhgftj"
+    }
+  ],
+  "type": "default",
+  "id": "Form_06pj31j",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

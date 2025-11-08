@@ -1,0 +1,102 @@
+{
+  "components": [
+    {
+      "text": "# Prüfung der Vorleistung (SBB)",
+      "type": "text",
+      "layout": {
+        "row": "Row_0et62i9",
+        "columns": null
+      },
+      "id": "Field_0x42hco"
+    },
+    {
+      "label": "Named der Studierenden",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1j7iouc",
+        "columns": null
+      },
+      "id": "Field_1rttufk",
+      "key": "textfield_b1t5u"
+    },
+    {
+      "label": "Studiengang",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1j7iouc",
+        "columns": null
+      },
+      "id": "Field_0ndqlus",
+      "key": "textfield_x3so3m"
+    },
+    {
+      "label": "SSB-Sachberbeiter/in",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1fw2gp2",
+        "columns": null
+      },
+      "id": "Field_00ya404",
+      "key": "textfield_2t3mv",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Vorleistung erfüllt?",
+      "values": [
+        {
+          "label": "Ja",
+          "value": "value"
+        },
+        {
+          "label": "Nein",
+          "value": "value2"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_1lhat46",
+        "columns": null
+      },
+      "id": "Field_0fsal5i",
+      "key": "radio_dgjm2",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Kommentar",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1lhat46",
+        "columns": null
+      },
+      "id": "Field_0kcgvvf",
+      "key": "textarea_habbyn"
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Datum der Prüfung ",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_1c156yc",
+        "columns": null
+      },
+      "id": "Field_1aelb3f",
+      "key": "datetime_yhcqm",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_1y9gdlv",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

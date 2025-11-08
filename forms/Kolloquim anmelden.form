@@ -1,0 +1,108 @@
+{
+  "components": [
+    {
+      "text": "# Kolloquim anmelden",
+      "type": "text",
+      "layout": {
+        "row": "Row_0nvyndc",
+        "columns": null
+      },
+      "id": "Field_15cbes8"
+    },
+    {
+      "label": "Name der Studierenden",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0nvyndc",
+        "columns": null
+      },
+      "id": "Field_1s1osku",
+      "key": "textfield_7g9gpe",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Matr.-Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_194m0md",
+        "columns": null
+      },
+      "id": "Field_1u0s560",
+      "key": "textfield_4oufyd",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Thema der Arbeit",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1sy7z5v",
+        "columns": null
+      },
+      "id": "Field_17wacqb",
+      "key": "textfield_048zw3",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Kolloquimstermin",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_1t9no0a",
+        "columns": null
+      },
+      "id": "Field_02hynca",
+      "key": "datetime_qif5wq",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Raum",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1h294tm",
+        "columns": null
+      },
+      "id": "Field_1foczg0",
+      "key": "textfield_x5irrc",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Anmerkungen",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1bwqjuz",
+        "columns": null
+      },
+      "id": "Field_14tyrz8",
+      "key": "textarea_3la0q2"
+    },
+    {
+      "label": "Anmelden und Bedstätigen ",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_1k0fa46",
+        "columns": null
+      },
+      "id": "Field_1eabd3h"
+    }
+  ],
+  "type": "default",
+  "id": "Form_12emfig",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "text": "# Abgabe Bestätigung",
+      "type": "text",
+      "layout": {
+        "row": "Row_01cn4yx",
+        "columns": null
+      },
+      "id": "Field_0gxygdw"
+    },
+    {
+      "label": "Name der Studierenden",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0t7k6yq",
+        "columns": null
+      },
+      "id": "Field_0mrt17x",
+      "key": "textfield_6141po"
+    },
+    {
+      "label": "Abgabe bestätigt",
+      "values": [
+        {
+          "label": "nein",
+          "value": "value"
+        },
+        {
+          "label": "ja",
+          "value": "value2"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_12onznn",
+        "columns": null
+      },
+      "id": "Field_00o684k",
+      "key": "radio_0f9npu"
+    },
+    {
+      "label": "Kommentar",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0ucblxm",
+        "columns": null
+      },
+      "id": "Field_1foevb3",
+      "key": "textarea_btogdq"
+    },
+    {
+      "label": "Bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_1i7kjtl",
+        "columns": null
+      },
+      "id": "Field_1as8kmk"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0ie9rcs",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

@@ -1,0 +1,112 @@
+{
+  "components": [
+    {
+      "text": "# Prüfung auf Vollständigkeit",
+      "type": "text",
+      "layout": {
+        "row": "Row_1c95epp",
+        "columns": null
+      },
+      "id": "Field_0vtedv6"
+    },
+    {
+      "label": "Name der Studierenden ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ivk0ho",
+        "columns": null
+      },
+      "id": "Field_083upq3",
+      "key": "textfield_ag678"
+    },
+    {
+      "label": "Studiengang",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ivk0ho",
+        "columns": null
+      },
+      "id": "Field_0q37zdl",
+      "key": "textfield_elqiah"
+    },
+    {
+      "label": "Prüfer ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ivk0ho",
+        "columns": null
+      },
+      "id": "Field_0s45yq9",
+      "key": "textfield_uqxd4o",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Thema der Arbeit",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_19obnll",
+        "columns": null
+      },
+      "id": "Field_0fokk5q",
+      "key": "textarea_38xl1w"
+    },
+    {
+      "label": "Vollständig?",
+      "values": [
+        {
+          "label": "ja",
+          "value": "value"
+        },
+        {
+          "label": "Nein",
+          "value": "value2"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0983mi2",
+        "columns": null
+      },
+      "id": "Field_10dp30j",
+      "key": "radio_n87rhj",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Bemerkung zur Vollständigkeit",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0983mi2",
+        "columns": null
+      },
+      "id": "Field_1kcs3k9",
+      "key": "textarea_o8nqr"
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Datum der Prüfung",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_17srdfw",
+        "columns": null
+      },
+      "id": "Field_08rc99d",
+      "key": "datetime_0sw5",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_01iyqoe",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}
