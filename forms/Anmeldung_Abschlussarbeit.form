@@ -10,7 +10,7 @@
       "id": "Field_18ax127"
     },
     {
-      "label": "Name Student (bei mehreren mit Semikolon ';' getrennt)",
+      "label": "Name Student",
       "type": "textfield",
       "layout": {
         "row": "Row_0xn0wos",
@@ -23,7 +23,7 @@
       }
     },
     {
-      "label": "E-mail Student (bei mehreren mit Semikolon ';' getrennt)",
+      "label": "E-mail Student",
       "type": "textfield",
       "layout": {
         "row": "Row_0p28ec3",
@@ -36,7 +36,7 @@
       }
     },
     {
-      "label": "Mat. Nr. (bei mehreren mit Semikolon ';' getrennt)",
+      "label": "Mat. Nr.",
       "type": "textfield",
       "layout": {
         "row": "Row_1dwj3ly",

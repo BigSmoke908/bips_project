@@ -31,7 +31,7 @@
       "key": "radio_6e6iyb"
     },
     {
-      "label": "Name des Studierenden",
+      "label": "Name des Studierenden (bei mehreren mit Semikolon ';' getrennt)",
       "type": "textfield",
       "layout": {
         "row": "Row_01srf2x",
@@ -44,7 +44,7 @@
       }
     },
     {
-      "label": "E-Mail Student",
+      "label": "E-Mail Student (bei mehreren mit Semikolon ';' getrennt)",
       "type": "textfield",
       "layout": {
         "row": "Row_1q3ivx4",
@@ -57,7 +57,7 @@
       }
     },
     {
-      "label": "Mat. Nr.",
+      "label": "Mat. Nr. (bei mehreren mit Semikolon ';' getrennt)",
       "type": "textfield",
       "layout": {
         "row": "Row_0v2tgxc",
