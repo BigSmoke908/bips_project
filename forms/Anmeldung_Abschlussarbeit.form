@@ -10,24 +10,43 @@
       "id": "Field_18ax127"
     },
     {
-      "label": "Name Student",
+      "label": "Name Student (bei mehreren mit Semikolon ';' getrennt)",
       "type": "textfield",
       "layout": {
         "row": "Row_0xn0wos",
         "columns": null
       },
       "id": "Field_097txm3",
-      "key": "textfield_7wtjk"
+      "key": "textfield_7wtjk",
+      "validate": {
+        "required": true
+      }
     },
     {
-      "label": "E-mail Student",
+      "label": "E-mail Student (bei mehreren mit Semikolon ';' getrennt)",
       "type": "textfield",
       "layout": {
         "row": "Row_0p28ec3",
         "columns": null
       },
       "id": "Field_11bgu3n",
-      "key": "textfield_v38r7g"
+      "key": "textfield_v38r7g",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Mat. Nr. (bei mehreren mit Semikolon ';' getrennt)",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1dwj3ly",
+        "columns": null
+      },
+      "id": "Field_1lcv2z1",
+      "key": "textfield_d93b73",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Thema der Arbeit",
@@ -37,7 +56,10 @@
         "columns": null
       },
       "id": "Field_07mnz6g",
-      "key": "textfield_h5mlv"
+      "key": "textfield_h5mlv",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Studiengang",
@@ -47,7 +69,10 @@
         "columns": null
       },
       "id": "Field_0xphxn0",
-      "key": "textfield_4gp488"
+      "key": "textfield_4gp488",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Name Betreuer",
@@ -57,7 +82,10 @@
         "columns": null
       },
       "id": "Field_0lpj1gp",
-      "key": "textfield_6no5oh"
+      "key": "textfield_6no5oh",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Email Betreuer",
@@ -67,7 +95,10 @@
         "columns": null
       },
       "id": "Field_1ftjq3k",
-      "key": "textfield_o9ynnf"
+      "key": "textfield_o9ynnf",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Name Zweitbetreuer",
@@ -77,7 +108,10 @@
         "columns": null
       },
       "id": "Field_0exp0m2",
-      "key": "textfield_dud0z"
+      "key": "textfield_dud0z",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Email Zweiter Betreuer",
@@ -87,7 +121,20 @@
         "columns": null
       },
       "id": "Field_13xz3if",
-      "key": "textfield_o7fsd"
+      "key": "textfield_o7fsd",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_0x9teuz",
+        "columns": null
+      },
+      "id": "Field_1jyweiw"
     }
   ],
   "type": "default",

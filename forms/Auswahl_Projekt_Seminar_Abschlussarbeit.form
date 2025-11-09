@@ -10,15 +10,51 @@
       "id": "Field_0w6dfk2"
     },
     {
+      "label": "Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1spqyns",
+        "columns": null
+      },
+      "id": "Field_13cnswi",
+      "key": "textfield_zeu9to",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Mat. Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1spqyns",
+        "columns": null
+      },
+      "id": "Field_1fkel4s",
+      "key": "textfield_ts75t",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "E-Mail",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1spqyns",
+        "columns": null
+      },
+      "id": "Field_0l8ia3v",
+      "key": "textfield_h0xd6r",
+      "validate": {
+        "required": true,
+        "validationType": "email"
+      }
+    },
+    {
       "label": "Projekt-/Seminararbeit oder Abschlussarbeit?",
       "values": [
         {
-          "label": "Seminararbeit",
+          "label": "Seminararbeit/Projektarbeit",
           "value": "1"
-        },
-        {
-          "label": "Projektarbeit",
-          "value": "2"
         },
         {
           "label": "Abschlussarbeit",
@@ -32,6 +68,16 @@
       },
       "id": "Field_0m1xigk",
       "key": "radio_vvumvq"
+    },
+    {
+      "label": "Bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_0ddzraa",
+        "columns": null
+      },
+      "id": "Field_09tqy9r"
     }
   ],
   "type": "default",

@@ -17,7 +17,30 @@
         "columns": null
       },
       "id": "Field_0mrt17x",
-      "key": "textfield_6141po"
+      "key": "textfield_6141po",
+      "disabled": true
+    },
+    {
+      "label": "Mat. Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0t7k6yq",
+        "columns": null
+      },
+      "id": "Field_107xrwg",
+      "key": "textfield_xpo22q",
+      "disabled": true
+    },
+    {
+      "label": "E-Mail",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0t7k6yq",
+        "columns": null
+      },
+      "id": "Field_1x9jase",
+      "key": "textfield_543a3d",
+      "disabled": true
     },
     {
       "label": "Abgabe bestätigt",
@@ -37,7 +60,11 @@
         "columns": null
       },
       "id": "Field_00o684k",
-      "key": "radio_0f9npu"
+      "key": "radio_0f9npu",
+      "disabled": false,
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Kommentar",

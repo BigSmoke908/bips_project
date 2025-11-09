@@ -1,0 +1,89 @@
+{
+  "components": [
+    {
+      "text": "# Note eintragen",
+      "type": "text",
+      "layout": {
+        "row": "Row_14enev9",
+        "columns": null
+      },
+      "id": "Field_00jqg08"
+    },
+    {
+      "label": "Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_06ft2ox",
+        "columns": null
+      },
+      "id": "Field_1vwgs5d",
+      "key": "textfield_zurawp",
+      "disabled": true
+    },
+    {
+      "label": "E-Mail",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_06ft2ox",
+        "columns": null
+      },
+      "id": "Field_0xl2iab",
+      "key": "textfield_q1dvi",
+      "disabled": true
+    },
+    {
+      "label": "Mat.Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_06ft2ox",
+        "columns": null
+      },
+      "id": "Field_19va0yk",
+      "key": "textfield_i53uli",
+      "disabled": true
+    },
+    {
+      "label": "Thema der Arbeit",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0kygjmv",
+        "columns": null
+      },
+      "id": "Field_0nb4hu9",
+      "key": "textarea_mptqmp",
+      "disabled": true
+    },
+    {
+      "label": "Note",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0i72lgg",
+        "columns": 5
+      },
+      "id": "Field_1rm885y",
+      "key": "textfield_yaqehm",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_1lmguh3",
+        "columns": null
+      },
+      "id": "Field_0byj43o"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1k44req",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

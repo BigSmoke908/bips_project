@@ -44,14 +44,32 @@
       }
     },
     {
-      "label": "E-mail Student",
+      "label": "E-Mail Student",
       "type": "textfield",
       "layout": {
-        "row": "Row_1ysi2kz",
+        "row": "Row_1q3ivx4",
         "columns": null
       },
       "id": "Field_13xetih",
-      "key": "textfield_j4ham"
+      "key": "textfield_j4ham",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Mat. Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0v2tgxc",
+        "columns": null
+      },
+      "id": "Field_0c819ib",
+      "key": "textfield_549lkq",
+      "validate": {
+        "required": true,
+        "minLength": "",
+        "pattern": "[0-9]*"
+      }
     },
     {
       "label": "Studiengang",
@@ -75,6 +93,16 @@
       },
       "id": "Field_1bqzjq4",
       "key": "textfield_opiimk"
+    },
+    {
+      "label": "Bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_13xwsj8",
+        "columns": null
+      },
+      "id": "Field_1369tqy"
     }
   ],
   "type": "default",

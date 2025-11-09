@@ -1,10 +1,10 @@
 {
   "components": [
     {
-      "text": "Antrag auf Betreueung ",
+      "text": "# Antrag auf Betreuung bestätigen",
       "type": "text",
       "layout": {
-        "row": "Row_0ti1w0x",
+        "row": "Row_08687wd",
         "columns": null
       },
       "id": "Field_0ce8ern",
@@ -18,7 +18,19 @@
         "columns": null
       },
       "id": "Field_18y92b6",
-      "key": "textarea_5xjjc"
+      "key": "textarea_5xjjc",
+      "disabled": true
+    },
+    {
+      "label": "Mat. Nr.",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0ti1w0x",
+        "columns": null
+      },
+      "id": "Field_11vvdsy",
+      "key": "textarea_wmtkly",
+      "disabled": true
     },
     {
       "label": "Thema der Arbeit",
@@ -28,21 +40,8 @@
         "columns": null
       },
       "id": "Field_1j4r5qf",
-      "key": "textarea_ukioro"
-    },
-    {
-      "label": "Name der Betreuerin/des Betreuer",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_0ti1w0x",
-        "columns": null
-      },
-      "id": "Field_1vs9hff",
-      "key": "betreuerName",
-      "properties": {},
-      "validate": {
-        "required": true
-      }
+      "key": "textarea_ukioro",
+      "disabled": true
     },
     {
       "label": "E-Mail der Betreuerin/des Betreuer",
@@ -55,7 +54,23 @@
       "key": "textarea_tausbb",
       "validate": {
         "required": true
-      }
+      },
+      "disabled": true
+    },
+    {
+      "label": "Name der Betreuerin/des Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0sj9emk",
+        "columns": 4
+      },
+      "id": "Field_1vs9hff",
+      "key": "betreuerName",
+      "properties": {},
+      "validate": {
+        "required": true
+      },
+      "disabled": true
     },
     {
       "label": "Bestätigung ",
@@ -93,7 +108,8 @@
       "key": "datetime_4yg9v",
       "validate": {
         "required": true
-      }
+      },
+      "disabled": true
     },
     {
       "label": "Kommentar/Anmerkung ",
@@ -107,6 +123,16 @@
       "validate": {
         "required": false
       }
+    },
+    {
+      "label": "Bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_1ombxca",
+        "columns": null
+      },
+      "id": "Field_0j21kb9"
     }
   ],
   "type": "default",

@@ -17,17 +17,30 @@
         "columns": null
       },
       "id": "Field_0a7jk57",
-      "key": "textfield_6fc1xf"
+      "key": "textfield_6fc1xf",
+      "disabled": true
     },
     {
       "label": "Matr.-Nr.",
       "type": "textfield",
       "layout": {
-        "row": "Row_18jtd0u",
+        "row": "Row_0po0pb8",
         "columns": null
       },
       "id": "Field_069k4fh",
-      "key": "textfield_agz6ks"
+      "key": "textfield_agz6ks",
+      "disabled": true
+    },
+    {
+      "label": "E-Mail",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0po0pb8",
+        "columns": null
+      },
+      "id": "Field_0ul3p8j",
+      "key": "textfield_8l6799",
+      "disabled": true
     },
     {
       "label": "Arbeit hochladen(PDF)",
@@ -43,7 +56,7 @@
       }
     },
     {
-      "label": "Ich bestätige ,dass die Arbeit eigenständig erstellt habe ",
+      "label": "Ich bestätige, dass die Arbeit eigenständig erstellt wurde",
       "type": "checkbox",
       "layout": {
         "row": "Row_0mprjdq",
@@ -66,8 +79,9 @@
       "id": "Field_1k3wqb9",
       "key": "datetime_gzelkd",
       "validate": {
-        "required": true
-      }
+        "required": false
+      },
+      "disabled": true
     },
     {
       "label": "Unterschrift",
@@ -77,7 +91,10 @@
         "columns": null
       },
       "id": "Field_0vleue4",
-      "key": "textarea_t0etkd"
+      "key": "textarea_t0etkd",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Abgabe bestätigen",

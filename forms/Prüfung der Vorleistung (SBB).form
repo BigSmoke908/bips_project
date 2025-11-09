@@ -17,7 +17,8 @@
         "columns": null
       },
       "id": "Field_1rttufk",
-      "key": "textfield_b1t5u"
+      "key": "textfield_b1t5u",
+      "disabled": true
     },
     {
       "label": "Studiengang",
@@ -27,7 +28,19 @@
         "columns": null
       },
       "id": "Field_0ndqlus",
-      "key": "textfield_x3so3m"
+      "key": "textfield_x3so3m",
+      "disabled": true
+    },
+    {
+      "label": "Mat. Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1j7iouc",
+        "columns": null
+      },
+      "id": "Field_0kbe63f",
+      "key": "textfield_e5gj",
+      "disabled": true
     },
     {
       "label": "SSB-Sachberbeiter/in",
@@ -87,7 +100,18 @@
       "key": "datetime_yhcqm",
       "validate": {
         "required": true
-      }
+      },
+      "disabled": true
+    },
+    {
+      "label": "Bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_1r5kuyh",
+        "columns": null
+      },
+      "id": "Field_0nssxnw"
     }
   ],
   "type": "default",

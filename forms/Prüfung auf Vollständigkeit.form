@@ -17,7 +17,8 @@
         "columns": null
       },
       "id": "Field_083upq3",
-      "key": "textfield_ag678"
+      "key": "textfield_ag678",
+      "disabled": true
     },
     {
       "label": "Studiengang",
@@ -30,6 +31,16 @@
       "key": "textfield_elqiah"
     },
     {
+      "label": "Mat. Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ivk0ho",
+        "columns": null
+      },
+      "id": "Field_0268vcv",
+      "key": "textfield_82lml5"
+    },
+    {
       "label": "Prüfer ",
       "type": "textfield",
       "layout": {
@@ -40,7 +51,8 @@
       "key": "textfield_uqxd4o",
       "validate": {
         "required": true
-      }
+      },
+      "disabled": true
     },
     {
       "label": "Thema der Arbeit",
@@ -50,13 +62,14 @@
         "columns": null
       },
       "id": "Field_0fokk5q",
-      "key": "textarea_38xl1w"
+      "key": "textarea_38xl1w",
+      "disabled": true
     },
     {
       "label": "Vollständig?",
       "values": [
         {
-          "label": "ja",
+          "label": "Ja",
           "value": "value"
         },
         {
@@ -76,7 +89,27 @@
       }
     },
     {
-      "label": "Bemerkung zur Vollständigkeit",
+      "label": "Weitere Vorgaben erfüllt?",
+      "values": [
+        {
+          "label": "Ja",
+          "value": "value2"
+        },
+        {
+          "label": "Nein",
+          "value": "value3"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0983mi2",
+        "columns": null
+      },
+      "id": "Field_0lbv3vr",
+      "key": "radio_4zi05"
+    },
+    {
+      "label": "Bemerkung",
       "type": "textarea",
       "layout": {
         "row": "Row_0983mi2",
@@ -97,7 +130,18 @@
       "key": "datetime_0sw5",
       "validate": {
         "required": true
-      }
+      },
+      "disabled": true
+    },
+    {
+      "label": "Bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_0tmgi6h",
+        "columns": null
+      },
+      "id": "Field_0ww32ko"
     }
   ],
   "type": "default",
