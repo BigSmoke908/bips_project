@@ -18,7 +18,7 @@
         "columns": null
       },
       "id": "Field_18y92b6",
-      "key": "textarea_5xjjc",
+      "key": "student_name_fill",
       "disabled": true
     },
     {
@@ -55,7 +55,7 @@
       "validate": {
         "required": true
       },
-      "disabled": true
+      "disabled": false
     },
     {
       "label": "Name der Betreuerin/des Betreuer",
@@ -70,18 +70,18 @@
       "validate": {
         "required": true
       },
-      "disabled": true
+      "disabled": false
     },
     {
       "label": "Bestätigung ",
       "values": [
         {
           "label": "Ja ,ich übernehme die Betreuung",
-          "value": "value"
+          "value": "1"
         },
         {
           "label": "Nein",
-          "value": "ja ich übernehme die Betreuung"
+          "value": "0"
         }
       ],
       "type": "radio",
@@ -94,7 +94,7 @@
       "validate": {
         "required": true
       },
-      "disabled": true
+      "disabled": false
     },
     {
       "subtype": "date",

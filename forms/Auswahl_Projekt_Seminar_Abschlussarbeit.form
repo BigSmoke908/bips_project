@@ -20,7 +20,8 @@
       "key": "textfield_zeu9to",
       "validate": {
         "required": true
-      }
+      },
+      "readonly": false
     },
     {
       "label": "Mat. Nr.",
@@ -58,7 +59,7 @@
         },
         {
           "label": "Abschlussarbeit",
-          "value": "3"
+          "value": "2"
         }
       ],
       "type": "radio",

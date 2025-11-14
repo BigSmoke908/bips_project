@@ -60,11 +60,11 @@
       "values": [
         {
           "label": "Ja",
-          "value": "value"
+          "value": "1"
         },
         {
           "label": "Nein",
-          "value": "value2"
+          "value": "0"
         }
       ],
       "type": "radio",

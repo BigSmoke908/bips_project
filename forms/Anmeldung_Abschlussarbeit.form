@@ -110,7 +110,7 @@
       "id": "Field_0exp0m2",
       "key": "textfield_dud0z",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -123,7 +123,7 @@
       "id": "Field_13xz3if",
       "key": "textfield_o7fsd",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
