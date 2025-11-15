@@ -64,7 +64,7 @@
       "label": "E-Mail",
       "type": "textfield",
       "layout": {
-        "row": "Row_0bzew8s",
+        "row": "Row_1xvvoca",
         "columns": null
       },
       "id": "Field_0l8ia3v",
@@ -78,7 +78,7 @@
       "label": "Telefonnummer",
       "type": "textfield",
       "layout": {
-        "row": "Row_1hljavd",
+        "row": "Row_1xvvoca",
         "columns": null
       },
       "id": "Field_0ckvj1f",
@@ -89,6 +89,12 @@
     },
     {
       "label": "Studiengang",
+      "values": [
+        {
+          "label": "Value",
+          "value": "value"
+        }
+      ],
       "type": "select",
       "layout": {
         "row": "Row_1iawouk",
@@ -96,7 +102,21 @@
       },
       "id": "Field_1tafart",
       "key": "select_889dg",
-      "valuesKey": ""
+      "valuesKey": "",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Semester der Arbeit",
+      "type": "select",
+      "layout": {
+        "row": "Row_19c32jc",
+        "columns": null
+      },
+      "id": "Field_1561bix",
+      "key": "select_xgpsk",
+      "valuesKey": "semesterList"
     },
     {
       "label": "Projekt-/Seminararbeit oder Abschlussarbeit?",

@@ -11,34 +11,81 @@
       "properties": {}
     },
     {
-      "label": "Name der Studierenden",
-      "type": "textarea",
+      "label": "Name Student",
+      "type": "textfield",
       "layout": {
-        "row": "Row_0ti1w0x",
+        "row": "Row_0aop99x",
         "columns": null
       },
-      "id": "Field_18y92b6",
-      "key": "student_name_fill",
-      "disabled": false,
-      "readonly": true
+      "id": "Field_1drle2f",
+      "key": "textfield_lv26ni"
     },
     {
-      "label": "Mat. Nr.",
-      "type": "textarea",
+      "label": "Vorname Student",
+      "type": "textfield",
       "layout": {
-        "row": "Row_0ti1w0x",
+        "row": "Row_0aop99x",
         "columns": null
       },
-      "id": "Field_11vvdsy",
-      "key": "mat_nr_fill",
-      "disabled": false,
+      "id": "Field_02m0po8",
+      "key": "textfield_bo4vvh"
+    },
+    {
+      "label": "Titel Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0aop99x",
+        "columns": null
+      },
+      "id": "Field_0hc9779",
+      "key": "textfield_mrv1m"
+    },
+    {
+      "label": "Mat Nr Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0co5upi",
+        "columns": null
+      },
+      "id": "Field_1v6pril",
+      "key": "textfield_u1r4r8"
+    },
+    {
+      "label": "E-Mail Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0co5upi",
+        "columns": null
+      },
+      "id": "Field_08ehxov",
+      "key": "textfield_ez3u5s"
+    },
+    {
+      "label": "Telefonnummer Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0co5upi",
+        "columns": null
+      },
+      "id": "Field_1p8delx",
+      "key": "textfield_h0n4j"
+    },
+    {
+      "label": "Semester der Arbeit",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1gg8x5z",
+        "columns": null
+      },
+      "id": "Field_0f9d13g",
+      "key": "semester_arbeit_fill",
       "readonly": true
     },
     {
       "label": "Thema der Arbeit",
       "type": "textarea",
       "layout": {
-        "row": "Row_0ti1w0x",
+        "row": "Row_09smpua",
         "columns": null
       },
       "id": "Field_1j4r5qf",
@@ -78,30 +125,6 @@
       "readonly": true
     },
     {
-      "label": "Bestätigung ",
-      "values": [
-        {
-          "label": "Ja ,ich übernehme die Betreuung",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "type": "radio",
-      "layout": {
-        "row": "Row_0sj9emk",
-        "columns": null
-      },
-      "id": "Field_1x0ea18",
-      "key": "date_",
-      "validate": {
-        "required": true
-      },
-      "disabled": false
-    },
-    {
       "subtype": "date",
       "dateLabel": "Datum der Bestätigung",
       "type": "datetime",
@@ -116,6 +139,38 @@
       },
       "disabled": false,
       "readonly": true
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_1o5phj1",
+        "columns": null
+      },
+      "id": "Field_046llen"
+    },
+    {
+      "label": "Bestätigung ",
+      "values": [
+        {
+          "label": "Ja ,ich übernehme die Betreuung",
+          "value": "1"
+        },
+        {
+          "label": "Nein",
+          "value": "0"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0t857c0",
+        "columns": null
+      },
+      "id": "Field_1x0ea18",
+      "key": "date_",
+      "validate": {
+        "required": true
+      },
+      "disabled": false
     },
     {
       "label": "Kommentar/Anmerkung ",

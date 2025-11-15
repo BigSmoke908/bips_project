@@ -58,7 +58,7 @@
       "label": "E mail Studierender",
       "type": "textfield",
       "layout": {
-        "row": "Row_16b4p6e",
+        "row": "Row_0uvbfkg",
         "columns": null
       },
       "id": "Field_1mn7j77",
@@ -69,11 +69,12 @@
       "label": "Telefennummer Studierender",
       "type": "textfield",
       "layout": {
-        "row": "Row_0tfm5fe",
+        "row": "Row_0uvbfkg",
         "columns": null
       },
       "id": "Field_1u7tg3n",
-      "key": "textfield_kmc2o"
+      "key": "textfield_kmc2o",
+      "readonly": true
     },
     {
       "label": "Studiengang",
@@ -83,7 +84,8 @@
         "columns": null
       },
       "id": "Field_0q37zdl",
-      "key": "textfield_elqiah"
+      "key": "textfield_elqiah",
+      "readonly": true
     },
     {
       "label": "Thema der Arbeit",
@@ -94,7 +96,8 @@
       },
       "id": "Field_0fokk5q",
       "key": "textarea_38xl1w",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "type": "separator",
@@ -116,7 +119,8 @@
       "validate": {
         "required": true
       },
-      "disabled": true
+      "disabled": false,
+      "readonly": false
     },
     {
       "label": "Vollständig?",
@@ -184,7 +188,8 @@
       "validate": {
         "required": true
       },
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Bestätigen",

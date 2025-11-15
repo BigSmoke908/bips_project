@@ -16,8 +16,41 @@
         "row": "Row_0xn0wos",
         "columns": null
       },
+      "id": "Field_0gbz5ey",
+      "key": "textfield_trw1yn"
+    },
+    {
+      "label": "Vorname Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0xn0wos",
+        "columns": null
+      },
+      "id": "Field_1quedsy",
+      "key": "textfield_du3v1"
+    },
+    {
+      "label": "Titel Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0xn0wos",
+        "columns": null
+      },
       "id": "Field_097txm3",
       "key": "textfield_7wtjk",
+      "validate": {
+        "required": false
+      }
+    },
+    {
+      "label": "Mat. Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0p28ec3",
+        "columns": null
+      },
+      "id": "Field_1lcv2z1",
+      "key": "textfield_d93b73",
       "validate": {
         "required": false
       }
@@ -36,42 +69,44 @@
       }
     },
     {
-      "label": "Mat. Nr.",
+      "label": "Telefonnummer",
       "type": "textfield",
       "layout": {
-        "row": "Row_1dwj3ly",
+        "row": "Row_0p28ec3",
         "columns": null
       },
-      "id": "Field_1lcv2z1",
-      "key": "textfield_d93b73",
-      "validate": {
-        "required": false
-      }
+      "id": "Field_1atc7n1",
+      "key": "telefonnummer_fill"
+    },
+    {
+      "label": "Semester der Arbeit",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0rf2hdn",
+        "columns": null
+      },
+      "id": "Field_0cauwmn",
+      "key": "semester_fill"
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_13upwhg",
+        "columns": null
+      },
+      "id": "Field_1usmat2"
     },
     {
       "label": "Thema der Arbeit",
       "type": "textfield",
       "layout": {
-        "row": "Row_0wca3yd",
+        "row": "Row_10b7icm",
         "columns": null
       },
       "id": "Field_07mnz6g",
       "key": "textfield_h5mlv",
       "validate": {
         "required": true
-      }
-    },
-    {
-      "label": "Studiengang",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_1u5hmrt",
-        "columns": null
-      },
-      "id": "Field_0xphxn0",
-      "key": "textfield_4gp488",
-      "validate": {
-        "required": false
       }
     },
     {

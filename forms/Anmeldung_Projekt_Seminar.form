@@ -66,7 +66,7 @@
       "label": "E-Mail Student ",
       "type": "textfield",
       "layout": {
-        "row": "Row_1q3ivx4",
+        "row": "Row_0ic69x2",
         "columns": null
       },
       "id": "Field_13xetih",
@@ -80,11 +80,22 @@
       "label": "Telefonnummer",
       "type": "textfield",
       "layout": {
-        "row": "Row_0f8zet8",
+        "row": "Row_0ic69x2",
         "columns": null
       },
       "id": "Field_0kgq2fx",
       "key": "student_phone_fill",
+      "readonly": true
+    },
+    {
+      "label": "Semester der Arbeit",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1o679td",
+        "columns": null
+      },
+      "id": "Field_06ai1rc",
+      "key": "semester_fill",
       "readonly": true
     },
     {
@@ -133,14 +144,213 @@
       "readonly": false
     },
     {
-      "label": "Betreuer (Optional)",
-      "type": "textfield",
+      "label": "Betreuer?",
+      "values": [
+        {
+          "label": "Ja",
+          "value": "1"
+        },
+        {
+          "label": "Nein",
+          "value": "0"
+        }
+      ],
+      "type": "radio",
       "layout": {
-        "row": "Row_1bs8llz",
+        "row": "Row_1u9zedg",
         "columns": null
       },
-      "id": "Field_1bqzjq4",
-      "key": "textfield_opiimk"
+      "id": "Field_0zzr26n",
+      "key": "radio_evahfn",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Dozenten auswählen",
+      "type": "select",
+      "layout": {
+        "row": "Row_034gdod",
+        "columns": null
+      },
+      "id": "Field_0t4v7le",
+      "key": "select_ugkl1",
+      "valuesKey": "dozentenList"
+    },
+    {
+      "label": "Externer Betreuer?",
+      "values": [
+        {
+          "label": "Ja",
+          "value": "1"
+        },
+        {
+          "label": "Nein",
+          "value": "0"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_1ge7yvq",
+        "columns": null
+      },
+      "id": "Field_1538qdt",
+      "key": "radio_jq401",
+      "conditional": {
+        "hide": "=radio_evahfn = \"0\""
+      }
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_0fxnuo2",
+        "columns": null
+      },
+      "id": "Field_11bo1i5"
+    },
+    {
+      "label": "Vorname Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0kv6ce3",
+        "columns": null
+      },
+      "id": "Field_0dt59so",
+      "key": "textfield_zz0bmw",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=radio_jq401 = \"0\""
+      }
+    },
+    {
+      "label": "Nachname Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0kv6ce3",
+        "columns": null
+      },
+      "id": "Field_0g0oqgn",
+      "key": "textfield_whw5yh",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=radio_jq401 = \"0\""
+      }
+    },
+    {
+      "label": "Title Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0kv6ce3",
+        "columns": null
+      },
+      "id": "Field_1eztx7e",
+      "key": "textfield_g17jv",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=radio_jq401 = \"0\""
+      }
+    },
+    {
+      "label": "E-Mail Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_06o7fai",
+        "columns": null
+      },
+      "id": "Field_1h80nz4",
+      "key": "textfield_001jgs",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=radio_jq401 = \"0\""
+      }
+    },
+    {
+      "label": "Telefonnummer Betreuer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_06o7fai",
+        "columns": null
+      },
+      "id": "Field_07x53ig",
+      "key": "textfield_rfkjkl",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=radio_jq401 = \"0\""
+      }
+    },
+    {
+      "label": "Firma Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0m3tm92",
+        "columns": null
+      },
+      "id": "Field_16poasi",
+      "key": "textfield_gmseuw",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=radio_jq401 = \"0\""
+      }
+    },
+    {
+      "label": "Adresse Firma",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0m3tm92",
+        "columns": null
+      },
+      "id": "Field_06scr51",
+      "key": "textfield_kqb5p6",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=radio_jq401 = \"0\""
+      }
+    },
+    {
+      "label": "PLZ Firma",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1v0xsvr",
+        "columns": null
+      },
+      "id": "Field_0r46gd9",
+      "key": "textfield_hf4htb",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=radio_jq401 = \"0\""
+      }
+    },
+    {
+      "label": "Stadt Firma",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1v0xsvr",
+        "columns": null
+      },
+      "id": "Field_05pcjqm",
+      "key": "textfield_tyxo2",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=radio_jq401 = \"0\""
+      }
     },
     {
       "label": "Bestätigen",

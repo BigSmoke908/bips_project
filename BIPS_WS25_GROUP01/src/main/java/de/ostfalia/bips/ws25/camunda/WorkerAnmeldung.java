@@ -80,8 +80,10 @@ public class WorkerAnmeldung {
         Map<String, Object> mapAll = Map.of();
         Map<String, Object> mapDozenten = Anmeldung.ladeDozenten();
         Map<String, Object> mapCourseOfStudies = Anmeldung.ladeStudiengaenge();
+        Map<String, Object> mapSemester = Anmeldung.ladeSemester();
         mapAll.putAll(mapDozenten);
         mapAll.putAll(mapCourseOfStudies);
+        mapAll.putAll(mapSemester);
         LOGGER.info("Dozenten und Studiengänge erfolgreich geladen");
         return mapAll;
     }
@@ -111,8 +113,32 @@ public class WorkerAnmeldung {
     }
     
     @JobWorker(type = "saveProjektSeminarArbeitAntrageToDatabase")
-    public Map<String, Object> saveProjektSeminarArbeitAntrageToDatabase(@Variable(name = "username") String username) {
-        LOGGER.info("Saving to Database...", username); //TODO
+    public Map<String, Object> saveProjektSeminarArbeitAntrageToDatabase(@Variable(name = "student_lastname") String studentLastname,
+                                                                            @Variable(name = "student_firstname") String studentFirstname,
+                                                                            @Variable(name = "student_title") String studentTitle,
+                                                                            @Variable(name = "student_phone") String studentPhone,
+                                                                            @Variable(name = "student_mail") String studentMail,
+                                                                            @Variable(name = "student_studiengang") String studentStudiengang,
+                                                                            @Variable(name = "student_mat_nr") String studenMatNr, //TODO ist im Muster gar nicht verlangt
+                                                                            @Variable(name = "semester_arbeit") String semeserterOfArbeit,
+                                                                            @Variable(name = "thema_der_arbeit") String themaDerArbeit, //TODO ist das mit thesis gemeint?
+                                                                            @Variable(name = "betreuer_vorhanden") String betreuerVorhanden,
+                                                                            @Variable(name = "betreuer_extern") String betreuerExtern,
+                                                                            @Variable(name = "vorname_betreuer_extern") String vornameBetreuerExtern,
+                                                                            @Variable(name = "nachname_betreuer_extern") String nachnameBetreuerExtern,
+                                                                            @Variable(name = "title_betreuer_extern") String titleBetreuerExtern,
+                                                                            @Variable(name = "email_betreuer_extern") String emailBetreuerExtern,
+                                                                            @Variable(name = "phone_betreuer_extern") String phoneBetreuerExetern,
+                                                                            @Variable(name = "firma_name") String firmaName,
+                                                                            @Variable(name = "firma_adresse") String firmaAdresse,
+                                                                            @Variable(name = "firma_plz") String firmaPlz,
+                                                                            @Variable(name = "firma_stadt") String firmaStadt,
+                                                                            @Variable(name = "betreuer_dozent") String lecturerID, 
+                                                                            @Variable(name = "istProjekt") String istProjekt) {
+        LOGGER.info("Saving to Database...");
+        Anmeldung.saveProjectOrSeminarWorkToDatabase(semeserterOfArbeit, istProjekt, betreuerVorhanden, betreuerExtern, studentStudiengang, lecturerID,
+                                                    studentFirstname, studentLastname, studentTitle, studentPhone, studentMail, vornameBetreuerExtern, nachnameBetreuerExtern, 
+                                                    titleBetreuerExtern, phoneBetreuerExetern, emailBetreuerExtern, firmaName, firmaAdresse, firmaPlz, firmaStadt);
         return Map.of("database-save", true);
     }
 
