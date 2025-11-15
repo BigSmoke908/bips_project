@@ -1,5 +1,6 @@
 package de.ostfalia.bips.ws25.camunda;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -77,7 +78,7 @@ public class WorkerAnmeldung {
     @JobWorker(type = "ladeDozentenUndStudiengänge")
     public Map<String, Object> ladeDozenten() {
         LOGGER.info("Dozenten und Studiengänge werden geladen..."); 
-        Map<String, Object> mapAll = Map.of();
+        Map<String, Object> mapAll = new HashMap<>();
         Map<String, Object> mapDozenten = Anmeldung.ladeDozenten();
         Map<String, Object> mapCourseOfStudies = Anmeldung.ladeStudiengaenge();
         Map<String, Object> mapSemester = Anmeldung.ladeSemester();

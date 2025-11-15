@@ -85,7 +85,7 @@ public class Utils {
                 if(count == 0){
                     final PreparedStatement statementInsert = connection.prepareStatement(insertQuery);
                     statementInsert.setString(1, semesterString);
-                    statementInsert.executeQuery();
+                    statementInsert.executeUpdate();
                 }
             } catch (SQLException e) {
                 // TODO Auto-generated catch block

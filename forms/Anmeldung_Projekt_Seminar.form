@@ -175,7 +175,10 @@
       },
       "id": "Field_0t4v7le",
       "key": "select_ugkl1",
-      "valuesKey": "dozentenList"
+      "valuesKey": "dozentenList",
+      "conditional": {
+        "hide": "=radio_evahfn = \"0\""
+      }
     },
     {
       "label": "Externer Betreuer?",
@@ -221,7 +224,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
       }
     },
     {
@@ -237,7 +240,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
       }
     },
     {
@@ -253,7 +256,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
       }
     },
     {
@@ -269,7 +272,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
       }
     },
     {
@@ -285,7 +288,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
       }
     },
     {
@@ -301,7 +304,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
       }
     },
     {
@@ -317,7 +320,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
       }
     },
     {
@@ -333,7 +336,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
       }
     },
     {
@@ -349,7 +352,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
       }
     },
     {

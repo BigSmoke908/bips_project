@@ -89,12 +89,6 @@
     },
     {
       "label": "Studiengang",
-      "values": [
-        {
-          "label": "Value",
-          "value": "value"
-        }
-      ],
       "type": "select",
       "layout": {
         "row": "Row_1iawouk",
@@ -102,7 +96,7 @@
       },
       "id": "Field_1tafart",
       "key": "select_889dg",
-      "valuesKey": "",
+      "valuesKey": "courseOfStudyList",
       "validate": {
         "required": true
       }

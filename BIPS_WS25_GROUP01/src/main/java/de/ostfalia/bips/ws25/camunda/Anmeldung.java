@@ -171,7 +171,7 @@ public class Anmeldung {
             statement.setInt(4, semesterId);
             statement.setInt(5, courseOfStudiesId);
             statement.setInt(6, studentId);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -186,7 +186,7 @@ public class Anmeldung {
             statement.setString(1, studentWorkId);
             statement.setString(2, supervisorId);
             statement.setString(3, isPrimarySupervisor);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -204,7 +204,7 @@ public class Anmeldung {
             statement.setString(2, lecturerId);
             statement.setString(3, isPrimarySupervisor);
             statement.setString(4, isBilled);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -236,7 +236,7 @@ public class Anmeldung {
                     insertStatement.setString(3, title);
                     insertStatement.setString(4, phone);
                     insertStatement.setString(5, email);
-                    insertStatement.executeQuery();
+                    insertStatement.executeUpdate();
 
                     ResultSet generatedKeys = insertStatement.getGeneratedKeys();
                     if (generatedKeys.next()) {
@@ -250,7 +250,7 @@ public class Anmeldung {
                     updateStatement.setString(3, firstname);
                     updateStatement.setString(4, lastname);
                     updateStatement.setString(5, email);
-                    updateStatement.executeQuery();
+                    updateStatement.executeUpdate();
                     return result.getInt("id");
                 }
             }

@@ -195,6 +195,7 @@
           <zeebe:output source="=textfield_hf4htb" target="firma_plz" />
           <zeebe:output source="=textfield_tyxo2" target="firma_stadt" />
           <zeebe:output source="=select_ugkl1" target="betreuer_dozent" />
+          <zeebe:output source="=radio_6e6iyb" target="istProjekt" />
         </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ji5yh7</bpmn:incoming>
