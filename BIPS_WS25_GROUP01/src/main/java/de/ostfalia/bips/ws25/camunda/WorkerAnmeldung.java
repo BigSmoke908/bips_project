@@ -16,8 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 @Component
-public class Worker {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Worker.class);
+public class WorkerAnmeldung {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WorkerAnmeldung.class);
 
     @JobWorker(type = "hello-world")
     public Map<String, Object> hello(@Variable(name = "username") String username) {
@@ -55,24 +55,61 @@ public class Worker {
         return password;
     }
 
-    @JobWorker(type = "ladeDozenten")
-    public Map<String, Object> ladeDozenten(@Variable(name = "username") String username) {
-        LOGGER.info("Dozenten werden geladen...", username); 
-        return Anmeldung.ladeDozenten();
+    /**
+     * @param betreuer_abschlussarbeit the name of the selected betreuer, if a dozent is selected this is null
+     * @param zweitbetreuer the name of the selected zweitbetreuer, if a dozent is selected this is null
+     * @param betreuer_abschlussarbeit_select the id of the selected lecturer
+     * @param zweitbetreuer_select the id of the selected lecturer (in this case for the second lecturer)
+     * @return the assignees for checking wether they are actually supervisors for the project
+     */
+    @JobWorker(type = "getAssigneeForBetreuerAbschlussarbeit")
+    public Map<String, Object> getAssigneeForBetreuerAbschlussarbeit(
+                                @Variable(name = "betreuer_abschlussarbeit") String betreuer_abschlussarbeit,
+                                @Variable(name = "zweitbetreuer") String zweitbetreuer,
+                                @Variable(name = "betreuer_abschlussarbeit_select") String betreuer_abschlussarbeit_select,
+                                @Variable(name = "zweitbetreuer_select") String zweitbetreuer_select
+                                ) {
+        //if the betreuer_abschlussarbeit or zweitbetreuer null, then we need to get the selected lecturer from our database 
+        LOGGER.info("Assignees werden bestimmt..."); 
+        return Anmeldung.getAssigneeForBetreuerAbschlussarbeit(betreuer_abschlussarbeit_select, zweitbetreuer_select, zweitbetreuer, zweitbetreuer_select);
+    }
+
+    @JobWorker(type = "ladeDozentenUndStudiengänge")
+    public Map<String, Object> ladeDozenten() {
+        LOGGER.info("Dozenten und Studiengänge werden geladen..."); 
+        Map<String, Object> mapAll = Map.of();
+        Map<String, Object> mapDozenten = Anmeldung.ladeDozenten();
+        Map<String, Object> mapCourseOfStudies = Anmeldung.ladeStudiengaenge();
+        mapAll.putAll(mapDozenten);
+        mapAll.putAll(mapCourseOfStudies);
+        LOGGER.info("Dozenten und Studiengänge erfolgreich geladen");
+        return mapAll;
     }
 
     @JobWorker(type = "ablehnungBetreuerProjektSeminarArbeitMail")
-    public Map<String, Object> ablehnungMail(@Variable(name = "username") String username) {
-        LOGGER.info("Die Arbeit wurde vom Betreuer abgelehnt", username);
+    public Map<String, Object> ablehnungMail(
+                                    @Variable(name = "betreuer") String betreuer,
+                                    @Variable(name = "student_name") String student_name, 
+                                    @Variable(name = "Email_student") String email, 
+                                    @Variable(name = "thema_der_arbeit") String arbietsThema) {
+        LOGGER.info("Die Arbeit wurde vom Betreuer abgelehnt");
+        String message = "Ihre Arbeit '" + arbietsThema + "' wurde vom Betreuer " + betreuer + " abgelehnt.";
+        Utils.simulateEmail(student_name, message, email);
         return Map.of("mail-verschickt", true);
     }
 
     @JobWorker(type = "annahmeBetreuerProjektSeminarArbeitMail")
-    public Map<String, Object> annahmeMail(@Variable(name = "username") String username) {
-        LOGGER.info("Die Arbeit wurde vom Betreuer angenommen", username);
+    public Map<String, Object> annahmeMail(
+                                    @Variable(name = "betreuer") String betreuer,
+                                    @Variable(name = "student_name") String student_name, 
+                                    @Variable(name = "Email_student") String email, 
+                                    @Variable(name = "thema_der_arbeit") String arbietsThema) {
+        LOGGER.info("Die Arbeit wurde vom Betreuer angenommen");
+        String message = "Ihre Arbeit '" + arbietsThema + "' wurde vom Betreuer " + betreuer + " angenommen.";
+        Utils.simulateEmail(student_name, message, email);
         return Map.of("mail-verschickt", true);
     }
-
+    
     @JobWorker(type = "saveProjektSeminarArbeitAntrageToDatabase")
     public Map<String, Object> saveProjektSeminarArbeitAntrageToDatabase(@Variable(name = "username") String username) {
         LOGGER.info("Saving to Database...", username); //TODO

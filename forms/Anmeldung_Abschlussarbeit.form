@@ -19,7 +19,7 @@
       "id": "Field_097txm3",
       "key": "textfield_7wtjk",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -32,7 +32,7 @@
       "id": "Field_11bgu3n",
       "key": "textfield_v38r7g",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -45,7 +45,7 @@
       "id": "Field_1lcv2z1",
       "key": "textfield_d93b73",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -71,11 +71,22 @@
       "id": "Field_0xphxn0",
       "key": "textfield_4gp488",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
-      "label": "Name Betreuer",
+      "label": "Dozenten Auswahl",
+      "type": "select",
+      "layout": {
+        "row": "Row_1lr4yfq",
+        "columns": null
+      },
+      "id": "Field_1onj4iw",
+      "key": "select_h6vbx9",
+      "valuesKey": "dozentenList"
+    },
+    {
+      "label": "Name Betreuer (nur nutzen, wenn nicht in Dozenten Auswahlt gefunden) ",
       "type": "textfield",
       "layout": {
         "row": "Row_0e4ffbu",
@@ -85,10 +96,13 @@
       "key": "textfield_6no5oh",
       "validate": {
         "required": true
+      },
+      "conditional": {
+        "hide": "=select_h6vbx9 != null"
       }
     },
     {
-      "label": "Email Betreuer",
+      "label": "Email Betreuer (nur nutzen, wenn nicht in Dozenten Auswahlt gefunden) ",
       "type": "textfield",
       "layout": {
         "row": "Row_0cfybu0",
@@ -98,10 +112,24 @@
       "key": "textfield_o9ynnf",
       "validate": {
         "required": true
+      },
+      "conditional": {
+        "hide": "=select_h6vbx9 != null"
       }
     },
     {
-      "label": "Name Zweitbetreuer",
+      "label": "Dozenten Auswahl (Zweitbetreuer)",
+      "type": "select",
+      "layout": {
+        "row": "Row_1sxadze",
+        "columns": null
+      },
+      "id": "Field_1yo4yui",
+      "key": "select_7t5sgn",
+      "valuesKey": "dozentenList"
+    },
+    {
+      "label": "Name Zweitbetreuer (nur nutzen, wenn nicht in Dozenten Auswahlt gefunden) ",
       "type": "textfield",
       "layout": {
         "row": "Row_19lsz3q",
@@ -111,10 +139,13 @@
       "key": "textfield_dud0z",
       "validate": {
         "required": false
+      },
+      "conditional": {
+        "hide": "=select_7t5sgn != null"
       }
     },
     {
-      "label": "Email Zweiter Betreuer",
+      "label": "Email Zweiter Betreuer (nur nutzen, wenn nicht in Dozenten Auswahlt gefunden) ",
       "type": "textfield",
       "layout": {
         "row": "Row_1d89tp9",
@@ -124,6 +155,9 @@
       "key": "textfield_o7fsd",
       "validate": {
         "required": false
+      },
+      "conditional": {
+        "hide": "=select_7t5sgn != null"
       }
     },
     {

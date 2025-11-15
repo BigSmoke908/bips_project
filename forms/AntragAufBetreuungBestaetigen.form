@@ -19,7 +19,8 @@
       },
       "id": "Field_18y92b6",
       "key": "student_name_fill",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Mat. Nr.",
@@ -29,8 +30,9 @@
         "columns": null
       },
       "id": "Field_11vvdsy",
-      "key": "textarea_wmtkly",
-      "disabled": true
+      "key": "mat_nr_fill",
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Thema der Arbeit",
@@ -40,8 +42,9 @@
         "columns": null
       },
       "id": "Field_1j4r5qf",
-      "key": "textarea_ukioro",
-      "disabled": true
+      "key": "thema_arbeit_fill",
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "E-Mail der Betreuerin/des Betreuer",
@@ -51,11 +54,12 @@
         "columns": null
       },
       "id": "Field_1n1k3c8",
-      "key": "textarea_tausbb",
+      "key": "EmailBetreuerFill",
       "validate": {
-        "required": true
+        "required": false
       },
-      "disabled": false
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Name der Betreuerin/des Betreuer",
@@ -65,12 +69,13 @@
         "columns": 4
       },
       "id": "Field_1vs9hff",
-      "key": "betreuerName",
+      "key": "betreuerNameFill",
       "properties": {},
       "validate": {
-        "required": true
+        "required": false
       },
-      "disabled": false
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Bestätigung ",
@@ -105,11 +110,12 @@
         "columns": null
       },
       "id": "Field_0109ljn",
-      "key": "datetime_4yg9v",
+      "key": "datum",
       "validate": {
-        "required": true
+        "required": false
       },
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Kommentar/Anmerkung ",

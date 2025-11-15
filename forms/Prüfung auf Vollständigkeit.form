@@ -10,7 +10,29 @@
       "id": "Field_0vtedv6"
     },
     {
-      "label": "Name der Studierenden ",
+      "label": "Name Studierender",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ivk0ho",
+        "columns": null
+      },
+      "id": "Field_0ex7jh2",
+      "key": "textfield_hb12ae",
+      "readonly": true
+    },
+    {
+      "label": "Nachname Studierender",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ivk0ho",
+        "columns": null
+      },
+      "id": "Field_14ce7er",
+      "key": "textfield_ht3s",
+      "readonly": true
+    },
+    {
+      "label": "Titel Studierender",
       "type": "textfield",
       "layout": {
         "row": "Row_1ivk0ho",
@@ -18,41 +40,50 @@
       },
       "id": "Field_083upq3",
       "key": "textfield_ag678",
-      "disabled": true
-    },
-    {
-      "label": "Studiengang",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_1ivk0ho",
-        "columns": null
-      },
-      "id": "Field_0q37zdl",
-      "key": "textfield_elqiah"
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Mat. Nr.",
       "type": "textfield",
       "layout": {
-        "row": "Row_1ivk0ho",
+        "row": "Row_0uvbfkg",
         "columns": null
       },
       "id": "Field_0268vcv",
-      "key": "textfield_82lml5"
+      "key": "textfield_82lml5",
+      "readonly": true
     },
     {
-      "label": "Prüfer ",
+      "label": "E mail Studierender",
       "type": "textfield",
       "layout": {
-        "row": "Row_1ivk0ho",
+        "row": "Row_16b4p6e",
         "columns": null
       },
-      "id": "Field_0s45yq9",
-      "key": "textfield_uqxd4o",
-      "validate": {
-        "required": true
+      "id": "Field_1mn7j77",
+      "key": "textfield_syupup",
+      "readonly": true
+    },
+    {
+      "label": "Telefennummer Studierender",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0tfm5fe",
+        "columns": null
       },
-      "disabled": true
+      "id": "Field_1u7tg3n",
+      "key": "textfield_kmc2o"
+    },
+    {
+      "label": "Studiengang",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1uy38z5",
+        "columns": null
+      },
+      "id": "Field_0q37zdl",
+      "key": "textfield_elqiah"
     },
     {
       "label": "Thema der Arbeit",
@@ -63,6 +94,28 @@
       },
       "id": "Field_0fokk5q",
       "key": "textarea_38xl1w",
+      "disabled": true
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_01hxhk2",
+        "columns": null
+      },
+      "id": "Field_13x4sea"
+    },
+    {
+      "label": "Prüfer ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_19aq0kz",
+        "columns": null
+      },
+      "id": "Field_0s45yq9",
+      "key": "textfield_uqxd4o",
+      "validate": {
+        "required": true
+      },
       "disabled": true
     },
     {

@@ -24,10 +24,34 @@
       "readonly": false
     },
     {
-      "label": "Mat. Nr.",
+      "label": "Vorname ",
       "type": "textfield",
       "layout": {
         "row": "Row_1spqyns",
+        "columns": null
+      },
+      "id": "Field_0bxzhs0",
+      "key": "textfield_rzj5gr",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Title",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1spqyns",
+        "columns": null
+      },
+      "id": "Field_0aablv1",
+      "key": "textfield_vfsy8f",
+      "defaultValue": ""
+    },
+    {
+      "label": "Mat. Nr.",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1xvvoca",
         "columns": null
       },
       "id": "Field_1fkel4s",
@@ -40,7 +64,7 @@
       "label": "E-Mail",
       "type": "textfield",
       "layout": {
-        "row": "Row_1spqyns",
+        "row": "Row_0bzew8s",
         "columns": null
       },
       "id": "Field_0l8ia3v",
@@ -49,6 +73,30 @@
         "required": true,
         "validationType": "email"
       }
+    },
+    {
+      "label": "Telefonnummer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1hljavd",
+        "columns": null
+      },
+      "id": "Field_0ckvj1f",
+      "key": "textfield_1in3",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Studiengang",
+      "type": "select",
+      "layout": {
+        "row": "Row_1iawouk",
+        "columns": null
+      },
+      "id": "Field_1tafart",
+      "key": "select_889dg",
+      "valuesKey": ""
     },
     {
       "label": "Projekt-/Seminararbeit oder Abschlussarbeit?",

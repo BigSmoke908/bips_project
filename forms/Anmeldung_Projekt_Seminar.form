@@ -11,6 +11,91 @@
       "properties": {}
     },
     {
+      "label": "Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_01srf2x",
+        "columns": null
+      },
+      "id": "Field_14wg1f5",
+      "key": "student_nachname_fill",
+      "readonly": true
+    },
+    {
+      "label": "Vorname",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_01srf2x",
+        "columns": null
+      },
+      "id": "Field_01zqp0l",
+      "key": "student_vorname_fill",
+      "validate": {
+        "required": false
+      },
+      "readonly": true
+    },
+    {
+      "label": "Title",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_01srf2x",
+        "columns": null
+      },
+      "id": "Field_0doaz9r",
+      "key": "student_titel_fill",
+      "readonly": true
+    },
+    {
+      "label": "Mat. Nr. ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0ic69x2",
+        "columns": null
+      },
+      "id": "Field_0c819ib",
+      "key": "student_mat_nr_fill",
+      "validate": {
+        "required": false,
+        "minLength": "",
+        "pattern": "[0-9]*"
+      },
+      "readonly": true
+    },
+    {
+      "label": "E-Mail Student ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1q3ivx4",
+        "columns": null
+      },
+      "id": "Field_13xetih",
+      "key": "student_email_fill",
+      "validate": {
+        "required": false
+      },
+      "readonly": true
+    },
+    {
+      "label": "Telefonnummer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0f8zet8",
+        "columns": null
+      },
+      "id": "Field_0kgq2fx",
+      "key": "student_phone_fill",
+      "readonly": true
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_0i2onvs",
+        "columns": null
+      },
+      "id": "Field_0rmgd8q"
+    },
+    {
       "label": "Typ der Arbeit",
       "values": [
         {
@@ -24,65 +109,28 @@
       ],
       "type": "radio",
       "layout": {
-        "row": "Row_1cqhtrw",
+        "row": "Row_1hsx4c5",
         "columns": null
       },
       "id": "Field_0ajfn46",
-      "key": "radio_6e6iyb"
-    },
-    {
-      "label": "Name des Studierenden (bei mehreren mit Semikolon ';' getrennt)",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_01srf2x",
-        "columns": null
-      },
-      "id": "Field_01zqp0l",
-      "key": "textfield_jz2mkj",
+      "key": "radio_6e6iyb",
       "validate": {
         "required": true
       }
     },
     {
-      "label": "E-Mail Student (bei mehreren mit Semikolon ';' getrennt)",
-      "type": "textfield",
+      "label": "Thema der Arbeit",
+      "type": "textarea",
       "layout": {
-        "row": "Row_1q3ivx4",
+        "row": "Row_0k3vemd",
         "columns": null
       },
-      "id": "Field_13xetih",
-      "key": "textfield_j4ham",
+      "id": "Field_03oopd3",
+      "key": "textarea_nevo8n",
       "validate": {
         "required": true
-      }
-    },
-    {
-      "label": "Mat. Nr. (bei mehreren mit Semikolon ';' getrennt)",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_0v2tgxc",
-        "columns": null
       },
-      "id": "Field_0c819ib",
-      "key": "textfield_549lkq",
-      "validate": {
-        "required": true,
-        "minLength": "",
-        "pattern": "[0-9]*"
-      }
-    },
-    {
-      "label": "Studiengang",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_0d0e1oy",
-        "columns": null
-      },
-      "id": "Field_0y09nlq",
-      "key": "textfield_97ezqn",
-      "validate": {
-        "required": true
-      }
+      "readonly": false
     },
     {
       "label": "Betreuer (Optional)",
