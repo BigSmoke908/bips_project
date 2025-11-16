@@ -1,4 +1,4 @@
-package de.ostfalia.bips.ws25.camunda;
+package de.ostfalia.bips.ws25.camunda.anmeldung_pack;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import de.ostfalia.bips.ws25.camunda.Constants;
+import de.ostfalia.bips.ws25.camunda.Option;
+import de.ostfalia.bips.ws25.camunda.StatusStudentWork;
+import de.ostfalia.bips.ws25.camunda.Utils;
 
 import java.sql.Connection;
 
@@ -114,63 +119,17 @@ public class Anmeldung {
         return Map.of("betreuer_abschlussarbeit", betreuer, "zweitbetreuer", zweitbetreuer, "betreuerIsLecturer", betreuerIsLecturer, "zweitbetreuerIsLecturer", zweitbetreuerIsLecturer);
     }
 
-    /**
-     * for anmeldung
-     * @return
-     */
-    //TODO Übergabe als Objekte für Übersichlichkeit ==> Student, Supervisor, Company, Lecturer?
-    public static Map<String, Object> saveProjectOrSeminarWorkToDatabase(String semester, String projektarbeit, String betreuerVorhanden, String betreuerExtern, String studiengang, String lecturerId,
-                                                                            String firstnameStudent, String lastnameStudent, String titleStudent, String phoneStudent, String emailStudent, //student
-                                                                            String firstnameExternSuper, String lastnameExternSuper, String titleExternSuper, String phoneExternSuper, String emailExternSuper, //supervisor
-                                                                            String companyName, String address, String zipCode, String city){ //company
-        
-        Connection connection = Utils.establishSQLConnection();
-        Integer studentWorkId = null;
-        try {
-            Statement maxIdStmt = connection.createStatement();
-            ResultSet maxIdRs = maxIdStmt.executeQuery("SELECT COALESCE(MAX(id), 0) + 1 AS new_id FROM company");
-            studentWorkId = maxIdRs.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        String status = StatusStudentWork.ANGEMELDET.getDescription();
-        String type_of_student_work_id;
-        if(Integer.parseInt(projektarbeit) == 1){
-            //TODO schön machen mit key raussuchen aus DB
-            type_of_student_work_id = "1"; //projektarbeit
-        }else{
-            type_of_student_work_id = "2"; //seminararbeit
-        }
-        String semester_id = String.valueOf(Utils.getSemesterIdFromString(semester));
-        //Studiengang already is a number (inside of the String)
-        int idStudent = insertStudent(firstnameStudent, lastnameStudent, titleStudent, phoneStudent, emailStudent);
-
-        //check wether we have a supervisor, then insert the correct one (extern or dozent)
-        if(betreuerVorhanden.equals("1")){
-            if(betreuerExtern.equals("1")){
-                int supervisorId = insertSupervisorFromCompany(firstnameExternSuper, lastnameExternSuper, titleExternSuper, phoneExternSuper, emailExternSuper, companyName, address, zipCode, city);
-                insertStudentWorkHasSupervisor(String.valueOf(studentWorkId), String.valueOf(supervisorId), "1"); // 1 for true and is alway primary supervisor
-            }else{
-                insertStudentWorkHasLecturer(String.valueOf(studentWorkId), lecturerId, "1");
-            }
-        }
-
-        insertStudentWork(idStudent, status, Integer.parseInt(type_of_student_work_id), Integer.parseInt(semester_id), Integer.parseInt(studiengang), idStudent);
-
-        return Map.of();
-    }
-
-    public static void insertStudentWork(int studentWorkId, String status, int typeOfStudentWorkId, int semesterId, int courseOfStudiesId, int studentId){
-        String insertQuery = "INSERT INTO student (id, status, type_of_student_work_id, semester_id, course_of_studies_id, student_id) VALUES (?, ?, ?, ?, ?, ?)";
+    
+    public static void insertStudentWork(int status, int typeOfStudentWorkId, int semesterId, int courseOfStudiesId, int studentId){
+        System.out.println("insert student work");
+        String insertQuery = "INSERT INTO student_work (status, type_of_student_work_id, semester_id, course_of_studies_id, student_id) VALUES (?, ?, ?, ?, ?)";
         try(Connection connection = Utils.establishSQLConnection();) {
             final PreparedStatement statement = connection.prepareStatement(insertQuery);
-            statement.setInt(1, studentWorkId);
-            statement.setString(2, status);
-            statement.setInt(3, typeOfStudentWorkId);
-            statement.setInt(4, semesterId);
-            statement.setInt(5, courseOfStudiesId);
-            statement.setInt(6, studentId);
+            statement.setInt(1, status);
+            statement.setInt(2, typeOfStudentWorkId);
+            statement.setInt(3, semesterId);
+            statement.setInt(4, courseOfStudiesId);
+            statement.setInt(5, studentId);
             statement.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -230,7 +189,7 @@ public class Anmeldung {
 
             if(result.next()){
                 if(result.getInt(1) == 0){ //first col will be count ==> 0 insert needed
-                    final PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
+                    final PreparedStatement insertStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
                     insertStatement.setString(1, firstname);
                     insertStatement.setString(2, lastname);
                     insertStatement.setString(3, title);
@@ -251,7 +210,16 @@ public class Anmeldung {
                     updateStatement.setString(4, lastname);
                     updateStatement.setString(5, email);
                     updateStatement.executeUpdate();
-                    return result.getInt("id");
+
+                    final PreparedStatement findIdStatement =  connection.prepareStatement("Select * from student where title = ? and phone = ? and firstname = ? and lastname = ? and email = ? ");
+                    findIdStatement.setString(1, title);
+                    findIdStatement.setString(2, phone);
+                    findIdStatement.setString(3, firstname);
+                    findIdStatement.setString(4, lastname);
+                    findIdStatement.setString(5, email);
+                    ResultSet resultId = findIdStatement.executeQuery();
+                    
+                    return resultId.getInt("id");
                 }
             }
         } catch (SQLException e) {
@@ -338,6 +306,137 @@ public class Anmeldung {
         }
 
         return -1;
+    }
+
+    public static String getDeadlineFromSemester(String semester){
+        //TODO either this does not work, or the database saves, as semester is treated as string and id
+        String[] splittedString =  semester.split(" ");
+        String wsSS = splittedString[0];
+        String year = "";
+        String monthDay = "";
+        if(wsSS.equals("WS")){
+            year = splittedString[1].split("/")[0];
+            monthDay = "28.Februar";
+        }else{
+            year = splittedString[1];
+            monthDay = "30.August";
+        }
+        return (monthDay + year);
+    }
+
+    /**
+     * for anmeldung
+     * @return
+     */
+    //TODO Übergabe als Objekte für Übersichlichkeit ==> Student, Supervisor, Company, Lecturer?
+    public static Map<String, Object> saveProjectOrSeminarWorkToDatabase(String semester, String projektarbeit, String betreuerVorhanden, String betreuerExtern, String studiengang, String lecturerId,
+                                                                            String firstnameStudent, String lastnameStudent, String titleStudent, String phoneStudent, String emailStudent, //student
+                                                                            String firstnameExternSuper, String lastnameExternSuper, String titleExternSuper, String phoneExternSuper, String emailExternSuper, //supervisor
+                                                                            String companyName, String address, String zipCode, String city){ //company
+        
+                                                                                
+        System.out.println("establishing connection ..."); 
+        System.out.flush();                                                                     
+        Connection connection = Utils.establishSQLConnection();
+        Integer studentWorkId = null;
+        System.out.println("established connection");
+        try {
+            Statement maxIdStmt = connection.createStatement();
+            ResultSet maxIdRs = maxIdStmt.executeQuery("SELECT COALESCE(MAX(id), 0) + 1 AS new_id FROM company");
+            System.out.println("max results statement");
+            if(maxIdRs.next()){
+                studentWorkId = maxIdRs.getInt(1);
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        int status = StatusStudentWork.ANGEMELDET.getNumber();
+        String type_of_student_work_id;
+        if(Integer.parseInt(projektarbeit) == 1){
+            //TODO schön machen mit key raussuchen aus DB
+            type_of_student_work_id = "1"; //projektarbeit
+        }else{
+            type_of_student_work_id = "2"; //seminararbeit
+        }
+        String semester_id = semester; //I already get the primary key id (as this is everything I store as value)
+        //Studiengang already is a number (inside of the String)
+        int idStudent = insertStudent(firstnameStudent, lastnameStudent, titleStudent, phoneStudent, emailStudent);
+        System.out.println("inserted studewnt");
+
+        //check wether we have a supervisor, then insert the correct one (extern or dozent)
+        if(betreuerVorhanden.equals("1")){
+            if(betreuerExtern.equals("1")){
+                int supervisorId = insertSupervisorFromCompany(firstnameExternSuper, lastnameExternSuper, titleExternSuper, phoneExternSuper, emailExternSuper, companyName, address, zipCode, city);
+                insertStudentWorkHasSupervisor(String.valueOf(studentWorkId), String.valueOf(supervisorId), "1"); // 1 for true and is alway primary supervisor
+            }else{
+                insertStudentWorkHasLecturer(String.valueOf(studentWorkId), lecturerId, "1");
+            }
+        }
+        System.out.println("inserted sbetreure");
+
+        insertStudentWork(status, Integer.parseInt(type_of_student_work_id), Integer.parseInt(semester_id), Integer.parseInt(studiengang), idStudent);
+        System.out.println("inserted student workt");
+
+        return Map.of("test", "test");
+    }
+
+
+    public static Map<String, Object> saveAbschlussarbeitAntragToDatabase( String semester, String zweitbetreuerVorhanden, String betreuerExtern, String zweitbetreuerExtern, String studiengang, String lecturerId, String secondLecturerID,
+                                                            String firstnameStudent, String lastnameStudent, String titleStudent, String phoneStudent, String emailStudent, //student
+                                                            String firstnameExternSuper, String lastnameExternSuper, String titleExternSuper, String phoneExternSuper, String emailExternSuper, //supervisor
+                                                            String companyNameErstbetreuer, String addressErstbetreuer, String zipCodeErstbetreuer, String cityErstbetreuer, //company first supervisor
+                                                            String firstnameExternSuperZweit, String lastnameExternSuperZweit, String titleExternSuperZweit, String phoneExternSuperZweit, String emailExternSuperZweit, //second supervisor
+                                                            String companyNameZweitbetreuer, String addressZweitbetreuer, String zipCodeZweitbetreuer, String cityZweitbetreuer){ //company second supervisor
+
+        System.out.println("establishing connection ..."); 
+        System.out.flush();                                                                     
+        Connection connection = Utils.establishSQLConnection();
+        Integer studentWorkId = null;
+        System.out.println("established connection");
+        try {
+            Statement maxIdStmt = connection.createStatement();
+            ResultSet maxIdRs = maxIdStmt.executeQuery("SELECT COALESCE(MAX(id), 0) + 1 AS new_id FROM company");
+            System.out.println("max results statement");
+            if(maxIdRs.next()){
+                studentWorkId = maxIdRs.getInt(1);
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        int status = StatusStudentWork.ANGEMELDET.getNumber();
+        String type_of_student_work_id = "3";
+        String semester_id = semester; //I already get the primary key id (as this is everything I store as value) //TODO I do not?
+        int idStudent = insertStudent(firstnameStudent, lastnameStudent, titleStudent, phoneStudent, emailStudent);
+        System.out.println("inserted studewnt");
+
+        //insert supervisors
+        String betreuerVorhanden = "1"; //es gibt immer den ERstbetreuer
+        if(betreuerVorhanden.equals("1")){
+            if(betreuerExtern.equals("1")){
+                int supervisorId = insertSupervisorFromCompany(firstnameExternSuper, lastnameExternSuper, titleExternSuper, phoneExternSuper, emailExternSuper, companyNameErstbetreuer, addressErstbetreuer, zipCodeErstbetreuer, cityErstbetreuer);
+                insertStudentWorkHasSupervisor(String.valueOf(studentWorkId), String.valueOf(supervisorId), "1"); // 1 for true and is alway primary supervisor
+            }else{
+                insertStudentWorkHasLecturer(String.valueOf(studentWorkId), lecturerId, "1");
+            }
+        }
+
+        if(zweitbetreuerVorhanden == "1"){
+            if(zweitbetreuerExtern.equals("1")){
+                int supervisorId = insertSupervisorFromCompany(firstnameExternSuperZweit, lastnameExternSuperZweit, titleExternSuperZweit, phoneExternSuperZweit, emailExternSuperZweit, companyNameZweitbetreuer, addressZweitbetreuer, zipCodeZweitbetreuer, cityZweitbetreuer);
+                insertStudentWorkHasSupervisor(String.valueOf(studentWorkId), String.valueOf(supervisorId), "0"); // 1 for true and is alway primary supervisor
+            }else{
+                insertStudentWorkHasLecturer(String.valueOf(studentWorkId), secondLecturerID, "0");
+            }
+        }
+        System.out.println("inserted Betreuer");
+
+        insertStudentWork(status, Integer.parseInt(type_of_student_work_id), Integer.parseInt(semester_id), Integer.parseInt(studiengang), idStudent);
+        System.out.println("inserted student workt");
+
+        return Map.of("test", "test");
+
     }
 
 }

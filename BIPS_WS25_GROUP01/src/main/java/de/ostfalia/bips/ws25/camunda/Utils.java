@@ -26,7 +26,7 @@ public class Utils {
 
     public static void simulateEmail(String adressat, String message, String email){
         StringBuilder sb = new StringBuilder();
-        sb.append("*********************************************************************");
+        sb.append("*********************************************************************\n");
         sb.append("Email an: ").append(email).append("\n\n");
         sb.append("Sehr geehrter/geehrte Herr/Frau ").append(adressat).append(",\n\n");
         sb.append(message).append("\n\n");

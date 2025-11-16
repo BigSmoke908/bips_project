@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Application",
+      "request": "launch",
+      "mainClass": "de.ostfalia.bips.ws25.camunda.Application",
+      "projectName": "BIPS_WS25_GROUP01",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)",
+      "request": "launch",
+      "mainClass": "de.ostfalia.bips.ws25.camunda.Application",
+      "projectName": "BIPS_WS25_GROUP01",
+      "console": "internalConsole", 
+      "internalConsoleOptions": "openOnSessionStart",
+      "stopOnEntry": true
+    }
+  ]
+}
