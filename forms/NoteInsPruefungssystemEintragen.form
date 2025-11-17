@@ -18,7 +18,8 @@
       },
       "id": "Field_1vwgs5d",
       "key": "textfield_zurawp",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "E-Mail",
@@ -29,7 +30,8 @@
       },
       "id": "Field_0xl2iab",
       "key": "textfield_q1dvi",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Mat.Nr.",
@@ -40,7 +42,8 @@
       },
       "id": "Field_19va0yk",
       "key": "textfield_i53uli",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Thema der Arbeit",
@@ -51,7 +54,8 @@
       },
       "id": "Field_0nb4hu9",
       "key": "textarea_mptqmp",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Note",

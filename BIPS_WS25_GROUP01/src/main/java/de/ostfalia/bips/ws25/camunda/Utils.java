@@ -116,4 +116,25 @@ public class Utils {
         return id;
     }
 
+    public static String getSemesterStringFromId(String semester_id){
+        Connection connection = establishSQLConnection(); 
+        String query = "SELECT description FROM semester WHERE id = ?";
+        String description = null;
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) { //TODO am besten immer autoclose
+            stmt.setInt(1, Integer.parseInt(semester_id));
+            final ResultSet result = stmt.executeQuery();
+
+            if (result.next()) {
+                description = result.getString("description");
+            }
+
+            result.close(); //TODO überall noch close aufrufen für result
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return description;
+    }
+
 }

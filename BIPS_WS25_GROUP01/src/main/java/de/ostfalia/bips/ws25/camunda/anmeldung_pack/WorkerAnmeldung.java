@@ -59,16 +59,13 @@ public class WorkerAnmeldung {
      * @param zweitbetreuer_select the id of the selected lecturer (in this case for the second lecturer)
      * @return the assignees for checking wether they are actually supervisors for the project
      */
-    @JobWorker(type = "getAssigneeForBetreuerAbschlussarbeit")
-    public Map<String, Object> getAssigneeForBetreuerAbschlussarbeit(
-                                @Variable(name = "betreuer_abschlussarbeit") String betreuer_abschlussarbeit,
-                                @Variable(name = "zweitbetreuer") String zweitbetreuer,
-                                @Variable(name = "betreuer_abschlussarbeit_select") String betreuer_abschlussarbeit_select,
-                                @Variable(name = "zweitbetreuer_select") String zweitbetreuer_select
-                                ) {
+    @JobWorker(type = "getAssignee")
+    public Map<String, Object> getAssigneeForBetreuerAbschlussarbeit() {
         //if the betreuer_abschlussarbeit or zweitbetreuer null, then we need to get the selected lecturer from our database 
+        //TODO
         LOGGER.info("Assignees werden bestimmt..."); 
-        return Anmeldung.getAssigneeForBetreuerAbschlussarbeit(betreuer_abschlussarbeit_select, zweitbetreuer_select, zweitbetreuer, zweitbetreuer_select);
+        //Anmeldung.getAssigneeForBetreuerAbschlussarbeit(betreuer_abschlussarbeit, zweitbetreuer, betreuer_abschlussarbeit_select, zweitbetreuer_select);
+        return Map.of("test", "todo");
     }
 
     @JobWorker(type = "ladeDozentenUndStudiengänge")
@@ -92,9 +89,9 @@ public class WorkerAnmeldung {
                                     @Variable(name = "nachname_betreuer_extern") String nachname_betreuer_extern,
                                     @Variable(name = "title_betreuer_extern") String title_betreuer_extern,
                                     @Variable(name = "dozent_id") String dozent_id,
-                                    @Variable(name = "student_name") String student_name, 
+                                    @Variable(name = "student_lastname") String student_lastname, 
                                     @Variable(name = "student_firstname") String student_firstname,
-                                    @Variable(name = "Email_student") String email, 
+                                    @Variable(name = "student_mail") String email, 
                                     @Variable(name = "thema_der_arbeit") String arbietsThema) {
         LOGGER.info("Die Arbeit wurde vom Betreuer abgelehnt");
         String betreuer = title_betreuer_extern + " " + vorname_betreuer_extern + " " + nachname_betreuer_extern;
@@ -102,7 +99,7 @@ public class WorkerAnmeldung {
             Dozent dozent =  Dozent.getDozentFromId(Integer.parseInt(dozent_id));
             betreuer = dozent.getTitle() + " " + dozent.getFirstname() + " " + dozent.getLastname();
         }
-        student_name = student_firstname + " " +  student_name;
+        String student_name = student_firstname + " " +  student_lastname;
         String message = "Ihre Arbeit '" + arbietsThema + "' wurde vom Betreuer " + betreuer + " abgelehnt.";
         Utils.simulateEmail(student_name, message, email);
         return Map.of("mail-verschickt", true);
@@ -116,9 +113,9 @@ public class WorkerAnmeldung {
                                     @Variable(name = "nachname_betreuer_extern") String nachname_betreuer_extern,
                                     @Variable(name = "title_betreuer_extern") String title_betreuer_extern,
                                     @Variable(name = "dozent_id") String dozent_id,
-                                    @Variable(name = "student_name") String student_name, 
+                                    @Variable(name = "student_lastname") String student_lastname, 
                                     @Variable(name = "student_firstname") String student_firstname,
-                                    @Variable(name = "Email_student") String email, 
+                                    @Variable(name = "student_mail") String email, 
                                     @Variable(name = "thema_der_arbeit") String arbietsThema) {
         LOGGER.info("Die Arbeit wurde vom Betreuer angenommen");
         String betreuer = title_betreuer_extern + " " + vorname_betreuer_extern + " " + nachname_betreuer_extern;
@@ -131,6 +128,8 @@ public class WorkerAnmeldung {
         if(betreuer_vorhanden == "0"){
             message = "Sie habe ihre Arbeit selbst bestätigt";
         }
+
+        String student_name = student_firstname + " " + student_lastname;
         
         Utils.simulateEmail(student_name, message, email);
         return Map.of("mail-verschickt", true);
@@ -279,13 +278,16 @@ public class WorkerAnmeldung {
             email_erstbetreuer = dozent.getEmail();
         }
 
-        if(zweitbetreuer_extern.equals("1")){
-            zweitbetreuerName = titel_zweitbetreuer + " " + vorname_zweitbetreuer + " " + nachname_zweitbetreuer;
-        }else{
-            Dozent dozent = Dozent.getDozentFromId(Integer.parseInt(dozent_id_zweitbetreuer));
-            zweitbetreuerName = dozent.concatName();
-            email_zweitbetreuer = dozent.getEmail();
+        if(zweitbetreuer_vorhanden.equals("1")){
+            if(zweitbetreuer_extern.equals("1")){
+                zweitbetreuerName = titel_zweitbetreuer + " " + vorname_zweitbetreuer + " " + nachname_zweitbetreuer;
+            }else{
+                Dozent dozent = Dozent.getDozentFromId(Integer.parseInt(dozent_id_zweitbetreuer));
+                zweitbetreuerName = dozent.concatName();
+                email_zweitbetreuer = dozent.getEmail();
+            }
         }
+        
 
         String message = "Die Arbeit " + thema_der_arbeit + " wurde vom PA akzeptiert und ist somit offiziell angenommen." + "\n" + 
         "Deadline: " + deadline + "\nStudent: " + studentName + "\nErstbetreuer: " + erstbetreuerName + "\nZweitbetreuer: " + zweitbetreuerName;
@@ -293,14 +295,18 @@ public class WorkerAnmeldung {
         //Mail Student, Erster Betreuer, Zweiter Betreuer
         Utils.simulateEmail(studentName, message, student_mail);
         Utils.simulateEmail(erstbetreuerName, message, email_erstbetreuer);
-        Utils.simulateEmail(zweitbetreuerName, message, email_zweitbetreuer);
+        if(email_zweitbetreuer != null){
+            Utils.simulateEmail(zweitbetreuerName, message, email_zweitbetreuer);
+        }    
         return Map.of("mail-verschickt", true);
     }
 
     @JobWorker(type = "getDeadline")
     public Map<String, Object> getDeadline(@Variable(name = "semester_arbeit") String semester_arbeit) {
         LOGGER.info("getting Deadline");
-        return Map.of("deadline", Anmeldung.getDeadlineFromSemester(semester_arbeit));
+        String deadline = Anmeldung.getDeadlineFromSemester(semester_arbeit);
+        LOGGER.info("got deadline");
+        return Map.of("deadline", deadline);
     }
 
     @JobWorker(type = "saveAbschlussarbeitAntragToDatabase")

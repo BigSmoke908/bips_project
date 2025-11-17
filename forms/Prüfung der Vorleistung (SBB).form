@@ -17,7 +17,7 @@
         "columns": null
       },
       "id": "Field_1rttufk",
-      "key": "textfield_b1t5u",
+      "key": "student_name_fill",
       "disabled": false,
       "readonly": true
     },
@@ -29,7 +29,7 @@
         "columns": null
       },
       "id": "Field_0gjpdji",
-      "key": "textfield_8s1sgr",
+      "key": "student_vorname_fill",
       "readonly": true
     },
     {
@@ -40,7 +40,7 @@
         "columns": null
       },
       "id": "Field_10ucx04",
-      "key": "textfield_yjwgt8",
+      "key": "student_title_fill",
       "readonly": true
     },
     {
@@ -51,7 +51,7 @@
         "columns": null
       },
       "id": "Field_0kbe63f",
-      "key": "textfield_e5gj",
+      "key": "student_mat_nr_fill",
       "disabled": false,
       "readonly": true
     },
@@ -63,7 +63,7 @@
         "columns": null
       },
       "id": "Field_1lrrcaw",
-      "key": "textfield_jc3x5e",
+      "key": "student_mail_fill",
       "readonly": true
     },
     {
@@ -74,19 +74,7 @@
         "columns": null
       },
       "id": "Field_03tayan",
-      "key": "textfield_1luzhe",
-      "readonly": true
-    },
-    {
-      "label": "Studiengang",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_0s4kaga",
-        "columns": null
-      },
-      "id": "Field_0ndqlus",
-      "key": "textfield_x3so3m",
-      "disabled": false,
+      "key": "studen_phone_fill",
       "readonly": true
     },
     {
@@ -142,22 +130,6 @@
       },
       "id": "Field_0kcgvvf",
       "key": "textarea_habbyn"
-    },
-    {
-      "subtype": "date",
-      "dateLabel": "Datum der Prüfung ",
-      "type": "datetime",
-      "layout": {
-        "row": "Row_1c156yc",
-        "columns": null
-      },
-      "id": "Field_1aelb3f",
-      "key": "datetime_yhcqm",
-      "validate": {
-        "required": true
-      },
-      "disabled": false,
-      "readonly": true
     },
     {
       "label": "Bestätigen",

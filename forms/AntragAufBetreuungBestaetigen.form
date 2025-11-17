@@ -18,7 +18,8 @@
         "columns": null
       },
       "id": "Field_1drle2f",
-      "key": "textfield_lv26ni"
+      "key": "student_nachname_fill",
+      "readonly": true
     },
     {
       "label": "Vorname Student",
@@ -28,7 +29,8 @@
         "columns": null
       },
       "id": "Field_02m0po8",
-      "key": "textfield_bo4vvh"
+      "key": "student_vorname_fill",
+      "readonly": true
     },
     {
       "label": "Titel Student",
@@ -38,7 +40,8 @@
         "columns": null
       },
       "id": "Field_0hc9779",
-      "key": "textfield_mrv1m"
+      "key": "student_title_fill",
+      "readonly": true
     },
     {
       "label": "Mat Nr Student",
@@ -48,7 +51,8 @@
         "columns": null
       },
       "id": "Field_1v6pril",
-      "key": "textfield_u1r4r8"
+      "key": "student_mat_nr_fill",
+      "readonly": true
     },
     {
       "label": "E-Mail Student",
@@ -58,7 +62,8 @@
         "columns": null
       },
       "id": "Field_08ehxov",
-      "key": "textfield_ez3u5s"
+      "key": "student_email_fill",
+      "readonly": true
     },
     {
       "label": "Telefonnummer Student",
@@ -68,7 +73,8 @@
         "columns": null
       },
       "id": "Field_1p8delx",
-      "key": "textfield_h0n4j"
+      "key": "student_phone_fill",
+      "readonly": true
     },
     {
       "label": "Semester der Arbeit",
@@ -94,14 +100,15 @@
       "readonly": true
     },
     {
-      "label": "E-Mail der Betreuerin/des Betreuer",
-      "type": "textarea",
+      "label": "Name der Betreuerin/des Betreuer",
+      "type": "textfield",
       "layout": {
         "row": "Row_0sj9emk",
-        "columns": null
+        "columns": 8
       },
-      "id": "Field_1n1k3c8",
-      "key": "EmailBetreuerFill",
+      "id": "Field_1vs9hff",
+      "key": "betreuer_name_fill",
+      "properties": {},
       "validate": {
         "required": false
       },
@@ -109,19 +116,14 @@
       "readonly": true
     },
     {
-      "label": "Name der Betreuerin/des Betreuer",
+      "label": "vorname Betrueuer",
       "type": "textfield",
       "layout": {
         "row": "Row_0sj9emk",
-        "columns": 4
+        "columns": null
       },
-      "id": "Field_1vs9hff",
-      "key": "betreuerNameFill",
-      "properties": {},
-      "validate": {
-        "required": false
-      },
-      "disabled": false,
+      "id": "Field_0shjpob",
+      "key": "betreuer_vorname_fill",
       "readonly": true
     },
     {

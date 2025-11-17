@@ -21,7 +21,8 @@
       "validate": {
         "required": true
       },
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Matr.-Nr.",
@@ -35,7 +36,8 @@
       "validate": {
         "required": true
       },
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "E-Mail",
@@ -46,21 +48,27 @@
       },
       "id": "Field_0x4sd2o",
       "key": "textfield_nr248v",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Thema der Arbeit",
-      "type": "select",
+      "type": "textfield",
       "layout": {
-        "row": "Row_1sy7z5v",
+        "row": "Row_1gc1kfp",
         "columns": null
       },
-      "id": "Field_1mde736",
-      "key": "select_fqlfnm",
-      "valuesKey": "abschlussarbeiten",
-      "validate": {
-        "required": true
-      }
+      "id": "Field_18mlp66",
+      "key": "textfield_u6d307",
+      "readonly": true
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_1op1fq6",
+        "columns": null
+      },
+      "id": "Field_0uptyqc"
     },
     {
       "subtype": "date",
@@ -76,19 +84,6 @@
         "required": true
       },
       "disabled": false
-    },
-    {
-      "label": "die Arbeit wurde hochgeladen",
-      "type": "checkbox",
-      "layout": {
-        "row": "Row_1t9no0a",
-        "columns": null
-      },
-      "id": "Field_0d83rzj",
-      "key": "checkbox_1mikqp",
-      "validate": {
-        "required": true
-      }
     },
     {
       "label": "Raum",

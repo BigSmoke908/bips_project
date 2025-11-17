@@ -167,20 +167,6 @@
       }
     },
     {
-      "label": "Dozenten auswählen",
-      "type": "select",
-      "layout": {
-        "row": "Row_034gdod",
-        "columns": null
-      },
-      "id": "Field_0t4v7le",
-      "key": "select_ugkl1",
-      "valuesKey": "dozentenList",
-      "conditional": {
-        "hide": "=radio_evahfn = \"0\""
-      }
-    },
-    {
       "label": "Externer Betreuer?",
       "values": [
         {
@@ -201,6 +187,20 @@
       "key": "radio_jq401",
       "conditional": {
         "hide": "=radio_evahfn = \"0\""
+      }
+    },
+    {
+      "label": "Dozenten auswählen",
+      "type": "select",
+      "layout": {
+        "row": "Row_1beq8o2",
+        "columns": null
+      },
+      "id": "Field_0t4v7le",
+      "key": "select_ugkl1",
+      "valuesKey": "dozentenList",
+      "conditional": {
+        "hide": "=radio_evahfn = \"0\" or radio_jq401 = \"1\""
       }
     },
     {

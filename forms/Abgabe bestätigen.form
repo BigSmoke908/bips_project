@@ -18,7 +18,8 @@
       },
       "id": "Field_0mrt17x",
       "key": "textfield_6141po",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Mat. Nr.",
@@ -29,7 +30,8 @@
       },
       "id": "Field_107xrwg",
       "key": "textfield_xpo22q",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "E-Mail",
@@ -40,18 +42,19 @@
       },
       "id": "Field_1x9jase",
       "key": "textfield_543a3d",
-      "disabled": true
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "Abgabe bestätigt",
       "values": [
         {
-          "label": "nein",
-          "value": "value"
+          "label": "ja",
+          "value": "1"
         },
         {
-          "label": "ja",
-          "value": "value2"
+          "label": "nein",
+          "value": "0"
         }
       ],
       "type": "radio",

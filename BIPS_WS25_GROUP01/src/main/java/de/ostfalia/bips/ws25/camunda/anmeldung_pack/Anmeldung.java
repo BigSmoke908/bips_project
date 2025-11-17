@@ -138,7 +138,7 @@ public class Anmeldung {
     }
 
     public static void insertStudentWorkHasSupervisor(String studentWorkId, String supervisorId, String isPrimarySupervisor){
-        String insertQuery = "INSERT INTO student (student_work_id, supervisor_id, is_primary_supervisor) VALUES (?, ?, ?)";
+        String insertQuery = "INSERT INTO student_work_has_supervisor (student_work_id, supervisor_id, is_primary_supervisor) VALUES (?, ?, ?)";
         try(Connection connection = Utils.establishSQLConnection();) {
             final PreparedStatement statement = connection.prepareStatement(insertQuery);
             //TODO change setString to setInt whereever it should (not necessary, but highly recommended)
@@ -153,7 +153,7 @@ public class Anmeldung {
     }
 
     public static void insertStudentWorkHasLecturer(String studentWorkId, String lecturerId, String isPrimarySupervisor){
-        String insertQuery = "INSERT INTO student (student_work_id, lecturer_id, is_primary_supervisor, is_billed) VALUES (?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO student_work_has_lecturer (student_work_id, lecturer_id, is_primary_supervisor, is_billed) VALUES (?, ?, ?, ?)";
         //TODO isbilled???
         String isBilled = "1";
 
@@ -218,8 +218,10 @@ public class Anmeldung {
                     findIdStatement.setString(4, lastname);
                     findIdStatement.setString(5, email);
                     ResultSet resultId = findIdStatement.executeQuery();
+                    if(resultId.next()){
+                        return resultId.getInt("id");
+                    }
                     
-                    return resultId.getInt("id");
                 }
             }
         } catch (SQLException e) {
@@ -308,8 +310,13 @@ public class Anmeldung {
         return -1;
     }
 
-    public static String getDeadlineFromSemester(String semester){
+    public static String getDeadlineFromSemester(String semester_id){
         //TODO either this does not work, or the database saves, as semester is treated as string and id
+        String semester = semester_id;
+        // if(Integer.parseInt(semester) == null){
+        //     semester = Utils.getSemesterStringFromId(semester_id);
+        // }
+        
         String[] splittedString =  semester.split(" ");
         String wsSS = splittedString[0];
         String year = "";
@@ -390,6 +397,7 @@ public class Anmeldung {
                                                             String companyNameZweitbetreuer, String addressZweitbetreuer, String zipCodeZweitbetreuer, String cityZweitbetreuer){ //company second supervisor
 
         System.out.println("establishing connection ..."); 
+        
         System.out.flush();                                                                     
         Connection connection = Utils.establishSQLConnection();
         Integer studentWorkId = null;
@@ -408,6 +416,7 @@ public class Anmeldung {
         int status = StatusStudentWork.ANGEMELDET.getNumber();
         String type_of_student_work_id = "3";
         String semester_id = semester; //I already get the primary key id (as this is everything I store as value) //TODO I do not?
+        semester_id = String.valueOf(Utils.getSemesterIdFromString(semester_id));
         int idStudent = insertStudent(firstnameStudent, lastnameStudent, titleStudent, phoneStudent, emailStudent);
         System.out.println("inserted studewnt");
 

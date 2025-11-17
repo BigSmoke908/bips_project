@@ -17,18 +17,18 @@
         "columns": null
       },
       "id": "Field_0ex7jh2",
-      "key": "textfield_hb12ae",
+      "key": "name_student_fill",
       "readonly": true
     },
     {
-      "label": "Nachname Studierender",
+      "label": "Vorname Studierender",
       "type": "textfield",
       "layout": {
         "row": "Row_1ivk0ho",
         "columns": null
       },
       "id": "Field_14ce7er",
-      "key": "textfield_ht3s",
+      "key": "vorname_student_fill",
       "readonly": true
     },
     {
@@ -39,7 +39,7 @@
         "columns": null
       },
       "id": "Field_083upq3",
-      "key": "textfield_ag678",
+      "key": "titel_student_fill",
       "disabled": false,
       "readonly": true
     },
@@ -51,7 +51,7 @@
         "columns": null
       },
       "id": "Field_0268vcv",
-      "key": "textfield_82lml5",
+      "key": "mat_nr_fill",
       "readonly": true
     },
     {
@@ -62,7 +62,7 @@
         "columns": null
       },
       "id": "Field_1mn7j77",
-      "key": "textfield_syupup",
+      "key": "student_mail_fill",
       "readonly": true
     },
     {
@@ -73,18 +73,7 @@
         "columns": null
       },
       "id": "Field_1u7tg3n",
-      "key": "textfield_kmc2o",
-      "readonly": true
-    },
-    {
-      "label": "Studiengang",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_1uy38z5",
-        "columns": null
-      },
-      "id": "Field_0q37zdl",
-      "key": "textfield_elqiah",
+      "key": "student_phone_fill",
       "readonly": true
     },
     {
@@ -95,7 +84,7 @@
         "columns": null
       },
       "id": "Field_0fokk5q",
-      "key": "textarea_38xl1w",
+      "key": "thema_fill",
       "disabled": false,
       "readonly": true
     },
@@ -127,11 +116,11 @@
       "values": [
         {
           "label": "Ja",
-          "value": "value"
+          "value": "1"
         },
         {
           "label": "Nein",
-          "value": "value2"
+          "value": "0"
         }
       ],
       "type": "radio",
@@ -163,7 +152,10 @@
         "columns": null
       },
       "id": "Field_0lbv3vr",
-      "key": "radio_4zi05"
+      "key": "radio_4zi05",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Bemerkung",
@@ -174,22 +166,6 @@
       },
       "id": "Field_1kcs3k9",
       "key": "textarea_o8nqr"
-    },
-    {
-      "subtype": "date",
-      "dateLabel": "Datum der Prüfung",
-      "type": "datetime",
-      "layout": {
-        "row": "Row_17srdfw",
-        "columns": null
-      },
-      "id": "Field_08rc99d",
-      "key": "datetime_0sw5",
-      "validate": {
-        "required": true
-      },
-      "disabled": false,
-      "readonly": true
     },
     {
       "label": "Bestätigen",

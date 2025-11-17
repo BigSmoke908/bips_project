@@ -1,0 +1,97 @@
+{
+  "components": [
+    {
+      "text": "# Anmeldung der Abgabe",
+      "type": "text",
+      "layout": {
+        "row": "Row_11qwzxc",
+        "columns": null
+      },
+      "id": "Field_1codefm"
+    },
+    {
+      "label": "Name Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_19mg3m1",
+        "columns": null
+      },
+      "id": "Field_06ps2bn",
+      "key": "textfield_4nstz",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Vorname Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_19mg3m1",
+        "columns": null
+      },
+      "id": "Field_0eorqsv",
+      "key": "textfield_5593y",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Title",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_19mg3m1",
+        "columns": null
+      },
+      "id": "Field_0wv2tux",
+      "key": "textfield_fi5o6o",
+      "validate": {
+        "required": false
+      }
+    },
+    {
+      "label": "Mat Nr",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_05psbdj",
+        "columns": null
+      },
+      "id": "Field_0qj7eat",
+      "key": "textfield_ddtqy",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Art der Arbeit",
+      "values": [
+        {
+          "label": "projekt oder seminar",
+          "value": "1"
+        },
+        {
+          "label": "abschlussarbeit",
+          "value": "0"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_19udje2",
+        "columns": null
+      },
+      "id": "Field_17v3jja",
+      "key": "radio_a6mic",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_05i6mxd",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

@@ -1,0 +1,91 @@
+{
+  "components": [
+    {
+      "text": "# Anmeldung für Abgabe",
+      "type": "text",
+      "layout": {
+        "row": "Row_0pmz4h7",
+        "columns": null
+      },
+      "id": "Field_1d65htg"
+    },
+    {
+      "label": "Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1o76uvy",
+        "columns": null
+      },
+      "id": "Field_0ydk9ru",
+      "key": "textfield_fqfg54",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Vorname",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1o76uvy",
+        "columns": null
+      },
+      "id": "Field_05xpho9",
+      "key": "textfield_eet5j7",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Titel",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1o76uvy",
+        "columns": null
+      },
+      "id": "Field_12yfpf5",
+      "key": "textfield_tavju2"
+    },
+    {
+      "label": "Mat Nr",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ysszxb",
+        "columns": null
+      },
+      "id": "Field_0wxvdgn",
+      "key": "textfield_0tza22",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Art der Arbeit",
+      "values": [
+        {
+          "label": "Projekt- oder seminararbeit",
+          "value": "1"
+        },
+        {
+          "label": "Abschlussarbeit",
+          "value": "0"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0bs0c83",
+        "columns": null
+      },
+      "id": "Field_0swo16r",
+      "key": "radio_3l5d32m"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0sww1fv",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.24.0",
+  "schemaVersion": 19
+}

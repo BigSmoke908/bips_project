@@ -130,7 +130,10 @@
         "columns": null
       },
       "id": "Field_0m1xigk",
-      "key": "radio_vvumvq"
+      "key": "radio_vvumvq",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Bestätigen",
