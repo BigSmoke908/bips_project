@@ -104,7 +104,7 @@
       "id": "Field_1usmat2"
     },
     {
-      "label": "Thema der Arbeit",
+      "label": "Thema der Arbeit (Titel)",
       "type": "textfield",
       "layout": {
         "row": "Row_10b7icm",
@@ -112,6 +112,19 @@
       },
       "id": "Field_07mnz6g",
       "key": "textfield_h5mlv",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Abstract der Arbeit",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0ev5iyh",
+        "columns": null
+      },
+      "id": "Field_0bnt5jm",
+      "key": "textarea_oxo3yq",
       "validate": {
         "required": true
       }

@@ -1,0 +1,71 @@
+{
+  "components": [
+    {
+      "text": "# Auswahl der Arbeit",
+      "type": "text",
+      "layout": {
+        "row": "Row_0g04gyj",
+        "columns": null
+      },
+      "id": "Field_0quvw8j"
+    },
+    {
+      "label": "Name Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1tzyuuc",
+        "columns": null
+      },
+      "id": "Field_0g566bb",
+      "key": "studentFullName"
+    },
+    {
+      "label": "Mat. Nr. Student",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1tzyuuc",
+        "columns": null
+      },
+      "id": "Field_15r7par",
+      "key": "textfield_dwki8e"
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_1tk8z6c",
+        "columns": null
+      },
+      "id": "Field_04m7t2z"
+    },
+    {
+      "label": "Arbeit auswählen",
+      "type": "select",
+      "layout": {
+        "row": "Row_163j72h",
+        "columns": null
+      },
+      "id": "Field_0fd7ncv",
+      "key": "select_lcgsyf",
+      "valuesKey": "studentWorkList"
+    },
+    {
+      "label": "Bestätigen",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_0ede2nl",
+        "columns": null
+      },
+      "id": "Field_0x6eu3z"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0miq6rt",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.40.1"
+  },
+  "schemaVersion": 19
+}

@@ -10,44 +10,44 @@
       "id": "Field_15cbes8"
     },
     {
-      "label": "Name der Studierenden",
+      "label": "Name des Studierenden",
       "type": "textfield",
       "layout": {
         "row": "Row_194m0md",
         "columns": null
       },
       "id": "Field_1s1osku",
-      "key": "textfield_7g9gpe",
+      "key": "studentFullName",
       "validate": {
-        "required": true
+        "required": false
       },
       "disabled": false,
       "readonly": true
     },
     {
-      "label": "Matr.-Nr.",
+      "label": "Matr.-Nr. Student",
       "type": "textfield",
       "layout": {
-        "row": "Row_194m0md",
+        "row": "Row_1953spx",
         "columns": null
       },
       "id": "Field_1u0s560",
       "key": "textfield_4oufyd",
       "validate": {
-        "required": true
+        "required": false
       },
       "disabled": false,
       "readonly": true
     },
     {
-      "label": "E-Mail",
+      "label": "E-Mail Student",
       "type": "textfield",
       "layout": {
-        "row": "Row_194m0md",
+        "row": "Row_1953spx",
         "columns": null
       },
       "id": "Field_0x4sd2o",
-      "key": "textfield_nr248v",
+      "key": "studentMail",
       "disabled": false,
       "readonly": true
     },

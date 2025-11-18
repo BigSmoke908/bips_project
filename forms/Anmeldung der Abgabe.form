@@ -1,7 +1,7 @@
 {
   "components": [
     {
-      "text": "# Anmeldung der Abgabe",
+      "text": "# Anmeldung für Abgabe",
       "type": "text",
       "layout": {
         "row": "Row_11qwzxc",

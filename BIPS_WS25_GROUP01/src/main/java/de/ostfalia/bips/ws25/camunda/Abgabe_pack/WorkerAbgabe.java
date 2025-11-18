@@ -1,10 +1,12 @@
 package de.ostfalia.bips.ws25.camunda.Abgabe_pack;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import de.ostfalia.bips.ws25.camunda.sql_deserialisation.EmailName;
 import io.camunda.client.annotation.JobWorker;
 import io.camunda.client.annotation.Variable;
 
@@ -25,11 +27,33 @@ public class WorkerAbgabe {
      @JobWorker(type= "ladeStudenten")
      public Map<String, Object> ladeStudenten(@Variable(name = "name_student") String name,
                                                 @Variable(name = "vorname_student") String vorname,
-                                                @Variable(name = "mat_nr") String matNr
-                                                ){
-        //TODO Studenten aus Datenbank holen der passt    
-        LOGGER.info("lade STudenten....");                                       
-        return Map.of("studentObject", "DB_Mock_Student");                                                
+                                                @Variable(name = "mat_nr") String matNr,
+                                                @Variable(name = "projekt_seminar_oder_abschluss") String projekt_seminar_oder_abschluss
+                                                ){ 
+        LOGGER.info("lade Studenten....");    
+        Integer studtenID =  Abgabe.getStudentFromDatabase(name, vorname, matNr);
+        if(studtenID != null){
+            EmailName studEmailName = Abgabe.getStudentNameMail(studtenID);    
+            String studentFullName = studEmailName.getFullName();
+            String studenMail = studEmailName.getE_mail();
+
+            boolean isAbschlussarbeit = projekt_seminar_oder_abschluss.equals("1") ? false : true;
+            Map<String, Object> mapComplete = new HashMap<>();
+            Map<String, Object> studentWork =  Abgabe.getStudentWork(studtenID, isAbschlussarbeit);
+            if(studentWork.isEmpty()){
+                LOGGER.info("finished lade Studenten, found student but no work of the given type");
+                return Map.of("student_has_registered_work", "0");
+            }
+            Map<String, Object> studentInfo =  Map.of("studentMail", studenMail, "studentFullName", studentFullName, "student_has_registered_work", "1");
+
+            mapComplete.putAll(studentWork);
+            mapComplete.putAll(studentInfo);
+            LOGGER.info("finished lade Studenten succesfully");
+            return mapComplete;
+        }
+        LOGGER.info("failed lade Studenten, no student found");
+        return Map.of("student_has_registered_work", "0");
+                                                       
      }
     @JobWorker(type = "saveAbschlussArbeitToDatabase")
     public Map<String, Object> saveAbschlussArbeitToDatabase(

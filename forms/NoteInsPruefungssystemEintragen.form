@@ -10,38 +10,38 @@
       "id": "Field_00jqg08"
     },
     {
-      "label": "Name",
+      "label": "Name Studierender",
       "type": "textfield",
       "layout": {
         "row": "Row_06ft2ox",
         "columns": null
       },
       "id": "Field_1vwgs5d",
-      "key": "textfield_zurawp",
+      "key": "studentFullName",
       "disabled": false,
       "readonly": true
     },
     {
-      "label": "E-Mail",
+      "label": "Mat.Nr. Studierender",
       "type": "textfield",
       "layout": {
-        "row": "Row_06ft2ox",
-        "columns": null
-      },
-      "id": "Field_0xl2iab",
-      "key": "textfield_q1dvi",
-      "disabled": false,
-      "readonly": true
-    },
-    {
-      "label": "Mat.Nr.",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_06ft2ox",
+        "row": "Row_106hmbo",
         "columns": null
       },
       "id": "Field_19va0yk",
       "key": "textfield_i53uli",
+      "disabled": false,
+      "readonly": true
+    },
+    {
+      "label": "E-Mail Studierender",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_106hmbo",
+        "columns": null
+      },
+      "id": "Field_0xl2iab",
+      "key": "textfield_q1dvi",
       "disabled": false,
       "readonly": true
     },
@@ -56,6 +56,14 @@
       "key": "textarea_mptqmp",
       "disabled": false,
       "readonly": true
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_0oevgmi",
+        "columns": null
+      },
+      "id": "Field_0ory09s"
     },
     {
       "label": "Note",

@@ -118,15 +118,17 @@ public class WorkerAnmeldung {
                                     @Variable(name = "student_mail") String email, 
                                     @Variable(name = "thema_der_arbeit") String arbietsThema) {
         LOGGER.info("Die Arbeit wurde vom Betreuer angenommen");
-        String betreuer = title_betreuer_extern + " " + vorname_betreuer_extern + " " + nachname_betreuer_extern;
-        if(betreuer_extern.equals("0")){
-            Dozent dozent =  Dozent.getDozentFromId(Integer.parseInt(dozent_id));
-            betreuer = dozent.concatName();
-        }
-        String message = "Ihre Arbeit '" + arbietsThema + "' wurde vom Betreuer " + betreuer + " angenommen.";
 
-        if(betreuer_vorhanden == "0"){
+        String message = "";
+        if(betreuer_vorhanden.equals("0")){
             message = "Sie habe ihre Arbeit selbst bestätigt";
+        }else{
+            String betreuer = title_betreuer_extern + " " + vorname_betreuer_extern + " " + nachname_betreuer_extern;
+            if(betreuer_extern.equals("0")){
+                Dozent dozent =  Dozent.getDozentFromId(Integer.parseInt(dozent_id));
+                betreuer = dozent.concatName();
+            }
+            message = "Ihre Arbeit '" + arbietsThema + "' wurde vom Betreuer " + betreuer + " angenommen.";
         }
 
         String student_name = student_firstname + " " + student_lastname;
@@ -162,7 +164,7 @@ public class WorkerAnmeldung {
         System.out.println("Saving to Database...");
         Anmeldung.saveProjectOrSeminarWorkToDatabase(semeserterOfArbeit, istProjekt, betreuerVorhanden, betreuerExtern, studentStudiengang, lecturerID,
                                                     studentFirstname, studentLastname, studentTitle, studentPhone, studentMail, vornameBetreuerExtern, nachnameBetreuerExtern, 
-                                                    titleBetreuerExtern, phoneBetreuerExetern, emailBetreuerExtern, firmaName, firmaAdresse, firmaPlz, firmaStadt);
+                                                    titleBetreuerExtern, phoneBetreuerExetern, emailBetreuerExtern, firmaName, firmaAdresse, firmaPlz, firmaStadt, studenMatNr, themaDerArbeit);
         System.out.println("saved to Database");                                                                         
                                                                            
         return Map.of("database-save", true);
@@ -340,7 +342,10 @@ public class WorkerAnmeldung {
                                                                     @Variable(name = "firma_name_zweitbetreuer") String firma_name_zweitbetreuer,
                                                                     @Variable(name = "firma_adresse_zweitbetreuer") String firma_adresse_zweitbetreuer,
                                                                     @Variable(name = "firma_plz_zweitbetreuer") String firma_plz_zweitbetreuer,
-                                                                    @Variable(name = "firma_stadt_zweitbetreuer") String firma_stadt_zweitbetreuer
+                                                                    @Variable(name = "firma_stadt_zweitbetreuer") String firma_stadt_zweitbetreuer, 
+                                                                    @Variable(name = "student_mat_nr") String matrikel_nummer,
+                                                                    @Variable(name = "abstract_der_arbeit") String abstract_der_arbeit,
+                                                                    @Variable(name = "thema_der_arbeit") String thema_der_arbeit
                                                                     ) {
         LOGGER.info("saving Abschlussarbeit to database...");
         Anmeldung.saveAbschlussarbeitAntragToDatabase(semester_arbeit, zweitbetreuer_vorhanden, erstbetreuer_extern, zweitbetreuer_extern, studentStudiengang,
@@ -348,7 +353,7 @@ public class WorkerAnmeldung {
                                                         studentMail, vorname_erstbetreuer, nachname_erstbetreuer, titel_erstbetreuer, telefon_erstbetreuer, email_erstbetreuer, 
                                                         firma_name_erstbetreuer, firma_adresse_erstbetreuer, firma_plz_erstbetreuer, firma_stadt_erstbetreuer,
                                                         vorname_zweitbetreuer, nachname_zweitbetreuer, titel_zweitbetreuer, telefon_zweitbetreuer, email_zweitbetreuer,
-                                                        firma_name_zweitbetreuer, firma_adresse_zweitbetreuer, firma_plz_zweitbetreuer, firma_stadt_zweitbetreuer);
+                                                        firma_name_zweitbetreuer, firma_adresse_zweitbetreuer, firma_plz_zweitbetreuer, firma_stadt_zweitbetreuer, matrikel_nummer, thema_der_arbeit, abstract_der_arbeit);
         LOGGER.info("saved Abschlussarbeit to database");
         return Map.of("database-save", true);
     }

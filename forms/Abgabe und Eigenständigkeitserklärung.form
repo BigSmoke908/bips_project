@@ -1,7 +1,7 @@
 {
   "components": [
     {
-      "text": "# Abgabe ",
+      "text": "# Abgabe Projekt-/Seminararbeit",
       "type": "text",
       "layout": {
         "row": "Row_07qmcxd",
@@ -10,37 +10,78 @@
       "id": "Field_1tomwq0"
     },
     {
-      "label": "Name,Vorname ",
+      "label": "Name Student",
       "type": "textfield",
       "layout": {
         "row": "Row_0po0pb8",
         "columns": null
       },
       "id": "Field_0a7jk57",
-      "key": "textfield_6fc1xf",
-      "disabled": true
+      "key": "studentFullName",
+      "disabled": false,
+      "readonly": true
     },
     {
-      "label": "Matr.-Nr.",
+      "label": "Matr.-Nr. Student",
       "type": "textfield",
       "layout": {
-        "row": "Row_0po0pb8",
+        "row": "Row_1ru0m0l",
         "columns": null
       },
       "id": "Field_069k4fh",
-      "key": "textfield_agz6ks",
-      "disabled": true
+      "key": "mat_nr",
+      "disabled": false
     },
     {
-      "label": "E-Mail",
+      "label": "E-Mail Student",
       "type": "textfield",
       "layout": {
-        "row": "Row_0po0pb8",
+        "row": "Row_1ru0m0l",
         "columns": null
       },
       "id": "Field_0ul3p8j",
-      "key": "textfield_8l6799",
-      "disabled": true
+      "key": "student_mail",
+      "disabled": false,
+      "readonly": true
+    },
+    {
+      "label": "Thema der Arbeit",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0o8eroq",
+        "columns": null
+      },
+      "id": "Field_0ys34bo",
+      "key": "thema_der_arbeit_fill",
+      "readonly": true
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_1tpnzzf",
+        "columns": null
+      },
+      "id": "Field_1h3zv91"
+    },
+    {
+      "label": "Teamarbeit?",
+      "values": [
+        {
+          "label": "Ja",
+          "value": "1"
+        },
+        {
+          "label": "Nein",
+          "value": "0"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_1hq3pfi",
+        "columns": null
+      },
+      "id": "Field_0ff88sr",
+      "key": "radio_hxj5z2"
     },
     {
       "label": "Arbeit hochladen(PDF)",
@@ -69,29 +110,23 @@
       }
     },
     {
-      "subtype": "date",
-      "dateLabel": "Abgabedatum",
-      "type": "datetime",
+      "text": "### Unterschrift:",
+      "type": "text",
       "layout": {
-        "row": "Row_0mprjdq",
-        "columns": null
+        "row": "Row_10irhcz",
+        "columns": 3
       },
-      "id": "Field_1k3wqb9",
-      "key": "datetime_gzelkd",
-      "validate": {
-        "required": false
-      },
-      "disabled": true
+      "id": "Field_0kxwpsa"
     },
     {
-      "label": "Unterschrift",
-      "type": "textarea",
+      "label": "Unterschrift hochladen",
+      "type": "filepicker",
       "layout": {
-        "row": "Row_1kobr59",
+        "row": "Row_10irhcz",
         "columns": null
       },
-      "id": "Field_0vleue4",
-      "key": "textarea_t0etkd",
+      "id": "Field_0fd3789",
+      "key": "filepicker_zjdfmm",
       "validate": {
         "required": true
       }

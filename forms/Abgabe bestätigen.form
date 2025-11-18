@@ -22,10 +22,10 @@
       "readonly": true
     },
     {
-      "label": "Mat. Nr.",
+      "label": "Mat. Nr. Student",
       "type": "textfield",
       "layout": {
-        "row": "Row_0t7k6yq",
+        "row": "Row_0kse062",
         "columns": null
       },
       "id": "Field_107xrwg",
@@ -34,16 +34,38 @@
       "readonly": true
     },
     {
-      "label": "E-Mail",
+      "label": "E-Mail Student",
       "type": "textfield",
       "layout": {
-        "row": "Row_0t7k6yq",
+        "row": "Row_0kse062",
         "columns": null
       },
       "id": "Field_1x9jase",
       "key": "textfield_543a3d",
       "disabled": false,
       "readonly": true
+    },
+    {
+      "label": "Thema der Arbeit",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0ulcxka",
+        "columns": null
+      },
+      "id": "Field_0zbnce3",
+      "key": "textfield_whitk4",
+      "readonly": true,
+      "validate": {
+        "required": false
+      }
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_1mkx1da",
+        "columns": null
+      },
+      "id": "Field_0ivkv49"
     },
     {
       "label": "Abgabe bestätigt",

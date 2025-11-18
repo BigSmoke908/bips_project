@@ -174,11 +174,11 @@ public class Anmeldung {
      * if the student already exists, no new entry is inserted
      * @return the id of the student entry created (or of the entry alredy existing)
      */
-    public static int insertStudent(String firstname, String lastname, String title, String phone, String email){
+    public static int insertStudent(String firstname, String lastname, String title, String phone, String email, String matNr){
         // a student is the same if firstname, lastname and email are the same (We assume that the email does not change in ostfalia context)
         String checkQuery = "SELECT COUNT(*) FROM student WHERE firstname = ? AND lastname = ? and email = ?";
-        String insertQuery = "INSERT INTO student (firstname, lastname, title, phone, email) VALUES (?, ?, ?, ?, ?)";
-        String updateQuery = "UPDATE student SET title = ?, phone = ? WHERE firstname = ? AND lastname = ? AND email = ?";
+        String insertQuery = "INSERT INTO student (firstname, lastname, title, phone, email, matrikel_nummer) VALUES (?, ?, ?, ?, ?, ?)";
+        String updateQuery = "UPDATE student SET title = ?, phone = ? WHERE firstname = ? AND lastname = ? AND email = ? AND matrikel_nummer = ?";
 
         try(Connection connection = Utils.establishSQLConnection();) {
             final PreparedStatement statement = connection.prepareStatement(checkQuery);
@@ -195,6 +195,7 @@ public class Anmeldung {
                     insertStatement.setString(3, title);
                     insertStatement.setString(4, phone);
                     insertStatement.setString(5, email);
+                    insertStatement.setString(6, matNr);
                     insertStatement.executeUpdate();
 
                     ResultSet generatedKeys = insertStatement.getGeneratedKeys();
@@ -209,6 +210,7 @@ public class Anmeldung {
                     updateStatement.setString(3, firstname);
                     updateStatement.setString(4, lastname);
                     updateStatement.setString(5, email);
+                    updateStatement.setString(6, matNr);
                     updateStatement.executeUpdate();
 
                     final PreparedStatement findIdStatement =  connection.prepareStatement("Select * from student where title = ? and phone = ? and firstname = ? and lastname = ? and email = ? ");
@@ -217,6 +219,7 @@ public class Anmeldung {
                     findIdStatement.setString(3, firstname);
                     findIdStatement.setString(4, lastname);
                     findIdStatement.setString(5, email);
+                    findIdStatement.setString(6, matNr);
                     ResultSet resultId = findIdStatement.executeQuery();
                     if(resultId.next()){
                         return resultId.getInt("id");
@@ -339,7 +342,7 @@ public class Anmeldung {
     public static Map<String, Object> saveProjectOrSeminarWorkToDatabase(String semester, String projektarbeit, String betreuerVorhanden, String betreuerExtern, String studiengang, String lecturerId,
                                                                             String firstnameStudent, String lastnameStudent, String titleStudent, String phoneStudent, String emailStudent, //student
                                                                             String firstnameExternSuper, String lastnameExternSuper, String titleExternSuper, String phoneExternSuper, String emailExternSuper, //supervisor
-                                                                            String companyName, String address, String zipCode, String city){ //company
+                                                                            String companyName, String address, String zipCode, String city, String matrNr, String themaDerArbeit){ //company
         
                                                                                 
         System.out.println("establishing connection ..."); 
@@ -349,7 +352,7 @@ public class Anmeldung {
         System.out.println("established connection");
         try {
             Statement maxIdStmt = connection.createStatement();
-            ResultSet maxIdRs = maxIdStmt.executeQuery("SELECT COALESCE(MAX(id), 0) + 1 AS new_id FROM company");
+            ResultSet maxIdRs = maxIdStmt.executeQuery("SELECT COALESCE(MAX(id), 0) + 1 AS new_id FROM student_work");
             System.out.println("max results statement");
             if(maxIdRs.next()){
                 studentWorkId = maxIdRs.getInt(1);
@@ -368,8 +371,19 @@ public class Anmeldung {
         }
         String semester_id = semester; //I already get the primary key id (as this is everything I store as value)
         //Studiengang already is a number (inside of the String)
-        int idStudent = insertStudent(firstnameStudent, lastnameStudent, titleStudent, phoneStudent, emailStudent);
-        System.out.println("inserted studewnt");
+        int idStudent = insertStudent(firstnameStudent, lastnameStudent, titleStudent, phoneStudent, emailStudent, matrNr);
+        System.out.println("inserted student");
+
+        Integer semesterId = null;
+        try{
+            //TODO semester id seems to be string not a id
+            semesterId = Integer.parseInt(semester_id);
+        }catch(Exception e){
+            semesterId = Utils.getSemesterIdFromString(semester_id);
+            e.printStackTrace();
+        }
+        insertStudentWork(status, Integer.parseInt(type_of_student_work_id), semesterId, Integer.parseInt(studiengang), idStudent);
+        System.out.println("inserted student workt");
 
         //check wether we have a supervisor, then insert the correct one (extern or dozent)
         if(betreuerVorhanden.equals("1")){
@@ -382,10 +396,41 @@ public class Anmeldung {
         }
         System.out.println("inserted sbetreure");
 
-        insertStudentWork(status, Integer.parseInt(type_of_student_work_id), Integer.parseInt(semester_id), Integer.parseInt(studiengang), idStudent);
-        System.out.println("inserted student workt");
+        //insert thema der arbeit
+        insertArbeitsThema(themaDerArbeit, studentWorkId);
+
+        
 
         return Map.of("test", "test");
+    }
+
+    public static void insertArbeitsThema(String thema, int studentWorkId){
+        String insertQuery = "INSERT INTO thema_seminar_projekt (student_work_id, thema) VALUES (?, ?)";
+
+        try(Connection connection = Utils.establishSQLConnection();) {
+            final PreparedStatement statement = connection.prepareStatement(insertQuery);
+            statement.setInt(1, studentWorkId);
+            statement.setString(2, thema);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void insertThesis(String thema, String abstractString, int studenWorkId){
+        String insertQuery = "INSERT INTO thesis (student_work_id, title, abstract) VALUES (?, ?, ?)";
+
+        try(Connection connection = Utils.establishSQLConnection();) {
+            final PreparedStatement statement = connection.prepareStatement(insertQuery);
+            statement.setInt(1, studenWorkId);
+            statement.setString(2, thema);
+            statement.setString(3, abstractString);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 
@@ -394,7 +439,7 @@ public class Anmeldung {
                                                             String firstnameExternSuper, String lastnameExternSuper, String titleExternSuper, String phoneExternSuper, String emailExternSuper, //supervisor
                                                             String companyNameErstbetreuer, String addressErstbetreuer, String zipCodeErstbetreuer, String cityErstbetreuer, //company first supervisor
                                                             String firstnameExternSuperZweit, String lastnameExternSuperZweit, String titleExternSuperZweit, String phoneExternSuperZweit, String emailExternSuperZweit, //second supervisor
-                                                            String companyNameZweitbetreuer, String addressZweitbetreuer, String zipCodeZweitbetreuer, String cityZweitbetreuer){ //company second supervisor
+                                                            String companyNameZweitbetreuer, String addressZweitbetreuer, String zipCodeZweitbetreuer, String cityZweitbetreuer, String matrikelNummer, String titelDerArbeit, String abstractString){ //company second supervisor
 
         System.out.println("establishing connection ..."); 
         
@@ -404,7 +449,7 @@ public class Anmeldung {
         System.out.println("established connection");
         try {
             Statement maxIdStmt = connection.createStatement();
-            ResultSet maxIdRs = maxIdStmt.executeQuery("SELECT COALESCE(MAX(id), 0) + 1 AS new_id FROM company");
+            ResultSet maxIdRs = maxIdStmt.executeQuery("SELECT COALESCE(MAX(id), 0) + 1 AS new_id FROM student_work"); //TODO Das gibt irgendwie 1 zu wenig aus?
             System.out.println("max results statement");
             if(maxIdRs.next()){
                 studentWorkId = maxIdRs.getInt(1);
@@ -417,8 +462,12 @@ public class Anmeldung {
         String type_of_student_work_id = "3";
         String semester_id = semester; //I already get the primary key id (as this is everything I store as value) //TODO I do not?
         semester_id = String.valueOf(Utils.getSemesterIdFromString(semester_id));
-        int idStudent = insertStudent(firstnameStudent, lastnameStudent, titleStudent, phoneStudent, emailStudent);
+        int idStudent = insertStudent(firstnameStudent, lastnameStudent, titleStudent, phoneStudent, emailStudent, matrikelNummer);
         System.out.println("inserted studewnt");
+
+        
+        insertStudentWork(status, Integer.parseInt(type_of_student_work_id), Integer.parseInt(semester_id), Integer.parseInt(studiengang), idStudent);
+        System.out.println("inserted student work");
 
         //insert supervisors
         String betreuerVorhanden = "1"; //es gibt immer den ERstbetreuer
@@ -441,8 +490,9 @@ public class Anmeldung {
         }
         System.out.println("inserted Betreuer");
 
-        insertStudentWork(status, Integer.parseInt(type_of_student_work_id), Integer.parseInt(semester_id), Integer.parseInt(studiengang), idStudent);
-        System.out.println("inserted student workt");
+
+        //insert thesis
+        insertThesis(titelDerArbeit, abstractString, studentWorkId);
 
         return Map.of("test", "test");
 
