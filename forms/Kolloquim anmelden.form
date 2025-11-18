@@ -17,7 +17,7 @@
         "columns": null
       },
       "id": "Field_1s1osku",
-      "key": "studentFullName",
+      "key": "student_name_fill",
       "validate": {
         "required": false
       },
@@ -32,7 +32,7 @@
         "columns": null
       },
       "id": "Field_1u0s560",
-      "key": "textfield_4oufyd",
+      "key": "student_mat_nr_fill",
       "validate": {
         "required": false
       },
@@ -47,7 +47,7 @@
         "columns": null
       },
       "id": "Field_0x4sd2o",
-      "key": "studentMail",
+      "key": "student_mail_fill",
       "disabled": false,
       "readonly": true
     },
@@ -59,7 +59,7 @@
         "columns": null
       },
       "id": "Field_18mlp66",
-      "key": "textfield_u6d307",
+      "key": "thema_der_arbeit_fill",
       "readonly": true
     },
     {

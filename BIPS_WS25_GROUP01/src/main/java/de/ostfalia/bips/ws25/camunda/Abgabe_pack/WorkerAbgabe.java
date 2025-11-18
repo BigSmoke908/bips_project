@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import de.ostfalia.bips.ws25.camunda.Utils;
+import de.ostfalia.bips.ws25.camunda.sql_deserialisation.Betreuer;
 import de.ostfalia.bips.ws25.camunda.sql_deserialisation.EmailName;
 import io.camunda.client.annotation.JobWorker;
 import io.camunda.client.annotation.Variable;
@@ -55,71 +57,130 @@ public class WorkerAbgabe {
         return Map.of("student_has_registered_work", "0");
                                                        
      }
-    @JobWorker(type = "saveAbschlussArbeitToDatabase")
-    public Map<String, Object> saveAbschlussArbeitToDatabase(
-            @Variable(name = "studentId") String studentId,
-            @Variable(name = "arbeitTitel") String titel) {
 
-        LOGGER.info("Speichere Abschlussarbeit für Student {} in DB…", studentId);
-        return Map.of("abschlussarbeit_gefunden", "1");
+    @JobWorker(type = "saveKolloquiumsDatenToDatabase")
+    public Map<String, Object> saveKolloquiumsDatenToDatabase(
+            @Variable(name = "studentId") String id,
+            @Variable(name = "kolloquiumDatum") String datum,
+            @Variable(name = "raum") String location,
+            @Variable(name = "arbeit_id") String arbeit_id ){
+
+        LOGGER.info("Speichere Kolloquiums-Daten...");
+        Abgabe.saveKolloquiumData(datum, location, Integer.parseInt(arbeit_id), "");
+        LOGGER.info("Daten des Kolloquium erfolgreich gespeichert");
+        return Map.of("saveOK", true);
     }
 
-    @JobWorker(type = "keineArbeitgefundenMail")
-    public Map<String, Object> keineArbeitGefundenMail(
-            @Variable(name = "username") String username) {
+    @JobWorker(type = "betreuerBestimmen")
+    public Map<String, Object> betreuerBestimmen(@Variable(name = "arbeit_id") String arbeit_id){
 
-        LOGGER.info("Sende Mail: Keine Arbeit gefunden für {}", username);
+        LOGGER.info("bestimme Betreuer der ausgewählten Arbeit...");
+        int studentWorkId = Integer.parseInt(arbeit_id);
+        Betreuer erstbetreuer = Abgabe.getErstbetreuerIdForStudentWork(studentWorkId);
+        if(erstbetreuer == null){
+            LOGGER.info("Betreuer bestimmt, kein Betreuer");
+            return Map.of("erstbetreuerName", "");
+        }
+        String erstbetreuerMail = erstbetreuer.getEmail();
+        String erstbetreuerName = erstbetreuer.concatName();
+        String usernameErstbetreuer = Utils.getUsernameFromLecturer(erstbetreuer.getId());
+        Betreuer zweitbetreuer = Abgabe.getZweitbetreuerIdForStudent(studentWorkId);
+        if(zweitbetreuer == null){
+            LOGGER.info("Betreuer bestimmt, kein Zweitbetreuer");
+            return Map.of("erstbetreuerName", erstbetreuerName, "erstbetreuerMail", erstbetreuerMail, "ErstbetreuerUsernam", usernameErstbetreuer, 
+                        "zweitbetreuerName", "", "zweitbetreuerMail", "");
+        }
+        String zweitbetreuerMail = zweitbetreuer.getEmail();
+        String zweitbetreuerName = zweitbetreuer.concatName();
+
+        LOGGER.info("Betreuer bestimmt");
+        return Map.of("erstbetreuerName", erstbetreuerName, "erstbetreuerMail", erstbetreuerMail, "ErstbetreuerUsernam", usernameErstbetreuer, 
+                        "zweitbetreuerName", zweitbetreuerName, "zweitbetreuerMail", zweitbetreuerMail);
+    }
+
+    @JobWorker(type = "abgabeNichtBestaetigtMail")
+    public Map<String, Object> abgabeNichtBestaetigtMail(
+            @Variable(name = "erstbetreuerName") String erstbetreuerName,
+            @Variable(name = "erstbetreuerMail") String erstbetreuerMail,
+            @Variable(name = "arbeitTitel") String arbeitTitel,
+            @Variable(name = "studentFullName") String studentFullName,
+            @Variable(name = "studentMail") String studentMail) {
+
+        LOGGER.info("Sende Mail...");
+        String message = "die Arbeit " + arbeitTitel + " wurde nicht bestanden." +
+                            "\nErstbetreuer: " + erstbetreuerName;
+        Utils.simulateEmail(studentFullName, message, studentMail);
+        Utils.simulateEmail(erstbetreuerName, message, erstbetreuerMail);
+
+        return Map.of("mailSent", true);
+    }
+
+    @JobWorker(type = "datenGespeicherMail")
+    public Map<String, Object> datenGespeichertMail(
+            @Variable(name = "erstbetreuerName") String erstbetreuerName,
+            @Variable(name = "erstbetreuerMail") String erstbetreuerMail,
+            @Variable(name = "arbeitTitel") String arbeitTitel,
+            @Variable(name = "studentFullName") String studentFullName,
+            @Variable(name = "studentMail") String studentMail) {
+
+        LOGGER.info("Sende Mail...");
+        String message = "die Arbeit " + arbeitTitel + " wurde bestanden." +
+                            "\nErstbetreuer: " + erstbetreuerName; 
+        Utils.simulateEmail(studentFullName, message, studentMail);
+        Utils.simulateEmail(erstbetreuerName, message, erstbetreuerMail);
+        return Map.of("mailSent", true);
+    }
+
+    @JobWorker(type = "noteeingetragenMail")
+    public Map<String, Object> noteEingetragenMail(
+            @Variable(name = "erstbetreuerName") String erstbetreuerName,
+            @Variable(name = "erstbetreuerMail") String erstbetreuerMail,
+            @Variable(name = "zweitbetreuerName") String zweitbetreuerName,
+            @Variable(name = "zweitbetreuerMail") String zweitbetreuerMail,
+            @Variable(name = "arbeitTitel") String arbeitTitel,
+            @Variable(name = "studentFullName") String studentFullName,
+            @Variable(name = "studentMail") String studentMail,
+            @Variable(name = "Note") String note) {
+
+        LOGGER.info("Sende Mail...");
+        String message = "die Arbeit " + arbeitTitel + " wurde erfolgreich bestanden." + 
+                            "\nNote: " + note +
+                            "\nErstbetreuer: " + erstbetreuerName + 
+                            "\nZweitbetreuer: " + zweitbetreuerName; //TODO noch Note hinzufügen
+        Utils.simulateEmail(studentFullName, message, studentMail);
+        Utils.simulateEmail(erstbetreuerName, message, erstbetreuerMail);
+        if(zweitbetreuerMail != null && !zweitbetreuerMail.equals("")){
+            Utils.simulateEmail(zweitbetreuerName, message, zweitbetreuerMail);
+        }
+        LOGGER.info("Abschluss mail gesendet");
         return Map.of("mailSent", true);
     }
 
     @JobWorker(type = "saveAbgabeToDatabase")
     public Map<String, Object> saveAbgabeToDatabase(
             @Variable(name = "studentId") String id,
-            @Variable(name = "abgabeDatum") String datum) {
+            @Variable(name = "abgabeDatum") String datum,
+            @Variable(name = "isTeamarbeit") String isTeamarbeit,
+            @Variable(name = "arbeit_id") String arbeit_id
+            ) {
 
-        LOGGER.info("Speichere Abgabe des Studenten {} in DB…", id);
-        return Map.of("saveOK", true);
-    }
-
-    @JobWorker(type = "abgabebestaetigtMail")
-    public Map<String, Object> abgabeBestaetigtMail(
-            @Variable(name = "username") String username) {
-
-        LOGGER.info("Sende Abgabebestätigung an {}", username);
-        return Map.of("mailSent", true);
-    }
-
-    @JobWorker(type = "datenGespeicherMail")
-    public Map<String, Object> datenGespeichertMail(
-            @Variable(name = "username") String username) {
-
-        LOGGER.info("Sende Mail: Daten gespeichert an {}", username);
-        return Map.of("mailSent", true);
-    }
-
-    @JobWorker(type = "saveKolloquiumsDatenToDatabase")
-    public Map<String, Object> saveKolloquiumsDatenToDatabase(
-            @Variable(name = "studentId") String id,
-            @Variable(name = "kolloquiumDatum") String datum) {
-
-        LOGGER.info("Speichere Kolloquiums-Daten für Student {}…", id);
+        LOGGER.info("Speichere Abgabe des Studenten ...");
+        Abgabe.saveNoteAndSubmissionToDatabase(null, Integer.parseInt(arbeit_id) , isTeamarbeit);
+        LOGGER.info("saved");
         return Map.of("saveOK", true);
     }
 
     @JobWorker(type = "saveAbschlussArbeitnoteToDatabase")
     public Map<String, Object> saveAbschlussArbeitnoteToDatabase(
             @Variable(name = "studentId") String id,
-            @Variable(name = "note") String note) {
+            @Variable(name = "note") String note,
+            @Variable(name = "arbeit_id") String arbeit_id) {
 
-        LOGGER.info("Speichere Abschlussarbeitsnote für Student {}: {}", id, note);
+        String isTeamwork = "0";
+        LOGGER.info("Speichere Abschlussarbeitsnote für Student ...");
+        Abgabe.saveNoteAndSubmissionToDatabase(note, Integer.parseInt(arbeit_id) , isTeamwork);
+        LOGGER.info("Note und Submission erfolgreich gepeichert");
         return Map.of("saveOK", true);
     }
 
-    @JobWorker(type = "noteeingetragenMail")
-    public Map<String, Object> noteEingetragenMail(
-            @Variable(name = "username") String username) {
-
-        LOGGER.info("Sende Mail: Note eingetragen an {}", username);
-        return Map.of("mailSent", true);
-    }
 }

@@ -1,79 +1,75 @@
 {
   "components": [
     {
-      "text": "# Note eintragen",
+      "text": "# Gutachten und Protokoll geschickt (bestätigen)",
       "type": "text",
       "layout": {
-        "row": "Row_14enev9",
+        "row": "Row_15hunzj",
         "columns": null
       },
-      "id": "Field_00jqg08"
+      "id": "Field_0tj8b6u"
     },
     {
-      "label": "Name Studierender",
+      "label": "Student Name",
       "type": "textfield",
       "layout": {
-        "row": "Row_06ft2ox",
+        "row": "Row_049g3sf",
         "columns": null
       },
-      "id": "Field_1vwgs5d",
+      "id": "Field_0xu51dw",
       "key": "student_name_fill",
-      "disabled": false,
       "readonly": true
     },
     {
-      "label": "Mat.Nr. Studierender",
+      "label": "Student Mat Nr",
       "type": "textfield",
       "layout": {
-        "row": "Row_106hmbo",
+        "row": "Row_0do4cx8",
         "columns": null
       },
-      "id": "Field_19va0yk",
+      "id": "Field_0ij2582",
       "key": "student_mat_nr_fill",
-      "disabled": false,
       "readonly": true
     },
     {
-      "label": "E-Mail Studierender",
+      "label": "Student Mail",
       "type": "textfield",
       "layout": {
-        "row": "Row_106hmbo",
+        "row": "Row_0do4cx8",
         "columns": null
       },
-      "id": "Field_0xl2iab",
+      "id": "Field_0zb1zqj",
       "key": "student_mail_fill",
-      "disabled": false,
       "readonly": true
     },
     {
-      "label": "Thema der Arbeit",
-      "type": "textarea",
+      "label": "Arbeitsthema",
+      "type": "textfield",
       "layout": {
-        "row": "Row_0kygjmv",
+        "row": "Row_1cgwk4w",
         "columns": null
       },
-      "id": "Field_0nb4hu9",
+      "id": "Field_0891b7z",
       "key": "thema_der_arbeit_fill",
-      "disabled": false,
       "readonly": true
     },
     {
       "type": "separator",
       "layout": {
-        "row": "Row_0oevgmi",
+        "row": "Row_0s84u05",
         "columns": null
       },
-      "id": "Field_0ory09s"
+      "id": "Field_02rj2y1"
     },
     {
-      "label": "Note",
-      "type": "textfield",
+      "label": "Gutachten und Protokoll an PA geschickt",
+      "type": "checkbox",
       "layout": {
-        "row": "Row_0i72lgg",
-        "columns": 5
+        "row": "Row_1c2q3sa",
+        "columns": null
       },
-      "id": "Field_1rm885y",
-      "key": "textfield_yaqehm",
+      "id": "Field_1oz96fv",
+      "key": "checkbox_gp5jwm",
       "validate": {
         "required": true
       }
@@ -83,14 +79,14 @@
       "action": "submit",
       "type": "button",
       "layout": {
-        "row": "Row_1lmguh3",
+        "row": "Row_1qcjgn8",
         "columns": null
       },
-      "id": "Field_0byj43o"
+      "id": "Field_1tc1z3t"
     }
   ],
   "type": "default",
-  "id": "Form_1k44req",
+  "id": "Form_1iw7k4w",
   "executionPlatform": "Camunda Cloud",
   "executionPlatformVersion": "8.8.0",
   "exporter": {

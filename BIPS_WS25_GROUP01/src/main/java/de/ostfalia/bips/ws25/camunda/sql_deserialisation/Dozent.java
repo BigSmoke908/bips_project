@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import de.ostfalia.bips.ws25.camunda.Utils;
 
+//TODO should logically inherit from Betreuer/replace Dozent with Betreuer and isLecturer = true
 public class Dozent {
     private int id;
     private String firstname;

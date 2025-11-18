@@ -186,7 +186,7 @@
       "id": "Field_1538qdt",
       "key": "radio_jq401",
       "conditional": {
-        "hide": "=radio_evahfn = \"0\""
+        "hide": "=true"
       }
     },
     {
@@ -224,7 +224,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\" or true"
       }
     },
     {
@@ -240,7 +240,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\"  or true"
       }
     },
     {
@@ -256,7 +256,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\"  or true"
       }
     },
     {
@@ -272,7 +272,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\"  or true"
       }
     },
     {
@@ -288,7 +288,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\"  or true"
       }
     },
     {
@@ -304,7 +304,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\"  or true"
       }
     },
     {
@@ -320,7 +320,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\"  or true"
       }
     },
     {
@@ -336,7 +336,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\"  or true"
       }
     },
     {
@@ -352,7 +352,7 @@
         "required": true
       },
       "conditional": {
-        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\""
+        "hide": "=radio_jq401 = \"0\" or radio_evahfn = \"0\"  or true"
       }
     },
     {

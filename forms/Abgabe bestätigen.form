@@ -17,7 +17,7 @@
         "columns": null
       },
       "id": "Field_0mrt17x",
-      "key": "textfield_6141po",
+      "key": "student_name_fill",
       "disabled": false,
       "readonly": true
     },
@@ -29,7 +29,7 @@
         "columns": null
       },
       "id": "Field_107xrwg",
-      "key": "textfield_xpo22q",
+      "key": "student_mat_nr_fill",
       "disabled": false,
       "readonly": true
     },
@@ -41,7 +41,7 @@
         "columns": null
       },
       "id": "Field_1x9jase",
-      "key": "textfield_543a3d",
+      "key": "student_mail_fill",
       "disabled": false,
       "readonly": true
     },
@@ -53,7 +53,7 @@
         "columns": null
       },
       "id": "Field_0zbnce3",
-      "key": "textfield_whitk4",
+      "key": "thema_arbeit_fill",
       "readonly": true,
       "validate": {
         "required": false

@@ -120,21 +120,31 @@ public class Anmeldung {
     }
 
     
-    public static void insertStudentWork(int status, int typeOfStudentWorkId, int semesterId, int courseOfStudiesId, int studentId){
+    public static Integer insertStudentWork(int status, int typeOfStudentWorkId, int semesterId, int courseOfStudiesId, int studentId){
         System.out.println("insert student work");
         String insertQuery = "INSERT INTO student_work (status, type_of_student_work_id, semester_id, course_of_studies_id, student_id) VALUES (?, ?, ?, ?, ?)";
+        Integer genereatedId = null;
         try(Connection connection = Utils.establishSQLConnection();) {
-            final PreparedStatement statement = connection.prepareStatement(insertQuery);
+            final PreparedStatement statement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, status);
             statement.setInt(2, typeOfStudentWorkId);
             statement.setInt(3, semesterId);
             statement.setInt(4, courseOfStudiesId);
             statement.setInt(5, studentId);
             statement.executeUpdate();
+
+            try (ResultSet rs = statement.getGeneratedKeys()) {
+                if (rs.next()) {
+                    genereatedId = rs.getInt(1); // assuming the ID is the first column
+                }
+            }
+
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        return genereatedId;
     }
 
     public static void insertStudentWorkHasSupervisor(String studentWorkId, String supervisorId, String isPrimarySupervisor){
@@ -154,7 +164,7 @@ public class Anmeldung {
 
     public static void insertStudentWorkHasLecturer(String studentWorkId, String lecturerId, String isPrimarySupervisor){
         String insertQuery = "INSERT INTO student_work_has_lecturer (student_work_id, lecturer_id, is_primary_supervisor, is_billed) VALUES (?, ?, ?, ?)";
-        //TODO isbilled???
+        //TODO isbilled ==> will be handled in a future version, 200 to indicate no value
         String isBilled = "1";
 
         try(Connection connection = Utils.establishSQLConnection();) {
@@ -176,15 +186,13 @@ public class Anmeldung {
      */
     public static int insertStudent(String firstname, String lastname, String title, String phone, String email, String matNr){
         // a student is the same if firstname, lastname and email are the same (We assume that the email does not change in ostfalia context)
-        String checkQuery = "SELECT COUNT(*) FROM student WHERE firstname = ? AND lastname = ? and email = ?";
+        String checkQuery = "SELECT COUNT(*) FROM student WHERE matrikel_nummer = ?";
         String insertQuery = "INSERT INTO student (firstname, lastname, title, phone, email, matrikel_nummer) VALUES (?, ?, ?, ?, ?, ?)";
         String updateQuery = "UPDATE student SET title = ?, phone = ? WHERE firstname = ? AND lastname = ? AND email = ? AND matrikel_nummer = ?";
 
         try(Connection connection = Utils.establishSQLConnection();) {
             final PreparedStatement statement = connection.prepareStatement(checkQuery);
-            statement.setString(1, firstname);
-            statement.setString(2, lastname);
-            statement.setString(3, email);
+            statement.setString(1, matNr);
             final ResultSet result = statement.executeQuery();
 
             if(result.next()){
@@ -213,13 +221,8 @@ public class Anmeldung {
                     updateStatement.setString(6, matNr);
                     updateStatement.executeUpdate();
 
-                    final PreparedStatement findIdStatement =  connection.prepareStatement("Select * from student where title = ? and phone = ? and firstname = ? and lastname = ? and email = ? ");
-                    findIdStatement.setString(1, title);
-                    findIdStatement.setString(2, phone);
-                    findIdStatement.setString(3, firstname);
-                    findIdStatement.setString(4, lastname);
-                    findIdStatement.setString(5, email);
-                    findIdStatement.setString(6, matNr);
+                    final PreparedStatement findIdStatement =  connection.prepareStatement("Select * from student where matrikel_nummer = ?");
+                    findIdStatement.setString(1, matNr);
                     ResultSet resultId = findIdStatement.executeQuery();
                     if(resultId.next()){
                         return resultId.getInt("id");
@@ -345,21 +348,6 @@ public class Anmeldung {
                                                                             String companyName, String address, String zipCode, String city, String matrNr, String themaDerArbeit){ //company
         
                                                                                 
-        System.out.println("establishing connection ..."); 
-        System.out.flush();                                                                     
-        Connection connection = Utils.establishSQLConnection();
-        Integer studentWorkId = null;
-        System.out.println("established connection");
-        try {
-            Statement maxIdStmt = connection.createStatement();
-            ResultSet maxIdRs = maxIdStmt.executeQuery("SELECT COALESCE(MAX(id), 0) + 1 AS new_id FROM student_work");
-            System.out.println("max results statement");
-            if(maxIdRs.next()){
-                studentWorkId = maxIdRs.getInt(1);
-            } 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         int status = StatusStudentWork.ANGEMELDET.getNumber();
         String type_of_student_work_id;
@@ -380,26 +368,24 @@ public class Anmeldung {
             semesterId = Integer.parseInt(semester_id);
         }catch(Exception e){
             semesterId = Utils.getSemesterIdFromString(semester_id);
-            e.printStackTrace();
+            //e.printStackTrace();
         }
-        insertStudentWork(status, Integer.parseInt(type_of_student_work_id), semesterId, Integer.parseInt(studiengang), idStudent);
+        Integer idStudenWork =  insertStudentWork(status, Integer.parseInt(type_of_student_work_id), semesterId, Integer.parseInt(studiengang), idStudent);
         System.out.println("inserted student workt");
 
         //check wether we have a supervisor, then insert the correct one (extern or dozent)
         if(betreuerVorhanden.equals("1")){
             if(betreuerExtern.equals("1")){
                 int supervisorId = insertSupervisorFromCompany(firstnameExternSuper, lastnameExternSuper, titleExternSuper, phoneExternSuper, emailExternSuper, companyName, address, zipCode, city);
-                insertStudentWorkHasSupervisor(String.valueOf(studentWorkId), String.valueOf(supervisorId), "1"); // 1 for true and is alway primary supervisor
+                insertStudentWorkHasSupervisor(String.valueOf(idStudenWork), String.valueOf(supervisorId), "1"); // 1 for true and is alway primary supervisor
             }else{
-                insertStudentWorkHasLecturer(String.valueOf(studentWorkId), lecturerId, "1");
+                insertStudentWorkHasLecturer(String.valueOf(idStudenWork), lecturerId, "1");
             }
         }
         System.out.println("inserted sbetreure");
 
         //insert thema der arbeit
-        insertArbeitsThema(themaDerArbeit, studentWorkId);
-
-        
+        insertArbeitsThema(themaDerArbeit, idStudenWork);
 
         return Map.of("test", "test");
     }
@@ -460,7 +446,7 @@ public class Anmeldung {
 
         int status = StatusStudentWork.ANGEMELDET.getNumber();
         String type_of_student_work_id = "3";
-        String semester_id = semester; //I already get the primary key id (as this is everything I store as value) //TODO I do not?
+        String semester_id = semester; 
         semester_id = String.valueOf(Utils.getSemesterIdFromString(semester_id));
         int idStudent = insertStudent(firstnameStudent, lastnameStudent, titleStudent, phoneStudent, emailStudent, matrikelNummer);
         System.out.println("inserted studewnt");

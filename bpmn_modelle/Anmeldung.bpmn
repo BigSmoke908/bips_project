@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0025bks" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.40.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
   <bpmn:collaboration id="Collaboration_1t02808">
-    <bpmn:participant id="Participant_04sbjx6" name="Anmeldung von Studentischen Arbeiten" processRef="Process_0rodom7" />
+    <bpmn:participant id="Participant_04sbjx6" name="Anmeldung von Studentischen Arbeiten" processRef="AnmeldungStudentischerArbeit" />
     <bpmn:textAnnotation id="TextAnnotation_05wwrdb">
       <bpmn:text>Abschlussarbeit</bpmn:text>
     </bpmn:textAnnotation>
@@ -96,7 +96,7 @@
     </bpmn:textAnnotation>
     <bpmn:association id="Association_04ph2lv" associationDirection="None" sourceRef="Flow_1xk0h5d" targetRef="TextAnnotation_1qj4nmw" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0rodom7" isExecutable="true">
+  <bpmn:process id="AnmeldungStudentischerArbeit" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1kghvcj">
       <bpmn:lane id="Lane_0f1nqkb" name="Betreuer">
         <bpmn:flowNodeRef>Activity_0jibq56</bpmn:flowNodeRef>

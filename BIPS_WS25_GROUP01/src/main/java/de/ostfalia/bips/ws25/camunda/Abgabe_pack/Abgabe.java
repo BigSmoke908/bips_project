@@ -1,22 +1,25 @@
 package de.ostfalia.bips.ws25.camunda.Abgabe_pack;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import de.ostfalia.bips.ws25.camunda.Option;
+import de.ostfalia.bips.ws25.camunda.StatusStudentWork;
 import de.ostfalia.bips.ws25.camunda.Utils;
 import de.ostfalia.bips.ws25.camunda.sql_deserialisation.EmailName;
-import de.ostfalia.bips.ws25.camunda.sql_deserialisation.IdKindOfSupervisor;
+import de.ostfalia.bips.ws25.camunda.sql_deserialisation.Betreuer;
 
 public class Abgabe {
     
     public static Integer getStudentFromDatabase(String studentName, String studentFirstName, String studentMatNr){
-        String queryString = "Select * from student where firstname = ? and lastname = ? and matrikel_nummer = ?";
+        String queryString = "Select * from student where firstname = ? and lastname = ? and matrikel_nummer = ?";//TODO TODO TODO and status = ?";
 
         Connection connection = Utils.establishSQLConnection();
         PreparedStatement statement;
@@ -26,6 +29,7 @@ public class Abgabe {
             statement.setString(1, studentFirstName);
             statement.setString(2, studentName);
             statement.setString(3, studentMatNr);
+            //TODO statement.setInt(4, StatusStudentWork.ABGEGEBEN.getNumber());
             final ResultSet result = statement.executeQuery();
 
             if(result.next()){
@@ -39,7 +43,7 @@ public class Abgabe {
         return student_id;
     }
 
-    public static IdKindOfSupervisor getErstbetreuerIdForStudentWork(int studentWorkId){
+    public static Betreuer getErstbetreuerIdForStudentWork(int studentWorkId){
         String queryStringSupervisor = "Select * from student_work_has_supervisor where student_work_id = ? and is_primary_supervisor = 1";
         String queryStringLecturer = "Select * from student_work_has_lecturer where student_work_id = ? and is_primary_supervisor = 1";
 
@@ -47,14 +51,32 @@ public class Abgabe {
         PreparedStatement statement;
         Integer erstbetreuerId = null;
         boolean isLecturer = true;
+        String firstname = null;
+        String lastname = null;
+        String phone = null;
+        String title = null;
+        String email = null;
         try {
             statement = connection.prepareStatement(queryStringLecturer);
             statement.setInt(1, studentWorkId);
 
-            final ResultSet result = statement.executeQuery();
+            ResultSet result = statement.executeQuery();
 
             if(result.next()){
-                erstbetreuerId = result.getInt("id");
+                erstbetreuerId = result.getInt("lecturer_id");
+
+                statement = connection.prepareStatement("Select * from lecturer where id = ?");
+                statement.setInt(1, erstbetreuerId);
+
+                result = statement.executeQuery();
+                if(result.next()){
+                    firstname = result.getString("firstname");
+                    lastname = result.getString("lastname");
+                    phone = result.getString("phone");
+                    title = result.getString("title");
+                    email = result.getString("email");
+                }
+                
             }
             if(erstbetreuerId == null){ //kein Lectuerer gefunden ==> supervisor suchen
                 isLecturer = false;
@@ -64,7 +86,21 @@ public class Abgabe {
                 final ResultSet resultSupervisor = statement.executeQuery();
 
                 if(resultSupervisor.next()){
-                    erstbetreuerId = resultSupervisor.getInt("id");
+                    erstbetreuerId = resultSupervisor.getInt("supervisor_id");
+
+                    statement = connection.prepareStatement("Select * from supervisor where id = ?");
+                    statement.setInt(1, erstbetreuerId);
+
+                    result = statement.executeQuery();
+                    if(result.next()){
+                        firstname = result.getString("firstname");
+                        lastname = result.getString("lastname");
+                        phone = result.getString("phone");
+                        title = result.getString("title");
+                        email = result.getString("email");
+                    }
+                }else{
+                    return null; //Fall kein Betreuer
                 }
             }
 
@@ -73,12 +109,12 @@ public class Abgabe {
             e.printStackTrace();
         }
         
-        return new IdKindOfSupervisor(erstbetreuerId, isLecturer);
+        return new Betreuer(erstbetreuerId, isLecturer, firstname, lastname, phone, email, title);
     };
 
 
 
-    public static IdKindOfSupervisor getZweitbetreuerIdForStudent(int studentWorkId){
+    public static Betreuer getZweitbetreuerIdForStudent(int studentWorkId){
         //maybe merge with ERstbetreuer function, then can replaxe != 1 mit =0 je nach boolean
         String queryStringSupervisor = "Select * from student_work_has_supervisor where student_work_id = ? and is_primary_supervisor != 1";
         String queryStringLecturer = "Select * from student_work_has_lecturer where student_work_id = ? and is_primary_supervisor != 1";
@@ -87,6 +123,11 @@ public class Abgabe {
         PreparedStatement statement;
         Integer zweitBetreuerId = null;
         boolean isLecturer = true;
+        String firstname = null;
+        String lastname = null;
+        String phone = null;
+        String title = null;
+        String email = null;
         try {
             statement = connection.prepareStatement(queryStringLecturer);
             statement.setInt(1, studentWorkId);
@@ -95,6 +136,11 @@ public class Abgabe {
 
             if(result.next()){
                 zweitBetreuerId = result.getInt("id");
+                firstname = result.getString("firstname");
+                lastname = result.getString("lastname");
+                phone = result.getString("phone");
+                title = result.getString("title");
+                email = result.getString("email");
             }
             if(zweitBetreuerId == null){ //kein Lectuerer gefunden ==> supervisor suchen
                 isLecturer = false;
@@ -105,6 +151,13 @@ public class Abgabe {
 
                 if(resultSupervisor.next()){
                     zweitBetreuerId = resultSupervisor.getInt("id");
+                    firstname = resultSupervisor.getString("firstname");
+                    lastname = resultSupervisor.getString("lastname");
+                    phone = resultSupervisor.getString("phone");
+                    title = resultSupervisor.getString("title");
+                    email = resultSupervisor.getString("email");
+                }else{
+                    return null; //kein Zweitbetreuer
                 }
             }
 
@@ -113,7 +166,7 @@ public class Abgabe {
             e.printStackTrace();
         }
         
-        return new IdKindOfSupervisor(zweitBetreuerId, isLecturer);
+        return new Betreuer(zweitBetreuerId, isLecturer, firstname, lastname, phone, email, title);
     }
 
     //TODO
@@ -122,7 +175,7 @@ public class Abgabe {
         String queryString = "";
         PreparedStatement statement;
         
-        IdKindOfSupervisor zweitBetreuer = getZweitbetreuerIdForStudent(studentWorkId);
+        Betreuer zweitBetreuer = getZweitbetreuerIdForStudent(studentWorkId);
         if(erstbetreuer){
             zweitBetreuer = getErstbetreuerIdForStudentWork(studentWorkId);
         }
@@ -244,5 +297,53 @@ public class Abgabe {
         }
 
         return null;
+    }
+
+    public static void saveKolloquiumData(String date, String room, int studenWorkId, String notes){
+        LocalDate localDate = LocalDate.parse(date);
+        Date sqlDate = Date.valueOf(localDate);
+        Connection connection = Utils.establishSQLConnection();
+       
+        String queryString = "Insert into colloquium (student_work_id, date, location, notes) values (?, ?, ?, ?)";
+        try {
+            final PreparedStatement statement = connection.prepareStatement(queryString);
+            statement.setInt(1, studenWorkId);
+            statement.setDate(2, sqlDate);
+            statement.setString(3, room);
+            statement.setString(4, notes);
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveNoteAndSubmissionToDatabase(String note, int studentWorkId, String isTeamwork){
+        Connection connection = Utils.establishSQLConnection();
+        //TODO es gibt noch keine Note im Datenbankmodell?! ==> handle note = null wenn das noch dazu kommt
+        String queryString = "Insert into student_work_submission (student_work_id, date_submission, is_teamwork) values (?, ?, ?)";
+        LocalDate localDate = LocalDate.now();
+        Date sqlDate = Date.valueOf(localDate);
+        try {
+            final PreparedStatement statement = connection.prepareStatement(queryString);
+            statement.setInt(1, studentWorkId);
+            statement.setDate(2, sqlDate);
+            statement.setString(3, isTeamwork);
+
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //set status to abgegeben
+        queryString = "Update student_work Set status = ?  where id = ?";
+        try {
+            final PreparedStatement statement = connection.prepareStatement(queryString);
+            statement.setInt(1, StatusStudentWork.ABGEGEBEN.getNumber());
+            statement.setInt(2, studentWorkId);
+
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

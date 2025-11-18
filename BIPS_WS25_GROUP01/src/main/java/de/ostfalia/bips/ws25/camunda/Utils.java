@@ -137,4 +137,24 @@ public class Utils {
         return description;
     }
 
+    public static String getUsernameFromLecturer(int lecturer_id){
+        Connection connection = establishSQLConnection(); 
+        String query = "SELECT * from lecturer";
+        String username = null;
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) { //TODO am besten immer autoclose
+            final ResultSet result = stmt.executeQuery();
+
+            if (result.next()) {
+                username = result.getString("username");
+            }
+
+            result.close(); //TODO überall noch close aufrufen für result
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return username;
+    }
+
 }

@@ -1,46 +1,47 @@
 {
   "components": [
     {
-      "text": "# Abgabe Projekt-/Seminararbeit",
+      "text": "# Abgabe Bestätigung PA",
       "type": "text",
       "layout": {
-        "row": "Row_07qmcxd",
+        "row": "Row_01cn4yx",
         "columns": null
       },
-      "id": "Field_1tomwq0"
+      "id": "Field_0gxygdw"
     },
     {
-      "label": "Name Student",
+      "label": "Name der Studierenden",
       "type": "textfield",
       "layout": {
-        "row": "Row_0po0pb8",
+        "row": "Row_0t7k6yq",
         "columns": null
       },
-      "id": "Field_0a7jk57",
-      "key": "name_student_fill",
+      "id": "Field_0mrt17x",
+      "key": "student_name_fill",
       "disabled": false,
       "readonly": true
     },
     {
-      "label": "Matr.-Nr. Student",
+      "label": "Mat. Nr. Student",
       "type": "textfield",
       "layout": {
-        "row": "Row_1ru0m0l",
+        "row": "Row_0kse062",
         "columns": null
       },
-      "id": "Field_069k4fh",
-      "key": "matr_nr_fill",
-      "disabled": false
+      "id": "Field_107xrwg",
+      "key": "student_mat_nr_fill",
+      "disabled": false,
+      "readonly": true
     },
     {
       "label": "E-Mail Student",
       "type": "textfield",
       "layout": {
-        "row": "Row_1ru0m0l",
+        "row": "Row_0kse062",
         "columns": null
       },
-      "id": "Field_0ul3p8j",
-      "key": "email_fill",
+      "id": "Field_1x9jase",
+      "key": "student_mail_fill",
       "disabled": false,
       "readonly": true
     },
@@ -48,70 +49,71 @@
       "label": "Thema der Arbeit",
       "type": "textfield",
       "layout": {
-        "row": "Row_0o8eroq",
+        "row": "Row_0ulcxka",
         "columns": null
       },
-      "id": "Field_0ys34bo",
-      "key": "thema_der_arbeit_fill",
-      "readonly": true
+      "id": "Field_0zbnce3",
+      "key": "thema_arbeit_fill",
+      "readonly": true,
+      "validate": {
+        "required": false
+      }
     },
     {
       "type": "separator",
       "layout": {
-        "row": "Row_1tpnzzf",
+        "row": "Row_1mkx1da",
         "columns": null
       },
-      "id": "Field_1h3zv91"
+      "id": "Field_0ivkv49"
     },
     {
-      "label": "Teamarbeit?",
+      "label": "Zum Kolloquium zulassen?",
       "values": [
         {
-          "label": "Ja",
+          "label": "ja",
           "value": "1"
         },
         {
-          "label": "Nein",
+          "label": "nein",
           "value": "0"
         }
       ],
       "type": "radio",
       "layout": {
-        "row": "Row_1hq3pfi",
+        "row": "Row_12onznn",
         "columns": null
       },
-      "id": "Field_0ff88sr",
-      "key": "radio_hxj5z2",
+      "id": "Field_00o684k",
+      "key": "radio_0f9npu",
+      "disabled": false,
       "validate": {
         "required": true
       }
     },
     {
-      "label": "Ich bestätige, dass die Arbeit eigenständig erstellt wurde",
-      "type": "checkbox",
+      "label": "Kommentar",
+      "type": "textarea",
       "layout": {
-        "row": "Row_0mprjdq",
+        "row": "Row_0ucblxm",
         "columns": null
       },
-      "id": "Field_1ml5xfc",
-      "key": "checkbox_t8yf8",
-      "validate": {
-        "required": true
-      }
+      "id": "Field_1foevb3",
+      "key": "textarea_btogdq"
     },
     {
-      "label": "Abgabe bestätigen",
+      "label": "Bestätigen",
       "action": "submit",
       "type": "button",
       "layout": {
-        "row": "Row_1vbrqqw",
+        "row": "Row_1i7kjtl",
         "columns": null
       },
-      "id": "Field_1vhgftj"
+      "id": "Field_1as8kmk"
     }
   ],
   "type": "default",
-  "id": "Form_06pj31j",
+  "id": "Form_0ie9rcs",
   "executionPlatform": "Camunda Cloud",
   "executionPlatformVersion": "8.8.0",
   "exporter": {

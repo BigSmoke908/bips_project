@@ -17,7 +17,7 @@
         "columns": null
       },
       "id": "Field_0g566bb",
-      "key": "studentFullName"
+      "key": "name_student_fill"
     },
     {
       "label": "Mat. Nr. Student",
@@ -27,7 +27,7 @@
         "columns": null
       },
       "id": "Field_15r7par",
-      "key": "textfield_dwki8e"
+      "key": "mat_nr_fill"
     },
     {
       "type": "separator",
@@ -46,7 +46,10 @@
       },
       "id": "Field_0fd7ncv",
       "key": "select_lcgsyf",
-      "valuesKey": "studentWorkList"
+      "valuesKey": "studentWorkList",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Bestätigen",

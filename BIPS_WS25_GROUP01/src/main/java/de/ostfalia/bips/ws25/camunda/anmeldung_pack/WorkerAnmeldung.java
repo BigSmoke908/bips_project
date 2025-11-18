@@ -144,7 +144,7 @@ public class WorkerAnmeldung {
                                                                             @Variable(name = "student_phone") String studentPhone,
                                                                             @Variable(name = "student_mail") String studentMail,
                                                                             @Variable(name = "student_studiengang") String studentStudiengang,
-                                                                            @Variable(name = "student_mat_nr") String studenMatNr, //TODO ist im Muster gar nicht verlangt
+                                                                            @Variable(name = "student_mat_nr") String studenMatNr, 
                                                                             @Variable(name = "semester_arbeit") String semeserterOfArbeit,
                                                                             @Variable(name = "thema_der_arbeit") String themaDerArbeit, //TODO ist das mit thesis gemeint?
                                                                             @Variable(name = "betreuer_vorhanden") String betreuerVorhanden,
