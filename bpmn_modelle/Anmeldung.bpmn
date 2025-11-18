@@ -340,7 +340,7 @@
       <bpmn:incoming>Flow_131l04k</bpmn:incoming>
       <bpmn:outgoing>Flow_1irxn80</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_08ow9p1">
+    <bpmn:exclusiveGateway id="Gateway_08ow9p1" name="">
       <bpmn:incoming>Flow_0wvnyvl</bpmn:incoming>
       <bpmn:outgoing>Flow_0z2zfez</bpmn:outgoing>
       <bpmn:outgoing>Flow_0ji5yh7</bpmn:outgoing>
@@ -600,7 +600,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_16sduun_di" bpmnElement="Lane_16sduun" isHorizontal="true">
         <dc:Bounds x="165" y="80" width="1516" height="350" />
-        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0f1nqkb_di" bpmnElement="Lane_0f1nqkb" isHorizontal="true">
         <dc:Bounds x="165" y="430" width="1516" height="240" />
@@ -641,6 +640,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_08ow9p1_di" bpmnElement="Gateway_08ow9p1" isMarkerVisible="true">
         <dc:Bounds x="448" y="141" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="458" y="111" width="30" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0rikr3b" bpmnElement="Gateway_0mn0cvl" isMarkerVisible="true">
         <dc:Bounds x="595" y="985" width="50" height="50" />

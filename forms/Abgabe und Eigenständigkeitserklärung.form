@@ -84,19 +84,6 @@
       "key": "radio_hxj5z2"
     },
     {
-      "label": "Arbeit hochladen(PDF)",
-      "type": "filepicker",
-      "layout": {
-        "row": "Row_0mprjdq",
-        "columns": null
-      },
-      "id": "Field_1qid55l",
-      "key": "filepicker_b40bszo",
-      "validate": {
-        "required": true
-      }
-    },
-    {
       "label": "Ich bestätige, dass die Arbeit eigenständig erstellt wurde",
       "type": "checkbox",
       "layout": {
@@ -105,28 +92,6 @@
       },
       "id": "Field_1ml5xfc",
       "key": "checkbox_t8yf8",
-      "validate": {
-        "required": true
-      }
-    },
-    {
-      "text": "### Unterschrift:",
-      "type": "text",
-      "layout": {
-        "row": "Row_10irhcz",
-        "columns": 3
-      },
-      "id": "Field_0kxwpsa"
-    },
-    {
-      "label": "Unterschrift hochladen",
-      "type": "filepicker",
-      "layout": {
-        "row": "Row_10irhcz",
-        "columns": null
-      },
-      "id": "Field_0fd3789",
-      "key": "filepicker_zjdfmm",
       "validate": {
         "required": true
       }
