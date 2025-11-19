@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import de.ostfalia.bips.ws25.camunda.anmeldung_pack.Anmeldung;
+import de.ostfalia.bips.ws25.camunda.sql_deserialisation.Dozent;
+
 public class Utils {
 
     public static Connection establishSQLConnection(){
@@ -155,6 +158,10 @@ public class Utils {
         }
 
         return username;
+    }
+
+    public static String getUsernameOfDozent(int dozentId){
+        return Dozent.getDozentFromId(dozentId).getUsername();
     }
 
 }

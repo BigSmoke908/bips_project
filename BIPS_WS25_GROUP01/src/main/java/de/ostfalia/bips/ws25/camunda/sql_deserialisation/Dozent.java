@@ -15,14 +15,20 @@ public class Dozent {
     private String phone;
     private String email;
     private String title;
+    private String username;
 
-    public Dozent(int id, String firstname, String lastname, String phone, String email, String title){
+    public Dozent(int id, String firstname, String lastname, String phone, String email, String title, String username){
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.email = email;
         this.title = title;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setTitle(String title) {
@@ -88,8 +94,9 @@ public class Dozent {
                 String title  = result.getString("title");
                 String phone  = result.getString("phone");
                 String email  = result.getString("email");
+                String username = result.getString("username");
 
-                return new Dozent(id, firstname, lastname, phone, email, title);
+                return new Dozent(id, firstname, lastname, phone, email, title, username);
             }
 
             result.close(); 

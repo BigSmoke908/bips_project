@@ -147,10 +147,14 @@
         "columns": null
       },
       "id": "Field_0qa0lvn",
-      "key": "radio_biug5m"
+      "key": "radio_biug5m",
+      "defaultValue": "0",
+      "conditional": {
+        "hide": "=true"
+      }
     },
     {
-      "label": "Dozenten Auswahl",
+      "label": "Dozenten Auswahl (Erstbetreuer)",
       "type": "select",
       "layout": {
         "row": "Row_1lr4yfq",

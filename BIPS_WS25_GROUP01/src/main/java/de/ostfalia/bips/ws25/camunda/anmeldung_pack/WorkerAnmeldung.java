@@ -59,13 +59,41 @@ public class WorkerAnmeldung {
      * @param zweitbetreuer_select the id of the selected lecturer (in this case for the second lecturer)
      * @return the assignees for checking wether they are actually supervisors for the project
      */
-    @JobWorker(type = "getAssignee")
-    public Map<String, Object> getAssigneeForBetreuerAbschlussarbeit() {
-        //if the betreuer_abschlussarbeit or zweitbetreuer null, then we need to get the selected lecturer from our database 
-        //TODO
+    @JobWorker(type = "getAssignees")
+    public Map<String, Object> getAssigneeForBetreuerAbschlussarbeit(
+                                            @Variable(name = "dozent_id") String erstbetreuer_id,
+                                            @Variable(name = "zweitbetreuer_extern") String is_zweitbetreuer_extern,
+                                            @Variable(name = "dozent_id_zweitbetreuer") String dozent_id_zweitbetreuer
+    ) {
+
         LOGGER.info("Assignees werden bestimmt..."); 
-        //Anmeldung.getAssigneeForBetreuerAbschlussarbeit(betreuer_abschlussarbeit, zweitbetreuer, betreuer_abschlussarbeit_select, zweitbetreuer_select);
-        return Map.of("test", "todo");
+        String usernameErstbetreuer = ""; //darf nicht null sein, weil das die Camunda map nicht frisst
+        String usernameZweitbetreuer = "";
+        if(true){//trueis_erstbetreuer_extern.equals("0")
+            usernameErstbetreuer = Utils.getUsernameOfDozent(Integer.parseInt(erstbetreuer_id));
+            if(is_zweitbetreuer_extern != null && is_zweitbetreuer_extern.equals("0")){
+                usernameZweitbetreuer = Utils.getUsernameOfDozent(Integer.parseInt(dozent_id_zweitbetreuer));
+            }
+            LOGGER.info("Assignees erfolgreich bestimmt"); 
+        }else{
+            LOGGER.info("Erstbetreuer is extern, something has truly gone wrong this should never happen"); 
+        }
+        
+        return Map.of("usernameErstbetreuer", usernameErstbetreuer, "usernameZweitbetreuer", usernameZweitbetreuer);
+    }
+    //getAssigneeOnlyFirst
+
+    @JobWorker(type = "getAssigneeOnlyFirst")
+    public Map<String, Object> getAssigneeOnlyFirst(
+                                            @Variable(name = "dozent_id") String erstbetreuer_id
+    ) {
+
+        LOGGER.info("Assignees werden bestimmt..."); 
+        String usernameErstbetreuer = ""; //darf nicht null sein, weil das die Camunda map nicht frisst
+        usernameErstbetreuer = Utils.getUsernameOfDozent(Integer.parseInt(erstbetreuer_id));
+        LOGGER.info("Assignees erfolgreich bestimmt"); 
+
+        return Map.of("usernameErstbetreuer", usernameErstbetreuer);
     }
 
     @JobWorker(type = "ladeDozentenUndStudiengänge")

@@ -55,7 +55,6 @@
     <bpmn:textAnnotation id="TextAnnotation_1mkx5vr">
       <bpmn:text>Betreuer eingetragen?</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0dfvkri" associationDirection="None" sourceRef="Gateway_1pr6cx1" targetRef="TextAnnotation_1mkx5vr" />
     <bpmn:textAnnotation id="TextAnnotation_0d9dbb1">
       <bpmn:text>ja</bpmn:text>
     </bpmn:textAnnotation>
@@ -69,7 +68,7 @@
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0dei4g4" associationDirection="None" sourceRef="Flow_1b2zb91" targetRef="TextAnnotation_1ful3wo" />
     <bpmn:textAnnotation id="TextAnnotation_08x23l5">
-      <bpmn:text>Zweitprüfer?</bpmn:text>
+      <bpmn:text>Zweitprüfer von der HaW?</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_1e60mik">
       <bpmn:text>ja</bpmn:text>
@@ -116,11 +115,12 @@
         <bpmn:flowNodeRef>Activity_0ixwxd4</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_08ow9p1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0oujx8c</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_1pr6cx1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0fnvfj5</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_10ly77t</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0gwhl1j</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1j10crd</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_1pr6cx1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1u39q4w</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1qrpuzd" name="Zweitbetreuer">
         <bpmn:flowNodeRef>Gateway_0099phr</bpmn:flowNodeRef>
@@ -243,7 +243,7 @@
           <zeebe:input source="=vorname_betreuer_extern" target="betreuer_vorname_fill" />
           <zeebe:output source="=date_" target="angenommen" />
         </zeebe:ioMapping>
-        <zeebe:assignmentDefinition assignee="demo" />
+        <zeebe:assignmentDefinition assignee="=usernameErstbetreuer" />
         <zeebe:taskSchedule dueDate="=date and time(today(), time(&#34;00:00:00&#34;))&#10;" />
         <zeebe:priorityDefinition priority="100" />
       </bpmn:extensionElements>
@@ -282,7 +282,7 @@
     <bpmn:sequenceFlow id="Flow_0l8y18f" sourceRef="Gateway_0mn0cvl" targetRef="Activity_042c2yj">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=sbb_pruefung = "1"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0od0qv7" sourceRef="Activity_0ixwxd4" targetRef="Gateway_1pr6cx1" />
+    <bpmn:sequenceFlow id="Flow_0od0qv7" sourceRef="Activity_0ixwxd4" targetRef="Activity_1u39q4w" />
     <bpmn:sequenceFlow id="Flow_0qmtm4a" sourceRef="Gateway_0mn0cvl" targetRef="Activity_1fglyea">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=sbb_pruefung = "0"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -317,7 +317,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=betreuer_vorhanden = "1"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1kufjx2" sourceRef="Gateway_1xomtz0" targetRef="Activity_12vltpj">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=zweitbetreuer_vorhanden = "1"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=usernameZweitbetreuer != ""</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1pf6jjl" sourceRef="Activity_042c2yj" targetRef="Activity_06458q4" />
     <bpmn:sequenceFlow id="Flow_1rsjxz2" sourceRef="Activity_0jibq56" targetRef="Gateway_1adcvn5" />
@@ -359,11 +359,6 @@
       <bpmn:incoming>Flow_1eo4lv2</bpmn:incoming>
       <bpmn:outgoing>Flow_0whejdm</bpmn:outgoing>
       <bpmn:outgoing>Flow_1b2zb91</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_1pr6cx1">
-      <bpmn:incoming>Flow_0od0qv7</bpmn:incoming>
-      <bpmn:outgoing>Flow_1jz03ih</bpmn:outgoing>
-      <bpmn:outgoing>Flow_131l04k</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:serviceTask id="Activity_1da1v4a" name="Mail an Studenten mit Ablehnung">
       <bpmn:extensionElements>
@@ -446,7 +441,7 @@
       <bpmn:outgoing>Flow_1bdf4ce</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0tbbwjl" sourceRef="Gateway_1xomtz0" targetRef="Gateway_0099phr">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=zweitbetreuer_vorhanden = "0"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=usernameZweitbetreuer != ""</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_14qdtac" sourceRef="Gateway_0099phr" targetRef="Activity_03io51h" />
     <bpmn:exclusiveGateway id="Gateway_1xomtz0">
@@ -536,10 +531,10 @@
           <zeebe:input source="=vorname_erstbetreuer" target="betreuer_vorname_fill" />
           <zeebe:output source="=date_" target="betreuung_angenommen" />
         </zeebe:ioMapping>
-        <zeebe:assignmentDefinition assignee="demo" />
+        <zeebe:assignmentDefinition assignee="=usernameErstbetreuer" />
         <zeebe:priorityDefinition priority="100" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_018uwg7</bpmn:incoming>
+      <bpmn:incoming>Flow_0as6gjp</bpmn:incoming>
       <bpmn:outgoing>Flow_03hnz5a</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_03hnz5a" sourceRef="Activity_1km2dz5" targetRef="Gateway_03jnyun" />
@@ -563,7 +558,7 @@
           <zeebe:input source="=vorname_zweitbetreuer" target="betreuer_vorname_fill" />
           <zeebe:output source="=date_" target="zweitpruefer_betreuung_angenommen" />
         </zeebe:ioMapping>
-        <zeebe:assignmentDefinition assignee="demo" />
+        <zeebe:assignmentDefinition assignee="usernameZweitbetreuer" />
         <zeebe:taskSchedule dueDate="=date and time(today(), time(&#34;00:00:00&#34;))&#10;" />
         <zeebe:priorityDefinition priority="100" />
       </bpmn:extensionElements>
@@ -571,14 +566,31 @@
       <bpmn:outgoing>Flow_1bzxxn1</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_1bzxxn1" sourceRef="Activity_12vltpj" targetRef="Gateway_0iq6rjg" />
-    <bpmn:serviceTask id="Activity_1j10crd" name="Assignee bestimmen">
+    <bpmn:sequenceFlow id="Flow_018uwg7" sourceRef="Activity_0oujx8c" targetRef="Activity_1j10crd" />
+    <bpmn:serviceTask id="Activity_1j10crd" name="Assignees bestimmen">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="=getAssignee" retries="3" />
+        <zeebe:taskDefinition type="getAssignees" retries="3" />
       </bpmn:extensionElements>
+      <bpmn:incoming>Flow_018uwg7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0as6gjp</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_018uwg7" sourceRef="Activity_0oujx8c" targetRef="Activity_1km2dz5" />
+    <bpmn:sequenceFlow id="Flow_0as6gjp" sourceRef="Activity_1j10crd" targetRef="Activity_1km2dz5" />
+    <bpmn:sequenceFlow id="Flow_1h0hvb0" sourceRef="Activity_1u39q4w" targetRef="Gateway_1pr6cx1" />
+    <bpmn:exclusiveGateway id="Gateway_1pr6cx1">
+      <bpmn:incoming>Flow_1h0hvb0</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jz03ih</bpmn:outgoing>
+      <bpmn:outgoing>Flow_131l04k</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Activity_1u39q4w" name="Assignee bestimmen">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="getAssigneeOnlyFirst" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0od0qv7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1h0hvb0</bpmn:outgoing>
+    </bpmn:serviceTask>
     <bpmn:association id="Association_0m5x71r" associationDirection="None" sourceRef="Gateway_1lqsln4" targetRef="TextAnnotation_0pldk06" />
     <bpmn:association id="Association_0eytj2z" associationDirection="None" sourceRef="Gateway_1xomtz0" targetRef="TextAnnotation_08x23l5" />
+    <bpmn:association id="Association_0dfvkri" associationDirection="None" sourceRef="Gateway_1pr6cx1" targetRef="TextAnnotation_1mkx5vr" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1t02808">
@@ -653,9 +665,6 @@
       <bpmndi:BPMNShape id="Gateway_1lqsln4_di" bpmnElement="Gateway_1lqsln4" isMarkerVisible="true">
         <dc:Bounds x="355" y="1255" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1pr6cx1_di" bpmnElement="Gateway_1pr6cx1" isMarkerVisible="true">
-        <dc:Bounds x="688" y="295" width="50" height="50" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1crvz1v_di" bpmnElement="Activity_1da1v4a">
         <dc:Bounds x="840" y="580" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -725,9 +734,20 @@
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0bn23an_di" bpmnElement="Activity_1j10crd">
-        <dc:Bounds x="240" y="370" width="100" height="80" />
+        <dc:Bounds x="440" y="370" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1pr6cx1_di" bpmnElement="Gateway_1pr6cx1" isMarkerVisible="true">
+        <dc:Bounds x="825" y="285" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1qpo680" bpmnElement="Activity_1u39q4w">
+        <dc:Bounds x="800" y="126" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0dfvkri_di" bpmnElement="Association_0dfvkri">
+        <di:waypoint x="827" y="312" />
+        <di:waypoint x="670" y="331" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_07e5oik_di" bpmnElement="Flow_07e5oik">
         <di:waypoint x="520" y="1150" />
         <di:waypoint x="520" y="1010" />
@@ -760,8 +780,8 @@
         <di:waypoint x="790" y="970" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0od0qv7_di" bpmnElement="Flow_0od0qv7">
-        <di:waypoint x="713" y="206" />
-        <di:waypoint x="713" y="295" />
+        <di:waypoint x="763" y="166" />
+        <di:waypoint x="800" y="166" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0qmtm4a_di" bpmnElement="Flow_0qmtm4a">
         <di:waypoint x="620" y="1035" />
@@ -798,8 +818,8 @@
         <di:waypoint x="473" y="270" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_131l04k_di" bpmnElement="Flow_131l04k">
-        <di:waypoint x="738" y="320" />
-        <di:waypoint x="980" y="320" />
+        <di:waypoint x="875" y="310" />
+        <di:waypoint x="980" y="310" />
         <di:waypoint x="980" y="505" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_16lw8qb_di" bpmnElement="Flow_16lw8qb">
@@ -831,7 +851,8 @@
         <di:waypoint x="1272" y="970" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1jz03ih_di" bpmnElement="Flow_1jz03ih">
-        <di:waypoint x="713" y="345" />
+        <di:waypoint x="825" y="310" />
+        <di:waypoint x="713" y="310" />
         <di:waypoint x="713" y="490" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1kufjx2_di" bpmnElement="Flow_1kufjx2">
@@ -883,9 +904,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_018uwg7_di" bpmnElement="Flow_018uwg7">
         <di:waypoint x="473" y="350" />
-        <di:waypoint x="473" y="415" />
-        <di:waypoint x="510" y="415" />
-        <di:waypoint x="510" y="480" />
+        <di:waypoint x="473" y="370" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0m5x71r_di" bpmnElement="Association_0m5x71r">
         <di:waypoint x="370" y="1265" />
@@ -893,7 +912,15 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0eytj2z_di" bpmnElement="Association_0eytj2z">
         <di:waypoint x="322" y="607" />
-        <di:waypoint x="346" y="583" />
+        <di:waypoint x="335" y="594" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0as6gjp_di" bpmnElement="Flow_0as6gjp">
+        <di:waypoint x="510" y="450" />
+        <di:waypoint x="510" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1h0hvb0_di" bpmnElement="Flow_1h0hvb0">
+        <di:waypoint x="850" y="206" />
+        <di:waypoint x="850" y="285" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_05wwrdb_di" bpmnElement="TextAnnotation_05wwrdb">
         <dc:Bounds x="360" y="226" width="100" height="30" />
@@ -964,7 +991,7 @@
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_08x23l5_di" bpmnElement="TextAnnotation_08x23l5">
-        <dc:Bounds x="310" y="553" width="100" height="30" />
+        <dc:Bounds x="310" y="553" width="100" height="41" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1e60mik_di" bpmnElement="TextAnnotation_1e60mik">
@@ -1035,16 +1062,12 @@
         <di:waypoint x="380" y="830" />
         <di:waypoint x="433" y="795" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0dfvkri_di" bpmnElement="Association_0dfvkri">
-        <di:waypoint x="691" y="323" />
-        <di:waypoint x="670" y="327" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_1sgfkdx_di" bpmnElement="Association_1sgfkdx">
-        <di:waypoint x="713" y="417.5" />
+        <di:waypoint x="713" y="400" />
         <di:waypoint x="796" y="377" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0bi52jb_di" bpmnElement="Association_0bi52jb">
-        <di:waypoint x="951.5" y="320" />
+        <di:waypoint x="968" y="310" />
         <di:waypoint x="1030" y="280" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0dei4g4_di" bpmnElement="Association_0dei4g4">
