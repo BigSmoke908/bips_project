@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import de.ostfalia.bips.ws25.camunda.Option;
 import de.ostfalia.bips.ws25.camunda.StatusStudentWork;
 import de.ostfalia.bips.ws25.camunda.Utils;
@@ -19,7 +17,7 @@ import de.ostfalia.bips.ws25.camunda.sql_deserialisation.Betreuer;
 public class Abgabe {
     
     public static Integer getStudentFromDatabase(String studentName, String studentFirstName, String studentMatNr){
-        String queryString = "Select * from student where firstname = ? and lastname = ? and matrikel_nummer = ?";//TODO TODO TODO and status = ?";
+        String queryString = "Select * from student where firstname = ? and lastname = ? and matrikel_nummer = ? and status = ?";
 
         Connection connection = Utils.establishSQLConnection();
         PreparedStatement statement;
@@ -29,7 +27,7 @@ public class Abgabe {
             statement.setString(1, studentFirstName);
             statement.setString(2, studentName);
             statement.setString(3, studentMatNr);
-            //TODO statement.setInt(4, StatusStudentWork.ABGEGEBEN.getNumber());
+            statement.setInt(4, StatusStudentWork.ABGEGEBEN.getNumber());
             final ResultSet result = statement.executeQuery();
 
             if(result.next()){
@@ -209,27 +207,22 @@ public class Abgabe {
         return null;
     }
 
-    public static List<Option<String>> getStudentWork(int studentId, boolean isAbschlussarbeit){
+    public static List<Option<String>> getStudentWork(int studentId, int artDerArbeit){
 
         //TODO no student work found
         Connection connection = Utils.establishSQLConnection();
         String queryString = "Select sw.id, sw.type_of_student_work_id, tsw.id from student_work sw " +
                                 "join type_of_student_work tsw on sw.type_of_student_work_id = tsw.id " + 
-                                "where student_id = ? and (tsw.id = ? or tsw.id = ?)";
+                                "where student_id = ? and (tsw.id = ?)";
         try {
             final PreparedStatement statement = connection.prepareStatement(queryString);
             statement.setInt(1, studentId);
-            if(isAbschlussarbeit){
-                statement.setInt(2, 3);
-                statement.setInt(3, 3);
-            }else{
-                statement.setInt(2, 1);
-                statement.setInt(3, 2);
-            }
+            statement.setInt(2, artDerArbeit);
             
             final ResultSet result = statement.executeQuery();
             List<Option<String>> studentWorkOptions = new ArrayList<>();
 
+            boolean isAbschlussarbeit = artDerArbeit == 3 ? true : false;
             while(result.next()) {
                 final String idStudenWork = result.getString("sw.id");
                 studentWorkOptions.add(Option.of(getThemaDerArbeit(isAbschlussarbeit, Integer.parseInt(idStudenWork)), idStudenWork));

@@ -87,7 +87,8 @@
       "id": "Field_0ckvj1f",
       "key": "textfield_1in3",
       "validate": {
-        "required": true
+        "required": true,
+        "validationType": "phone"
       }
     },
     {
@@ -113,7 +114,10 @@
       },
       "id": "Field_1561bix",
       "key": "select_xgpsk",
-      "valuesKey": "semesterList"
+      "valuesKey": "semesterList",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Projekt-/Seminararbeit oder Abschlussarbeit?",

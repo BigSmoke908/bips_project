@@ -1,6 +1,5 @@
 package de.ostfalia.bips.ws25.camunda.Abgabe_pack;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import ch.qos.logback.classic.pattern.Util;
 import de.ostfalia.bips.ws25.camunda.Option;
 import de.ostfalia.bips.ws25.camunda.Utils;
 import de.ostfalia.bips.ws25.camunda.sql_deserialisation.Betreuer;
@@ -43,9 +41,8 @@ public class WorkerAbgabe {
             String studentFullName = studEmailName.getFullName();
             String studenMail = studEmailName.getE_mail();
 
-            boolean isAbschlussarbeit = projekt_seminar_oder_abschluss.equals("1") ? false : true;
             Map<String, Object> mapComplete = new HashMap<>();
-            List<Option<String>> studentWork =  Abgabe.getStudentWork(studtenID, isAbschlussarbeit);
+            List<Option<String>> studentWork =  Abgabe.getStudentWork(studtenID, Integer.parseInt(projekt_seminar_oder_abschluss));
             if(studentWork.size() == 0){
                 LOGGER.info("finished lade Studenten, found student but no work of the given type");
                 return Map.of("student_has_registered_work", "0");
@@ -80,7 +77,7 @@ public class WorkerAbgabe {
     public Map<String, Object> betreuerBestimmen(@Variable(name = "arbeit_id") String arbeit_id, @Variable(name = "projekt_seminar_oder_abschluss") String is_projekt_seminar_oder_abschluss){
 
         LOGGER.info("bestimme Betreuer der ausgewählten Arbeit...");
-        boolean isAbschlussarbeit = is_projekt_seminar_oder_abschluss.equals("1") ? false : true;
+        boolean isAbschlussarbeit = (is_projekt_seminar_oder_abschluss.equals("1") || is_projekt_seminar_oder_abschluss.equals("2")) ? false : true;
         int studentWorkId = Integer.parseInt(arbeit_id);
         Betreuer erstbetreuer = Abgabe.getErstbetreuerIdForStudentWork(studentWorkId);
         if(erstbetreuer == null){

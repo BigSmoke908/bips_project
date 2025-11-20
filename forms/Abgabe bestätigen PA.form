@@ -53,7 +53,7 @@
         "columns": null
       },
       "id": "Field_0zbnce3",
-      "key": "thema_arbeit_fill",
+      "key": "thema_der_arbeit_fill",
       "readonly": true,
       "validate": {
         "required": false

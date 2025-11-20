@@ -74,7 +74,7 @@
       <bpmn:incoming>Flow_1shl0gm</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_09srl7l" name="projekt/seminar" sourceRef="Gateway_09368iv" targetRef="Activity_1tfegku">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_seminar_oder_abschluss = "1"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_seminar_oder_abschluss = "1" or projekt_seminar_oder_abschluss = "2"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0cy7vxd" name="ja" sourceRef="Gateway_02wgwye" targetRef="Activity_0wzfiji">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=erstbetreuerName != ""</bpmn:conditionExpression>
@@ -271,7 +271,7 @@
       <bpmn:outgoing>Flow_1siomyg</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_12zey1u" name="Abschlussarbeit" sourceRef="Gateway_09368iv" targetRef="Activity_1h937f2">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_seminar_oder_abschluss = "0"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_seminar_oder_abschluss = "3"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:userTask id="Activity_1ki4v0n" name="Abgabe bestätigen">
       <bpmn:extensionElements>

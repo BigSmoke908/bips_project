@@ -208,6 +208,8 @@ public class Anmeldung {
 
                     ResultSet generatedKeys = insertStatement.getGeneratedKeys();
                     if (generatedKeys.next()) {
+                        statement.close();
+                        result.close();
                         return generatedKeys.getInt(1);
                     }
 
@@ -225,6 +227,8 @@ public class Anmeldung {
                     findIdStatement.setString(1, matNr);
                     ResultSet resultId = findIdStatement.executeQuery();
                     if(resultId.next()){
+                        updateStatement.close();
+                        result.close();
                         return resultId.getInt("id");
                     }
                     
@@ -271,6 +275,8 @@ public class Anmeldung {
                     return keys.getInt(1);
                 }
             }
+
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -291,6 +297,7 @@ public class Anmeldung {
             ResultSet rs = checkStmt.executeQuery();
 
             if (rs.next()) {
+                rs.close();
                 return rs.getInt("id");
             } else {
                 // Generate a new ID manually (since it's not auto-increment)
@@ -306,6 +313,9 @@ public class Anmeldung {
                 insertStmt.setString(4, zipCode);
                 insertStmt.setString(5, city);
                 insertStmt.executeUpdate();
+
+                rs.close();
+                insertStmt.close();
 
                 return newId;
             }
@@ -398,6 +408,7 @@ public class Anmeldung {
             statement.setInt(1, studentWorkId);
             statement.setString(2, thema);
             statement.executeUpdate();
+            statement.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -413,6 +424,7 @@ public class Anmeldung {
             statement.setString(2, thema);
             statement.setString(3, abstractString);
             statement.executeUpdate();
+            statement.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -428,8 +440,7 @@ public class Anmeldung {
                                                             String companyNameZweitbetreuer, String addressZweitbetreuer, String zipCodeZweitbetreuer, String cityZweitbetreuer, String matrikelNummer, String titelDerArbeit, String abstractString){ //company second supervisor
 
         System.out.println("establishing connection ..."); 
-        
-        System.out.flush();                                                                     
+                                                                          
         Connection connection = Utils.establishSQLConnection();
         Integer studentWorkId = null;
         System.out.println("established connection");
@@ -440,6 +451,8 @@ public class Anmeldung {
             if(maxIdRs.next()){
                 studentWorkId = maxIdRs.getInt(1);
             } 
+            connection.close();
+            maxIdRs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

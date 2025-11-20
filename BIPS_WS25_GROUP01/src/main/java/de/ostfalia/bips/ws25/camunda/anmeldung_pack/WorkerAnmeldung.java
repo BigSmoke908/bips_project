@@ -78,8 +78,6 @@ public class WorkerAnmeldung {
                 usernameZweitbetreuer = zweitbetreuer.getUsername();
             }
             LOGGER.info("Assignees erfolgreich bestimmt"); 
-        }else{
-            LOGGER.info("Erstbetreuer is extern, something has truly gone wrong this should never happen"); 
         }
         
         return Map.of("usernameErstbetreuer", usernameErstbetreuer, "usernameZweitbetreuer", usernameZweitbetreuer);
@@ -129,8 +127,13 @@ public class WorkerAnmeldung {
                                     @Variable(name = "student_mail") String email, 
                                     @Variable(name = "thema_der_arbeit") String arbietsThema) {
         LOGGER.info("Die Arbeit wurde vom Betreuer abgelehnt");
-        String betreuer = title_betreuer_extern + " " + vorname_betreuer_extern + " " + nachname_betreuer_extern;
-        if(betreuer_extern.equals("0")){
+        
+        String betreuer = "";
+        if(betreuer_extern !=null){
+            betreuer = title_betreuer_extern + " " + vorname_betreuer_extern + " " + nachname_betreuer_extern;
+        }
+        
+        if(betreuer_extern !=null && betreuer_extern.equals("0")){
             Dozent dozent =  Dozent.getDozentFromId(Integer.parseInt(dozent_id));
             betreuer = dozent.getTitle() + " " + dozent.getFirstname() + " " + dozent.getLastname();
         }
@@ -229,7 +232,7 @@ public class WorkerAnmeldung {
 
         String betreuerName = "";
         String zweitbetreuerName = "kein Zweitbetreuer vorhanden";
-        String abgehlehntVon = betreuung_angenommen.equals("0") ? "Erstbetreuer":  "Zweitbetreuer";
+        String abgehlehntVon = zweitbetreuer_vorhanden.equals("0") ? "Erstbetreuer":  "Zweitbetreuer";
         if(erstbetreuer_extern != null && erstbetreuer_extern.equals("1")){
             betreuerName = titel_erstbetreuer + " " + vorname_erstbetreuer + " " + nachname_erstbetreuer; //erstbetreuer ist immer extern hier
         }else{

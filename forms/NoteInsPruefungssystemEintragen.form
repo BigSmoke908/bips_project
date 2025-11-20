@@ -75,7 +75,11 @@
       "id": "Field_1rm885y",
       "key": "textfield_yaqehm",
       "validate": {
-        "required": true
+        "required": true,
+        "pattern": "([1-4][\\.,][0|3|7]|5[\\.,]0)",
+        "maxLength": "3",
+        "minLength": "",
+        "patternErrorMessage": "nur Drittelnoten eintragen mit ."
       }
     },
     {
