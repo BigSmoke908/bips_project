@@ -106,7 +106,11 @@
         "columns": null
       },
       "id": "Field_14tyrz8",
-      "key": "textarea_3la0q2"
+      "key": "textarea_3la0q2",
+      "validate": {
+        "required": false
+      },
+      "defaultValue": "keine Anmerkung"
     },
     {
       "label": "Anmelden und Bestätigen ",

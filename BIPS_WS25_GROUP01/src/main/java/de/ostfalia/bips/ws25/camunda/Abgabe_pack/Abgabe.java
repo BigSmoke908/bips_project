@@ -209,7 +209,7 @@ public class Abgabe {
         return null;
     }
 
-    public static Map<String, Object> getStudentWork(int studentId, boolean isAbschlussarbeit){
+    public static List<Option<String>> getStudentWork(int studentId, boolean isAbschlussarbeit){
 
         //TODO no student work found
         Connection connection = Utils.establishSQLConnection();
@@ -234,7 +234,8 @@ public class Abgabe {
                 final String idStudenWork = result.getString("sw.id");
                 studentWorkOptions.add(Option.of(getThemaDerArbeit(isAbschlussarbeit, Integer.parseInt(idStudenWork)), idStudenWork));
             }
-            return Map.of("studentWorkList", studentWorkOptions);
+            return studentWorkOptions;
+            //return Map.of("studentWorkList", studentWorkOptions);
             
         } catch (SQLException e) {
             e.printStackTrace();

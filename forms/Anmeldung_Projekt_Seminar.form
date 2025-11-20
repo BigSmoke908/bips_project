@@ -99,15 +99,7 @@
       "readonly": true
     },
     {
-      "type": "separator",
-      "layout": {
-        "row": "Row_0i2onvs",
-        "columns": null
-      },
-      "id": "Field_0rmgd8q"
-    },
-    {
-      "label": "Typ der Arbeit",
+      "label": "Art der Arbeit",
       "values": [
         {
           "label": "Projektarbeit",
@@ -115,19 +107,25 @@
         },
         {
           "label": "Seminararbeit",
-          "value": "2"
+          "value": "3"
         }
       ],
       "type": "radio",
       "layout": {
-        "row": "Row_1hsx4c5",
+        "row": "Row_1kye3yn",
         "columns": null
       },
-      "id": "Field_0ajfn46",
-      "key": "radio_6e6iyb",
-      "validate": {
-        "required": true
-      }
+      "id": "Field_1li2bps",
+      "key": "art_der_arbeit",
+      "readonly": true
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_1pyd48y",
+        "columns": null
+      },
+      "id": "Field_0rmgd8q"
     },
     {
       "label": "Thema der Arbeit",
@@ -164,7 +162,9 @@
       "key": "radio_evahfn",
       "validate": {
         "required": true
-      }
+      },
+      "defaultValue": "1",
+      "readonly": false
     },
     {
       "label": "Externer Betreuer?",

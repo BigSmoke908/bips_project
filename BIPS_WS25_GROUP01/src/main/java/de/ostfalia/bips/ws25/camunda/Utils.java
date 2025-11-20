@@ -164,4 +164,34 @@ public class Utils {
         return Dozent.getDozentFromId(dozentId).getUsername();
     }
 
+    public static String getThemaDerArbeit(int studenWorkId, boolean isAbschlussarbeit){
+        Connection connection = establishSQLConnection(); 
+        String query = "SELECT * from thema_seminar_projekt where student_work_id = ?";
+        if(isAbschlussarbeit){
+            query = "SELECT * from thesis where student_work_id = ?" ;
+        }
+        String thema = null;
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) { 
+            stmt.setInt(1, studenWorkId);
+            final ResultSet result = stmt.executeQuery();
+
+            if (result.next()) {
+                if(isAbschlussarbeit){
+                    thema = result.getString("title");
+                }else{
+                    thema = result.getString("thema");
+                }
+                
+            }
+
+            result.close(); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return thema;
+    }
+    
+
 }

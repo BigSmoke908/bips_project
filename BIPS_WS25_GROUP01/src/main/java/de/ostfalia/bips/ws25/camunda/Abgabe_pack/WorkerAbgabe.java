@@ -1,11 +1,15 @@
 package de.ostfalia.bips.ws25.camunda.Abgabe_pack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import ch.qos.logback.classic.pattern.Util;
+import de.ostfalia.bips.ws25.camunda.Option;
 import de.ostfalia.bips.ws25.camunda.Utils;
 import de.ostfalia.bips.ws25.camunda.sql_deserialisation.Betreuer;
 import de.ostfalia.bips.ws25.camunda.sql_deserialisation.EmailName;
@@ -41,14 +45,14 @@ public class WorkerAbgabe {
 
             boolean isAbschlussarbeit = projekt_seminar_oder_abschluss.equals("1") ? false : true;
             Map<String, Object> mapComplete = new HashMap<>();
-            Map<String, Object> studentWork =  Abgabe.getStudentWork(studtenID, isAbschlussarbeit);
-            if(studentWork.isEmpty()){
+            List<Option<String>> studentWork =  Abgabe.getStudentWork(studtenID, isAbschlussarbeit);
+            if(studentWork.size() == 0){
                 LOGGER.info("finished lade Studenten, found student but no work of the given type");
                 return Map.of("student_has_registered_work", "0");
             }
             Map<String, Object> studentInfo =  Map.of("studentMail", studenMail, "studentFullName", studentFullName, "student_has_registered_work", "1");
 
-            mapComplete.putAll(studentWork);
+            mapComplete.putAll(Map.of("studentWorkList", studentWork));
             mapComplete.putAll(studentInfo);
             LOGGER.info("finished lade Studenten succesfully");
             return mapComplete;
@@ -63,18 +67,20 @@ public class WorkerAbgabe {
             @Variable(name = "studentId") String id,
             @Variable(name = "kolloquiumDatum") String datum,
             @Variable(name = "raum") String location,
-            @Variable(name = "arbeit_id") String arbeit_id ){
+            @Variable(name = "arbeit_id") String arbeit_id,
+            @Variable(name = "notes") String notes){
 
         LOGGER.info("Speichere Kolloquiums-Daten...");
-        Abgabe.saveKolloquiumData(datum, location, Integer.parseInt(arbeit_id), "");
+        Abgabe.saveKolloquiumData(datum, location, Integer.parseInt(arbeit_id), notes);
         LOGGER.info("Daten des Kolloquium erfolgreich gespeichert");
         return Map.of("saveOK", true);
     }
 
     @JobWorker(type = "betreuerBestimmen")
-    public Map<String, Object> betreuerBestimmen(@Variable(name = "arbeit_id") String arbeit_id){
+    public Map<String, Object> betreuerBestimmen(@Variable(name = "arbeit_id") String arbeit_id, @Variable(name = "projekt_seminar_oder_abschluss") String is_projekt_seminar_oder_abschluss){
 
         LOGGER.info("bestimme Betreuer der ausgewählten Arbeit...");
+        boolean isAbschlussarbeit = is_projekt_seminar_oder_abschluss.equals("1") ? false : true;
         int studentWorkId = Integer.parseInt(arbeit_id);
         Betreuer erstbetreuer = Abgabe.getErstbetreuerIdForStudentWork(studentWorkId);
         if(erstbetreuer == null){
@@ -85,17 +91,20 @@ public class WorkerAbgabe {
         String erstbetreuerName = erstbetreuer.concatName();
         String usernameErstbetreuer = Utils.getUsernameFromLecturer(erstbetreuer.getId());
         Betreuer zweitbetreuer = Abgabe.getZweitbetreuerIdForStudent(studentWorkId);
+        String themaArbeit = Utils.getThemaDerArbeit(studentWorkId, isAbschlussarbeit);
         if(zweitbetreuer == null){
             LOGGER.info("Betreuer bestimmt, kein Zweitbetreuer");
             return Map.of("erstbetreuerName", erstbetreuerName, "erstbetreuerMail", erstbetreuerMail, "ErstbetreuerUsernam", usernameErstbetreuer, 
-                        "zweitbetreuerName", "", "zweitbetreuerMail", "");
+                        "zweitbetreuerName", "", "zweitbetreuerMail", "", "thema_der_arbeit", themaArbeit);
         }
         String zweitbetreuerMail = zweitbetreuer.getEmail();
         String zweitbetreuerName = zweitbetreuer.concatName();
 
+        
+
         LOGGER.info("Betreuer bestimmt");
         return Map.of("erstbetreuerName", erstbetreuerName, "erstbetreuerMail", erstbetreuerMail, "ErstbetreuerUsernam", usernameErstbetreuer, 
-                        "zweitbetreuerName", zweitbetreuerName, "zweitbetreuerMail", zweitbetreuerMail);
+                        "zweitbetreuerName", zweitbetreuerName, "zweitbetreuerMail", zweitbetreuerMail, "thema_der_arbeit", themaArbeit);
     }
 
     @JobWorker(type = "abgabeNichtBestaetigtMail")
@@ -119,7 +128,7 @@ public class WorkerAbgabe {
     public Map<String, Object> datenGespeichertMail(
             @Variable(name = "erstbetreuerName") String erstbetreuerName,
             @Variable(name = "erstbetreuerMail") String erstbetreuerMail,
-            @Variable(name = "arbeitTitel") String arbeitTitel,
+            @Variable(name = "thema_der_arbeit") String arbeitTitel,
             @Variable(name = "studentFullName") String studentFullName,
             @Variable(name = "studentMail") String studentMail) {
 
@@ -137,7 +146,7 @@ public class WorkerAbgabe {
             @Variable(name = "erstbetreuerMail") String erstbetreuerMail,
             @Variable(name = "zweitbetreuerName") String zweitbetreuerName,
             @Variable(name = "zweitbetreuerMail") String zweitbetreuerMail,
-            @Variable(name = "arbeitTitel") String arbeitTitel,
+            @Variable(name = "thema_der_arbeit") String arbeitTitel,
             @Variable(name = "studentFullName") String studentFullName,
             @Variable(name = "studentMail") String studentMail,
             @Variable(name = "Note") String note) {

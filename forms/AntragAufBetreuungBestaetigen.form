@@ -100,33 +100,6 @@
       "readonly": true
     },
     {
-      "label": "Name der Betreuerin/des Betreuer",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_0sj9emk",
-        "columns": 8
-      },
-      "id": "Field_1vs9hff",
-      "key": "betreuer_name_fill",
-      "properties": {},
-      "validate": {
-        "required": false
-      },
-      "disabled": false,
-      "readonly": true
-    },
-    {
-      "label": "vorname Betrueuer",
-      "type": "textfield",
-      "layout": {
-        "row": "Row_0sj9emk",
-        "columns": null
-      },
-      "id": "Field_0shjpob",
-      "key": "betreuer_vorname_fill",
-      "readonly": true
-    },
-    {
       "subtype": "date",
       "dateLabel": "Datum der Bestätigung",
       "type": "datetime",

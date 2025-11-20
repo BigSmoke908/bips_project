@@ -375,7 +375,7 @@ public class Anmeldung {
 
         //check wether we have a supervisor, then insert the correct one (extern or dozent)
         if(betreuerVorhanden.equals("1")){
-            if(betreuerExtern.equals("1")){
+            if(betreuerExtern != null && betreuerExtern.equals("1")){
                 int supervisorId = insertSupervisorFromCompany(firstnameExternSuper, lastnameExternSuper, titleExternSuper, phoneExternSuper, emailExternSuper, companyName, address, zipCode, city);
                 insertStudentWorkHasSupervisor(String.valueOf(idStudenWork), String.valueOf(supervisorId), "1"); // 1 for true and is alway primary supervisor
             }else{
@@ -458,7 +458,7 @@ public class Anmeldung {
         //insert supervisors
         String betreuerVorhanden = "1"; //es gibt immer den ERstbetreuer
         if(betreuerVorhanden.equals("1")){
-            if(betreuerExtern.equals("1")){
+            if(betreuerExtern != null && betreuerExtern.equals("1")){
                 int supervisorId = insertSupervisorFromCompany(firstnameExternSuper, lastnameExternSuper, titleExternSuper, phoneExternSuper, emailExternSuper, companyNameErstbetreuer, addressErstbetreuer, zipCodeErstbetreuer, cityErstbetreuer);
                 insertStudentWorkHasSupervisor(String.valueOf(studentWorkId), String.valueOf(supervisorId), "1"); // 1 for true and is alway primary supervisor
             }else{

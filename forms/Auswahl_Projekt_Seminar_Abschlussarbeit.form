@@ -119,12 +119,16 @@
       "label": "Projekt-/Seminararbeit oder Abschlussarbeit?",
       "values": [
         {
-          "label": "Seminararbeit/Projektarbeit",
+          "label": "Projektarbeit",
           "value": "1"
         },
         {
           "label": "Abschlussarbeit",
           "value": "2"
+        },
+        {
+          "label": "Seminararbeit",
+          "value": "3"
         }
       ],
       "type": "radio",

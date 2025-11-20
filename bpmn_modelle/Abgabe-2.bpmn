@@ -47,12 +47,12 @@
       <bpmn:extensionElements>
         <zeebe:userTask />
         <zeebe:assignmentDefinition assignee="=ErstbetreuerUsernam" candidateGroups="" />
-        <zeebe:formDefinition formId="Form_0ie9rcs" />
+        <zeebe:formDefinition formId="Form_0ie9rct" />
         <zeebe:ioMapping>
           <zeebe:input source="=studentFullName" target="student_name_fill" />
           <zeebe:input source="=mat_nr" target="student_mat_nr_fill" />
           <zeebe:input source="=studentMail" target="student_mail_fill" />
-          <zeebe:input source="=studentWorkList[number(arbeit_id)].label" target="thema_arbeit_fill" />
+          <zeebe:input source="=thema_der_arbeit" target="thema_arbeit_fill" />
           <zeebe:output source="=radio_0f9npu" target="betreuer_bestaetigt" />
           <zeebe:output source="=textarea_btogdq&#10;" target="kommmentar_betreuer" />
         </zeebe:ioMapping>
@@ -138,7 +138,7 @@
         <zeebe:formDefinition formId="Form_1gzdi65" />
         <zeebe:assignmentDefinition assignee="demo" />
         <zeebe:ioMapping>
-          <zeebe:input source="=studentWorkList[number(arbeit_id)].label" target="thema_der_arbeit_fill" />
+          <zeebe:input source="=thema_der_arbeit" target="thema_der_arbeit_fill" />
           <zeebe:input source="=studentFullName" target="student_name_fill" />
           <zeebe:input source="=mat_nr" target="student_mat_nr_fill" />
           <zeebe:input source="=studentMail" target="student_mail_fill" />
@@ -191,7 +191,7 @@
           <zeebe:input source="=studentFullName" target="student_name_fill" />
           <zeebe:input source="=mat_nr" target="student_mat_nr_fill" />
           <zeebe:input source="=studentMail" target="student_mail_fill" />
-          <zeebe:input source="=studentWorkList[number(arbeit_id)].label" target="thema_der_arbeit_fill" />
+          <zeebe:input source="=thema_der_arbeit" target="thema_der_arbeit_fill" />
           <zeebe:output source="=radio_0f9npu" target="arbeit_ok_hochgeladen" />
         </zeebe:ioMapping>
       </bpmn:extensionElements>
@@ -233,7 +233,7 @@
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0yehats" sourceRef="Gateway_08n2ce5" targetRef="Activity_164lrkd" />
     <bpmn:sequenceFlow id="Flow_06xtzxr" name="nein" sourceRef="Gateway_11w4t07" targetRef="Gateway_08n2ce5">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=student_has_registered_work = "1"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=student_has_registered_work = "0"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1j1y0po" sourceRef="Activity_164lrkd" targetRef="Activity_1ytbtge" />
     <bpmn:sequenceFlow id="Flow_1hdcvdj" sourceRef="Activity_1ytbtge" targetRef="Gateway_11w4t07" />
@@ -276,14 +276,14 @@
     <bpmn:userTask id="Activity_1ki4v0n" name="Abgabe bestätigen">
       <bpmn:extensionElements>
         <zeebe:userTask />
-        <zeebe:formDefinition formId="Form_0ie9rcs" />
+        <zeebe:formDefinition formId="Form_0ie9rct" />
         <zeebe:ioMapping>
           <zeebe:output source="=radio_0f9npu" target="pa_bestaetigt" />
           <zeebe:output source="=textarea_btogdq" target="kommentar" />
           <zeebe:output source="=studentFullName" target="student_name_fill" />
           <zeebe:output source="=mat_nr" target="student_mat_nr_fill" />
           <zeebe:output source="=studentMail" target="student_mail_fill" />
-          <zeebe:output source="=studentWorkList[number(arbeit_id)].label" target="thema_arbeit_fill" />
+          <zeebe:output source="=thema_der_arbeit" target="thema_arbeit_fill" />
         </zeebe:ioMapping>
         <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
@@ -306,10 +306,11 @@
           <zeebe:input source="=studentFullName" target="student_name_fill" />
           <zeebe:input source="=mat_nr" target="student_mat_nr_fill" />
           <zeebe:input source="=studentMail" target="student_mail_fill" />
-          <zeebe:input source="=studentWorkList[number(arbeit_id)].label" target="thema_der_arbeit_fill" />
+          <zeebe:input source="=thema_der_arbeit" target="thema_der_arbeit_fill" />
           <zeebe:output source="=datetime_qif5wq" target="kolloquiumDatum" />
           <zeebe:output source="=textfield_x5irrc" target="raum" />
           <zeebe:output source="=checkbox_1mikqp&#10;" target="hochgeladen" />
+          <zeebe:output source="=textarea_3la0q2" target="notes" />
         </zeebe:ioMapping>
         <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
@@ -324,7 +325,7 @@
           <zeebe:input source="=studentFullName" target="student_name_fill" />
           <zeebe:input source="=mat_nr" target="student_mat_nr_fill" />
           <zeebe:input source="=studentMail" target="student_mail_fill" />
-          <zeebe:input source="=studentWorkList[number(arbeit_id)].label" target="thema_der_arbeit_fill" />
+          <zeebe:input source="=thema_der_arbeit" target="thema_der_arbeit_fill" />
           <zeebe:output source="=textfield_yaqehm" target="Note" />
         </zeebe:ioMapping>
         <zeebe:assignmentDefinition assignee="demo" />
@@ -353,7 +354,7 @@
         <zeebe:formDefinition formId="Form_06pj31j" />
         <zeebe:assignmentDefinition assignee="demo" />
         <zeebe:ioMapping>
-          <zeebe:input source="=studentWorkList[number(arbeit_id)].label" target="thema_der_arbeit_fill" />
+          <zeebe:input source="=thema_der_arbeit" target="thema_der_arbeit_fill" />
           <zeebe:input source="=studentFullName" target="name_student_fill" />
           <zeebe:input source="=mat_nr" target="matr_nr_fill" />
           <zeebe:input source="=studentMail" target="email_fill" />
@@ -377,9 +378,6 @@
     <bpmn:serviceTask id="Activity_12bksf4" name="Betreuer bestimmen">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="betreuerBestimmen" />
-        <zeebe:ioMapping>
-          <zeebe:output source="=studentWorkList[number(arbeit_id)].label" target="thema_der_arbeit" />
-        </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1siomyg</bpmn:incoming>
       <bpmn:outgoing>Flow_0qpmpqt</bpmn:outgoing>
@@ -649,10 +647,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0cw8gup_di" bpmnElement="Flow_0cw8gup">
         <di:waypoint x="420" y="890" />
-        <di:waypoint x="470" y="470" />
+        <di:waypoint x="460" y="470" />
         <di:waypoint x="815" y="250" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="449" y="680" width="21" height="14" />
+          <dc:Bounds x="444" y="680" width="21" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0yehats_di" bpmnElement="Flow_0yehats">
@@ -691,11 +689,10 @@
         <di:waypoint x="660" y="240" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12zey1u_di" bpmnElement="Flow_12zey1u">
-        <di:waypoint x="819" y="254" />
-        <di:waypoint x="720" y="370" />
-        <di:waypoint x="578" y="480" />
+        <di:waypoint x="817" y="252" />
+        <di:waypoint x="573" y="480" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="773" y="320" width="78" height="14" />
+          <dc:Bounds x="711" y="366" width="78" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_10z7vlk_di" bpmnElement="Flow_10z7vlk">

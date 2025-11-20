@@ -69,10 +69,13 @@ public class WorkerAnmeldung {
         LOGGER.info("Assignees werden bestimmt..."); 
         String usernameErstbetreuer = ""; //darf nicht null sein, weil das die Camunda map nicht frisst
         String usernameZweitbetreuer = "";
-        if(true){//trueis_erstbetreuer_extern.equals("0")
-            usernameErstbetreuer = Utils.getUsernameOfDozent(Integer.parseInt(erstbetreuer_id));
+        if(true){//is_erstbetreuer_extern.equals("0")
+            Dozent erstbetreuer = Dozent.getDozentFromId(Integer.parseInt(erstbetreuer_id));
+            usernameErstbetreuer = erstbetreuer.getUsername();
+            
             if(is_zweitbetreuer_extern != null && is_zweitbetreuer_extern.equals("0")){
-                usernameZweitbetreuer = Utils.getUsernameOfDozent(Integer.parseInt(dozent_id_zweitbetreuer));
+                Dozent zweitbetreuer = Dozent.getDozentFromId(Integer.parseInt(dozent_id_zweitbetreuer));
+                usernameZweitbetreuer = zweitbetreuer.getUsername();
             }
             LOGGER.info("Assignees erfolgreich bestimmt"); 
         }else{
@@ -90,8 +93,12 @@ public class WorkerAnmeldung {
 
         LOGGER.info("Assignees werden bestimmt..."); 
         String usernameErstbetreuer = ""; //darf nicht null sein, weil das die Camunda map nicht frisst
-        usernameErstbetreuer = Utils.getUsernameOfDozent(Integer.parseInt(erstbetreuer_id));
-        LOGGER.info("Assignees erfolgreich bestimmt"); 
+        if(erstbetreuer_id != null){
+            usernameErstbetreuer = Utils.getUsernameOfDozent(Integer.parseInt(erstbetreuer_id));
+            LOGGER.info("Assignees erfolgreich bestimmt"); 
+        }{
+            LOGGER.info("kein Assignee zu bestimmen");
+        }
 
         return Map.of("usernameErstbetreuer", usernameErstbetreuer);
     }
@@ -187,10 +194,10 @@ public class WorkerAnmeldung {
                                                                             @Variable(name = "firma_plz") String firmaPlz,
                                                                             @Variable(name = "firma_stadt") String firmaStadt,
                                                                             @Variable(name = "betreuer_dozent") String lecturerID, 
-                                                                            @Variable(name = "istProjekt") String istProjekt) {
+                                                                            @Variable(name = "projekt_seminar_abschluss") String projekt_seminar_abschluss) {
 
         System.out.println("Saving to Database...");
-        Anmeldung.saveProjectOrSeminarWorkToDatabase(semeserterOfArbeit, istProjekt, betreuerVorhanden, betreuerExtern, studentStudiengang, lecturerID,
+        Anmeldung.saveProjectOrSeminarWorkToDatabase(semeserterOfArbeit, projekt_seminar_abschluss, betreuerVorhanden, betreuerExtern, studentStudiengang, lecturerID,
                                                     studentFirstname, studentLastname, studentTitle, studentPhone, studentMail, vornameBetreuerExtern, nachnameBetreuerExtern, 
                                                     titleBetreuerExtern, phoneBetreuerExetern, emailBetreuerExtern, firmaName, firmaAdresse, firmaPlz, firmaStadt, studenMatNr, themaDerArbeit);
         System.out.println("saved to Database");                                                                         
@@ -223,7 +230,7 @@ public class WorkerAnmeldung {
         String betreuerName = "";
         String zweitbetreuerName = "kein Zweitbetreuer vorhanden";
         String abgehlehntVon = betreuung_angenommen.equals("0") ? "Erstbetreuer":  "Zweitbetreuer";
-        if(erstbetreuer_extern.equals("1")){
+        if(erstbetreuer_extern != null && erstbetreuer_extern.equals("1")){
             betreuerName = titel_erstbetreuer + " " + vorname_erstbetreuer + " " + nachname_erstbetreuer; //erstbetreuer ist immer extern hier
         }else{
             Dozent dozent =  Dozent.getDozentFromId(Integer.parseInt(dozent_id));
@@ -300,7 +307,7 @@ public class WorkerAnmeldung {
         String erstbetreuerName = "";
         String zweitbetreuerName = "";
 
-        if(erstbetreuer_extern.equals("1")){
+        if(erstbetreuer_extern != null &&  erstbetreuer_extern.equals("1")){
             erstbetreuerName = titel_erstbetreuer + " " +vorname_erstbetreuer + " " + nachname_erstbetreuer;
         }else{
             Dozent dozent = Dozent.getDozentFromId(Integer.parseInt(dozent_id));
