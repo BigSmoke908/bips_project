@@ -94,7 +94,7 @@ public class WorkerAnmeldung {
         if(erstbetreuer_id != null){
             usernameErstbetreuer = Utils.getUsernameOfDozent(Integer.parseInt(erstbetreuer_id));
             LOGGER.info("Assignees erfolgreich bestimmt"); 
-        }{
+        }else{
             LOGGER.info("kein Assignee zu bestimmen");
         }
 
@@ -159,10 +159,12 @@ public class WorkerAnmeldung {
 
         String message = "";
         if(betreuer_vorhanden.equals("0")){
-            message = "Sie habe ihre Arbeit selbst bestätigt";
+            message = "Sie haben ihre Arbeit selbst bestätigt";
         }else{
-            String betreuer = title_betreuer_extern + " " + vorname_betreuer_extern + " " + nachname_betreuer_extern;
-            if(betreuer_extern.equals("0")){
+            String betreuer = "";
+            if(betreuer_extern != null){
+                betreuer = title_betreuer_extern + " " + vorname_betreuer_extern + " " + nachname_betreuer_extern;
+            }else{
                 Dozent dozent =  Dozent.getDozentFromId(Integer.parseInt(dozent_id));
                 betreuer = dozent.concatName();
             }

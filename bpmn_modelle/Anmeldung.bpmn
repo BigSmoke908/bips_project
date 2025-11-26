@@ -46,12 +46,13 @@
         <bpmn:flowNodeRef>Activity_1fglyea</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_06458q4</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0fpk904</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0zfzio9</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0imsaj2" name="SSB">
-        <bpmn:flowNodeRef>Activity_0qbhp8p</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1nfesgi</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0v4vqey</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_1lqsln4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0qbhp8p</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:userTask id="Activity_0oujx8c" name="Anmeldung Abschlussarbeit">
@@ -176,7 +177,6 @@
     <bpmn:endEvent id="Event_1q30pr4">
       <bpmn:incoming>Flow_16lw8qb</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_07e5oik" sourceRef="Activity_0qbhp8p" targetRef="Gateway_0mn0cvl" />
     <bpmn:sequenceFlow id="Flow_0d9jez4" sourceRef="Activity_0ym2ok1" targetRef="Event_1bncub7" />
     <bpmn:sequenceFlow id="Flow_0ddupk5" sourceRef="Activity_1nfesgi" targetRef="Event_0v4vqey" />
     <bpmn:sequenceFlow id="Flow_0j9yra8" name="nein" sourceRef="Gateway_0iq6rjg" targetRef="Activity_0ym2ok1">
@@ -187,11 +187,11 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0kwg4p0" sourceRef="Event_0gwhl1j" targetRef="Activity_10ly77t" />
     <bpmn:sequenceFlow id="Flow_0l8y18f" name="ja" sourceRef="Gateway_0mn0cvl" targetRef="Activity_042c2yj">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=sbb_pruefung = "1"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=sbb_ergebnis_ok = "1"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0od0qv7" sourceRef="Activity_0ixwxd4" targetRef="Activity_1u39q4w" />
     <bpmn:sequenceFlow id="Flow_0qmtm4a" name="nein" sourceRef="Gateway_0mn0cvl" targetRef="Activity_1fglyea">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=sbb_pruefung = "0"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=sbb_ergebnis_ok = "0"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0u56e5z" name="ja" sourceRef="Gateway_0iq6rjg" targetRef="Gateway_0099phr">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=zweitpruefer_betreuung_angenommen = "1"</bpmn:conditionExpression>
@@ -253,7 +253,7 @@
       <bpmn:outgoing>Flow_0ji5yh7</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="Gateway_0mn0cvl" name="alles ok?">
-      <bpmn:incoming>Flow_07e5oik</bpmn:incoming>
+      <bpmn:incoming>Flow_1oyx418</bpmn:incoming>
       <bpmn:outgoing>Flow_0l8y18f</bpmn:outgoing>
       <bpmn:outgoing>Flow_0qmtm4a</bpmn:outgoing>
     </bpmn:exclusiveGateway>
@@ -300,24 +300,6 @@
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_14qdtac</bpmn:incoming>
       <bpmn:outgoing>Flow_1eo4lv2</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="Activity_0qbhp8p" name="Prüfung der Vorleistungen SBB">
-      <bpmn:extensionElements>
-        <zeebe:userTask />
-        <zeebe:formDefinition formId="Form_1y9gdlv" />
-        <zeebe:ioMapping>
-          <zeebe:input source="=student_lastname" target="student_name_fill" />
-          <zeebe:input source="=student_firstname" target="student_vorname_fill" />
-          <zeebe:input source="=student_title" target="student_title_fill" />
-          <zeebe:input source="=student_mat_nr" target="student_mat_nr_fill" />
-          <zeebe:input source="=student_mail" target="student_mail_fill" />
-          <zeebe:input source="=student_phone" target="studen_phone_fill" />
-          <zeebe:output source="=radio_dgjm2" target="sbb_pruefung" />
-        </zeebe:ioMapping>
-        <zeebe:assignmentDefinition assignee="demo" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0whejdm</bpmn:incoming>
-      <bpmn:outgoing>Flow_07e5oik</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:serviceTask id="Activity_042c2yj" name="Späteste Endatum der Arbeit ermitteln">
       <bpmn:extensionElements>
@@ -495,6 +477,42 @@
       <bpmn:incoming>Flow_0od0qv7</bpmn:incoming>
       <bpmn:outgoing>Flow_1h0hvb0</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1xn9j6y" sourceRef="Activity_0qbhp8p" targetRef="Activity_0zfzio9" />
+    <bpmn:sequenceFlow id="Flow_1oyx418" sourceRef="Activity_0zfzio9" targetRef="Gateway_0mn0cvl" />
+    <bpmn:userTask id="Activity_0qbhp8p" name="Prüfung der Vorleistungen SBB">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="Form_1y9gdlv" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=student_lastname" target="student_name_fill" />
+          <zeebe:input source="=student_firstname" target="student_vorname_fill" />
+          <zeebe:input source="=student_title" target="student_title_fill" />
+          <zeebe:input source="=student_mat_nr" target="student_mat_nr_fill" />
+          <zeebe:input source="=student_mail" target="student_mail_fill" />
+          <zeebe:input source="=student_phone" target="studen_phone_fill" />
+          <zeebe:input source="=thema_der_arbeit" target="thema_arbeit_fill" />
+          <zeebe:output source="=radio_dgjm2" target="sbb_pruefung" />
+        </zeebe:ioMapping>
+        <zeebe:assignmentDefinition assignee="demo" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0whejdm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xn9j6y</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_0zfzio9" name="Pruefung des SSB Ergebnis">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:ioMapping>
+          <zeebe:input source="=student_mat_nr" target="student_mat_nr_fill" />
+          <zeebe:input source="=sbb_pruefung" target="sbb_ergebnis_fill" />
+          <zeebe:input source="=thema_der_arbeit" target="thema_der_arbeit_fill" />
+          <zeebe:output source="=radio_rc20pg" target="sbb_ergebnis_ok" />
+        </zeebe:ioMapping>
+        <zeebe:assignmentDefinition assignee="demo" />
+        <zeebe:formDefinition formId="Form_0db2qtq" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1xn9j6y</bpmn:incoming>
+      <bpmn:outgoing>Flow_1oyx418</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1t02808">
@@ -590,10 +608,6 @@
       <bpmndi:BPMNShape id="Activity_1qolg5o_di" bpmnElement="Activity_03io51h">
         <dc:Bounds x="330" y="970" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1c5dc1p_di" bpmnElement="Activity_0qbhp8p">
-        <dc:Bounds x="470" y="1150" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1osjd45_di" bpmnElement="Activity_042c2yj">
         <dc:Bounds x="790" y="930" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -669,11 +683,14 @@
         <dc:Bounds x="800" y="126" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_07e5oik_di" bpmnElement="Flow_07e5oik">
-        <di:waypoint x="520" y="1150" />
-        <di:waypoint x="520" y="1010" />
-        <di:waypoint x="595" y="1010" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1c5dc1p_di" bpmnElement="Activity_0qbhp8p">
+        <dc:Bounds x="470" y="1240" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03c9y7q_di" bpmnElement="Activity_0zfzio9">
+        <dc:Bounds x="470" y="1040" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0d9jez4_di" bpmnElement="Flow_0d9jez4">
         <di:waypoint x="810" y="860" />
         <di:waypoint x="952" y="860" />
@@ -745,10 +762,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0whejdm_di" bpmnElement="Flow_0whejdm">
         <di:waypoint x="405" y="1280" />
-        <di:waypoint x="520" y="1280" />
-        <di:waypoint x="520" y="1230" />
+        <di:waypoint x="470" y="1280" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="459" y="1262" width="8" height="14" />
+          <dc:Bounds x="434" y="1262" width="8" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0wvnyvl_di" bpmnElement="Flow_0wvnyvl">
@@ -882,6 +898,15 @@
       <bpmndi:BPMNEdge id="Flow_1h0hvb0_di" bpmnElement="Flow_1h0hvb0">
         <di:waypoint x="850" y="206" />
         <di:waypoint x="850" y="285" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xn9j6y_di" bpmnElement="Flow_1xn9j6y">
+        <di:waypoint x="520" y="1240" />
+        <di:waypoint x="520" y="1120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1oyx418_di" bpmnElement="Flow_1oyx418">
+        <di:waypoint x="520" y="1040" />
+        <di:waypoint x="520" y="1010" />
+        <di:waypoint x="595" y="1010" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

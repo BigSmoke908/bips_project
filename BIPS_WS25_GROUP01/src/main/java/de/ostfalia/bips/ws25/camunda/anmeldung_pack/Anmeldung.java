@@ -479,7 +479,7 @@ public class Anmeldung {
             }
         }
 
-        if(zweitbetreuerVorhanden == "1"){
+        if(zweitbetreuerVorhanden.equals("1")){
             if(zweitbetreuerExtern.equals("1")){
                 int supervisorId = insertSupervisorFromCompany(firstnameExternSuperZweit, lastnameExternSuperZweit, titleExternSuperZweit, phoneExternSuperZweit, emailExternSuperZweit, companyNameZweitbetreuer, addressZweitbetreuer, zipCodeZweitbetreuer, cityZweitbetreuer);
                 insertStudentWorkHasSupervisor(String.valueOf(studentWorkId), String.valueOf(supervisorId), "0"); // 1 for true and is alway primary supervisor

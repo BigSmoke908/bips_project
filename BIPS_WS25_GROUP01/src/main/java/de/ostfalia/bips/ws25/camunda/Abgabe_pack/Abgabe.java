@@ -17,7 +17,7 @@ import de.ostfalia.bips.ws25.camunda.sql_deserialisation.Betreuer;
 public class Abgabe {
     
     public static Integer getStudentFromDatabase(String studentName, String studentFirstName, String studentMatNr){
-        String queryString = "Select * from student where firstname = ? and lastname = ? and matrikel_nummer = ? and status = ?";
+        String queryString = "Select * from student where firstname = ? and lastname = ? and matrikel_nummer = ?";
 
         Connection connection = Utils.establishSQLConnection();
         PreparedStatement statement;
@@ -27,12 +27,30 @@ public class Abgabe {
             statement.setString(1, studentFirstName);
             statement.setString(2, studentName);
             statement.setString(3, studentMatNr);
-            statement.setInt(4, StatusStudentWork.ABGEGEBEN.getNumber());
+            //statement.setInt(4, StatusStudentWork.ABGEGEBEN.getNumber());
             final ResultSet result = statement.executeQuery();
 
             if(result.next()){
                 student_id = result.getInt("id");
+                System.out.println("found student, checking wether related work was not already submitted...");
+
+                //only return student_id, if there is work related to the student, which is not yet submitted otherwise return null
+                String queryCheckSubmitted = "Select * from student_work where student_id = ? and status = ?";
+                statement = connection.prepareStatement(queryCheckSubmitted);
+                statement.setInt(1, student_id);
+                statement.setInt(2, StatusStudentWork.ANGEMELDET.getNumber());
+                final ResultSet resultCheck = statement.executeQuery();
+
+                if(resultCheck.next()){
+                    System.out.println("found at least one related work");
+                    return student_id;
+                }else{
+                    System.out.println("did not find any related work, which was not already submitted");
+                    return null;
+                }
             }
+
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
